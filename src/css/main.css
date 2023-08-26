@@ -4,7 +4,11 @@ body {
 }
 
 .cmn-py {
-  padding-block: 2rem;
+  padding-block: 20px;
+}
+
+.cmn-mb {
+  margin-bottom: 10px;
 }
 
 .cmn-hover:hover {
@@ -38,21 +42,43 @@ header .header__logo {
 }
 .input__form input {
   width: 100%;
+  padding-inline: 5px;
   border: 1px solid #d2d2d2;
+}
+.input__form--setting {
+  padding: 10px;
+  background-color: #f2f2f2;
+  border: 1px solid #d2d2d2;
+  border-bottom: none;
+}
+.input__button {
+  white-space: nowrap;
+}
+.input__button:hover {
+  cursor: pointer;
 }
 
 .output__title {
-  margin-bottom: 8px;
+  padding: 5px 10px;
+  border: 1px solid #d2d2d2;
+  border-bottom: none;
+  background-color: rgba(58, 58, 58, 0.2);
 }
 .output__list {
   padding: 5px;
   border: 1px solid #d2d2d2;
+  overflow-x: scroll;
+}
+.output__item {
+  white-space: nowrap;
+  font-family: "Roboto Mono", monospace;
 }
 
 footer {
   position: fixed;
   inset: auto 0 0 0;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   border-top: 1px solid #d2d2d2;
+  font-size: clamp(12px, 2.5vw, 14px);
 }

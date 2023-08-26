@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import dataSetting from "../data/settings.json";
 
 export default function Main() {
   const [slug, setSlug] = useState("");
@@ -12,9 +13,23 @@ export default function Main() {
     { slug: "site", name: "サイトマップ" },
   ]);
 
-  const [headerItem, setHeaderItem] = useState("header__item");
-  const [headerLink, setHeaderLink] = useState("header__item-link");
-  const [headerActive, setHeaderActive] = useState("header__item--active");
+  // const [headerItem, setHeaderItem] = useState("header__item");
+  // const [headerLink, setHeaderLink] = useState("header__item-link");
+  // const [headerActive, setHeaderActive] = useState("header__item--active");
+
+  const [headerItem, setHeaderItem] = useState();
+  const [headerLink, setHeaderLink] = useState();
+  const [headerActs, setHeaderActs] = useState();
+
+  useEffect(() => {
+    loadSetting(dataSetting);
+  }, []);
+
+  const loadSetting = (data) => {
+    setHeaderItem(data.header.itemName)
+    setHeaderLink(data.header.linkName)
+    setHeaderActs(data.header.actsName)
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -81,7 +96,7 @@ export default function Main() {
               />
             </div>
             <div className="input__form-item">
-              <label htmlFor="headerItem">&lt;a&gt; classname</label>
+              <label htmlFor="headerLink">&lt;a&gt; classname</label>
               <input
                 type="text"
                 id="headerLink"
@@ -91,13 +106,13 @@ export default function Main() {
               />
             </div>
             <div className="input__form-item">
-              <label htmlFor="headerItem">active classname</label>
+              <label htmlFor="headerActs">current classname</label>
               <input
                 type="text"
-                id="headerActive"
-                placeholder={headerActive}
-                // value={headerActive}
-                onChange={(e) => setHeaderActive(e.target.value)}
+                id="headerActs"
+                placeholder={headerActs}
+                // value={headerActs}
+                onChange={(e) => setHeaderActs(e.target.value)}
               />
             </div>
           </form>
@@ -107,8 +122,8 @@ export default function Main() {
               return (
                 <li className="output__item" key={newID}>
                   &lt;li class="{headerItem} &lt;?php get_meta('slug') === '
-                  {item.slug}' ? '{headerActive}' : ''?&gt;
-                  "&gt;&lt;a class="{headerLink}" href="/{item.slug}/"&gt;
+                  {item.slug}' ? '{headerActs}' : ''?&gt;"&gt;&lt;a class="
+                  {headerLink}" href="/{item.slug}/"&gt;
                   {item.name}&lt;/a&gt;&lt;/li&gt;
                 </li>
               );

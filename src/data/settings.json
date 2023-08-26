@@ -1,0 +1,17 @@
+{
+  "header": {
+    "itemName": "header__item",
+    "linkName": "header__item-link",
+    "actsName": "header__item--active"
+  },
+  "drawer": {
+    "itemName": "",
+    "linkName": "",
+    "actsName": ""
+  },
+  "footer": {
+    "itemName": "footer__item",
+    "linkName": "footer__item-link",
+    "actsName": "footer__item--active"
+  }
+}

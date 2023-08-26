@@ -1,0 +1,58 @@
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  color: #3a3a3a;
+}
+
+.cmn-py {
+  padding-block: 2rem;
+}
+
+.cmn-hover:hover {
+  opacity: 0.8;
+}
+
+a {
+  transition: all 0.3s;
+}
+
+[class$=__wrapper] {
+  width: min(100%, 800px);
+  margin-inline: auto;
+}
+
+header {
+  padding: 20px;
+  border-bottom: 1px solid #d2d2d2;
+}
+header .header__logo {
+  text-decoration: none;
+  color: #3a3a3a;
+}
+
+.input__form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-flow: row nowrap;
+  gap: 10px;
+}
+.input__form input {
+  width: 100%;
+  border: 1px solid #d2d2d2;
+}
+
+.output__title {
+  margin-bottom: 8px;
+}
+.output__list {
+  padding: 5px;
+  border: 1px solid #d2d2d2;
+}
+
+footer {
+  position: fixed;
+  inset: auto 0 0 0;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #d2d2d2;
+}

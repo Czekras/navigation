@@ -1,0 +1,68 @@
+$clr: #3a3a3a;
+$bdc: #d2d2d2;
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  color: $clr;
+}
+
+.cmn-py {
+  padding-block: 2rem;
+}
+
+.cmn-hover:hover {
+  opacity: .8;
+}
+
+a {
+  transition: all .3s;
+}
+
+[class$="__wrapper"] {
+  width: min(100%, 800px);
+  margin-inline: auto;
+}
+
+header {
+  padding: 20px;
+  border-bottom: 1px solid $bdc;
+
+  .header__logo {
+    text-decoration: none;
+    color: $clr;
+  }
+}
+
+.input {
+  &__form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-flow: row nowrap;
+    gap: 10px;
+
+    input {
+      width: 100%;
+      border: 1px solid $bdc;
+    }
+  }
+}
+
+.output {
+  &__title {
+    margin-bottom: 8px;
+  }
+
+  &__list {
+    padding: 5px;
+    border: 1px solid $bdc;
+  }
+}
+
+footer {
+  position: fixed;
+  inset: auto 0 0 0;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid $bdc;
+}

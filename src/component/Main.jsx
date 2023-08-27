@@ -4,18 +4,14 @@ import dataSetting from "../data/settings.json";
 export default function Main() {
   const [slug, setSlug] = useState("");
   const [name, setName] = useState("");
-  const [items, setItems] = useState([]);
   const [itemsCount, setItemsCount] = useState(1);
+  const [itemsList, setItemsList] = useState([]);
   const [defaultItems, setDefaultItems] = useState([
-    { slug: "news", name: "お知らせ" },
-    { slug: "contact", name: "お問い合わせ" },
-    { slug: "privacy", name: "プライバシーポリシー" },
-    { slug: "site", name: "サイトマップ" },
+    { id: "defaultItemID01", slug: "news", name: "お知らせ" },
+    { id: "defaultItemID02", slug: "contact", name: "お問い合わせ" },
+    { id: "defaultItemID03", slug: "privacy", name: "プライバシーポリシー" },
+    { id: "defaultItemID04", slug: "site", name: "サイトマップ" },
   ]);
-
-  // const [headerItem, setHeaderItem] = useState("header__item");
-  // const [headerLink, setHeaderLink] = useState("header__item-link");
-  // const [headerActive, setHeaderActive] = useState("header__item--active");
 
   const [headerItem, setHeaderItem] = useState();
   const [headerLink, setHeaderLink] = useState();
@@ -26,17 +22,19 @@ export default function Main() {
   }, []);
 
   const loadSetting = (data) => {
-    setHeaderItem(data.header.itemName)
-    setHeaderLink(data.header.linkName)
-    setHeaderActs(data.header.actsName)
+    setHeaderItem(data.header.itemName);
+    setHeaderLink(data.header.linkName);
+    setHeaderActs(data.header.actsName);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setDefaultItems((currentItems) => {
       return [
         ...currentItems.slice(0, itemsCount),
         {
+          id: crypto.randomUUID(),
           slug: slug,
           name: name,
         },
@@ -47,6 +45,12 @@ export default function Main() {
     setSlug("");
     setName("");
     setItemsCount(itemsCount + 1);
+    saveLocal(e)
+  };
+
+  const saveLocal = (data) => {
+    console.log(data);
+    // localStorage.setItem("id": data.)
   };
 
   return (
@@ -78,6 +82,12 @@ export default function Main() {
               Generate Link
             </button>
           </form>
+        </div>
+      </section>
+
+      <section className="display">
+        <div className="display__wrapper">
+          <ul className="display__list"></ul>
         </div>
       </section>
 
@@ -117,14 +127,15 @@ export default function Main() {
             </div>
           </form>
           <ul className="output__list">
-            {defaultItems.map((item, index) => {
-              const newID = crypto.randomUUID();
+            {defaultItems.map((item) => {
+              // const newID = crypto.randomUUID();
               return (
-                <li className="output__item" key={newID}>
-                  &lt;li class="{headerItem} &lt;?php get_meta('slug') === '
+                <li className="output__item" key={item.id}>
+                  {item.id}, {item.slug}, {item.name}
+                  {/* &lt;li class="{headerItem} &lt;?php get_meta('slug') === '
                   {item.slug}' ? '{headerActs}' : ''?&gt;"&gt;&lt;a class="
                   {headerLink}" href="/{item.slug}/"&gt;
-                  {item.name}&lt;/a&gt;&lt;/li&gt;
+                  {item.name}&lt;/a&gt;&lt;/li&gt; */}
                 </li>
               );
             })}

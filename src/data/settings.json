@@ -1,17 +1,43 @@
 {
-  "header": {
-    "itemName": "header__item",
-    "linkName": "header__item-link",
-    "actsName": "header__item--active"
+  "version": "v1.0.0",
+  "initialData": {
+    "header": {
+      "item": "header__item",
+      "link": "header__link",
+      "acts": "header__link--active"
+    },
+    "drawer": {
+      "item": "drawer__item",
+      "link": "drawer__link",
+      "acts": "drawer__link--active"
+    },
+    "footer": {
+      "item": "footer__item",
+      "link": "footer__link",
+      "acts": "footer__link--active"
+    },
+    "sitmap": {
+      "item": "sitemap__item",
+      "link": "sitemap__link",
+      "acts": "sitemap__link--active"
+    }
   },
-  "drawer": {
-    "itemName": "",
-    "linkName": "",
-    "actsName": ""
-  },
-  "footer": {
-    "itemName": "footer__item",
-    "linkName": "footer__item-link",
-    "actsName": "footer__item--active"
-  }
+  "initialList": [
+    {
+      "slug": "news",
+      "name": "お知らせ"
+    },
+    {
+      "slug": "contact",
+      "name": "お問い合わせ"
+    },
+    {
+      "slug": "privacy",
+      "name": "プライバシーポリシー"
+    },
+    {
+      "slug": "site",
+      "name": "サイトマップ"
+    }
+  ]
 }

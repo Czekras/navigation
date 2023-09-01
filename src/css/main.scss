@@ -1,4 +1,5 @@
 $clr: #3a3a3a;
+$clr2: #878787;
 $bdc: #d2d2d2;
 $bgc: #f2f2f2;
 
@@ -50,6 +51,11 @@ header {
       width: 100%;
       padding-inline: 5px;
       border: 1px solid $bdc;
+      color: $clr2;
+
+      &:focus {
+        color: $clr;
+      }
     }
 
     &--setting {
@@ -67,6 +73,11 @@ header {
       cursor: pointer;
     }
   }
+}
+
+.display {
+  background-color: $bgc;
+
 }
 
 .output {
@@ -92,6 +103,7 @@ header {
 
 footer {
   position: fixed;
+  background-color: $bgc;
   inset: auto 0 0 0;
   padding: 10px;
   text-align: center;

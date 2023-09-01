@@ -44,6 +44,10 @@ header .header__logo {
   width: 100%;
   padding-inline: 5px;
   border: 1px solid #d2d2d2;
+  color: #878787;
+}
+.input__form input:focus {
+  color: #3a3a3a;
 }
 .input__form--setting {
   padding: 10px;
@@ -56,6 +60,10 @@ header .header__logo {
 }
 .input__button:hover {
   cursor: pointer;
+}
+
+.display {
+  background-color: #f2f2f2;
 }
 
 .output__title {
@@ -76,6 +84,7 @@ header .header__logo {
 
 footer {
   position: fixed;
+  background-color: #f2f2f2;
   inset: auto 0 0 0;
   padding: 10px;
   text-align: center;

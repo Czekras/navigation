@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header>
+    <header className="header">
       <div className="header__wrapper">
         <a className="header__logo cmn-hover" href="/">
           <p className="header__subtitle"></p>

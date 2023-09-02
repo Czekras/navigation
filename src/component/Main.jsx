@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import dataSetting from "../data/settings.json";
+import Output from "./Output";
 
 export default function Main() {
   const [slug, setSlug] = useState("");
   const [name, setName] = useState("");
-  const [timer, setTimer] = useState(null);
+
+  const [nameTimer, setNameTimer] = useState(null);
+  const [toggTimer, setToggTimer] = useState(null);
+
+  const [sougouTogg, setSougouTogg] = useState(Boolean);
   const [nameChange, setNameChange] = useState(false);
 
   const [itemsCount, setItemsCount] = useState(1);
@@ -14,27 +19,32 @@ export default function Main() {
   const [headerItem, setHeaderItem] = useState("");
   const [headerLink, setHeaderLink] = useState("");
   const [headerActs, setHeaderActs] = useState("");
+  const [headerTogg, setHeaderTogg] = useState(Boolean);
 
   const [drawerItem, setDrawerItem] = useState("");
   const [drawerLink, setDrawerLink] = useState("");
   const [drawerActs, setDrawerActs] = useState("");
+  const [drawerTogg, setDrawerTogg] = useState(Boolean);
 
   const [footerItem, setFooterItem] = useState("");
   const [footerLink, setFooterLink] = useState("");
   const [footerActs, setFooterActs] = useState("");
+  const [footerTogg, setFooterTogg] = useState(Boolean);
 
   const [sitemapItem, setSitemapItem] = useState("");
   const [sitemapLink, setSitemapLink] = useState("");
   const [sitemapActs, setSitemapActs] = useState("");
+  const [sitemapTogg, setSitemapTogg] = useState(Boolean);
 
   useEffect(() => {
     const version = localStorage.getItem("version");
     loadSetting(version, dataSetting);
   }, []);
 
+  /* ----------------------------- Initial Loding ----------------------------- */
   const loadSetting = (version, setting) => {
     if (!version) {
-      console.log("Initializing: Settings");
+      console.log("Initialize: Settings");
       localStorage.setItem("version", setting.version);
       Object.entries(setting.initialData).map((section) => {
         Object.entries(section[1]).map((name) => {
@@ -43,7 +53,7 @@ export default function Main() {
         });
       });
 
-      console.log("Initializing: List");
+      console.log("Initialize: List");
       const list = Object.entries(setting.initialList).map((key) => {
         return { id: crypto.randomUUID(), data: key[1] };
       });
@@ -56,9 +66,19 @@ export default function Main() {
       });
 
       localStorage.setItem("masterIdList", JSON.stringify(initialList));
+
+      console.log("Initialize: Toggle");
+      Object.entries(setting.initialToggle).map((section) => {
+        const keyName = `${section[0]}_toggle`;
+        localStorage.setItem(keyName, section[1]);
+      });
+
+      console.log("Initialize: Option");
+      const initSougou = setting.sougouToggle;
+      localStorage.setItem("sougou_option", initSougou);
     }
 
-    console.log("Loading: Setting");
+    console.log("Load: Setting");
     setHeaderItem(localStorage.getItem("header_item"));
     setHeaderLink(localStorage.getItem("header_link"));
     setHeaderActs(localStorage.getItem("header_acts"));
@@ -75,7 +95,7 @@ export default function Main() {
     setSitemapLink(localStorage.getItem("sitemap_link"));
     setSitemapActs(localStorage.getItem("sitemap_acts"));
 
-    console.log("Loading: List");
+    console.log("Load: List");
     const initialList = JSON.parse(localStorage.getItem("masterIdList"));
     Object.entries(initialList).map((id) => {
       setMasterIdList((prevArray) => [...prevArray, id[1]]);
@@ -89,8 +109,18 @@ export default function Main() {
         },
       ]);
     });
+
+    console.log("Load: Toggle");
+    setHeaderTogg(JSON.parse(localStorage.getItem("header_toggle")));
+    setDrawerTogg(JSON.parse(localStorage.getItem("drawer_toggle")));
+    setFooterTogg(JSON.parse(localStorage.getItem("footer_toggle")));
+    setSitemapTogg(JSON.parse(localStorage.getItem("sitemap_toggle")));
+
+    console.log("Load: Option");
+    setSougouTogg(JSON.parse(localStorage.getItem("sougou_option")));
   };
 
+  /* ---------------------------- Submit Classname ---------------------------- */
   const handleSubmit = (e) => {
     e.preventDefault();
     setMasterList((currentItems) => {
@@ -111,8 +141,10 @@ export default function Main() {
     setSlug("");
     setName("");
     setItemsCount(itemsCount + 1);
+    console.log("Update: List");
   };
 
+  /* ---------------------------- Change Classname ---------------------------- */
   const handleChangeName = (e) => {
     const [section, name] = e.target.id.split("_");
     const value = e.target.value;
@@ -141,177 +173,213 @@ export default function Main() {
       if (name == "acts") setSitemapActs(value);
     }
 
-    clearTimeout(timer);
+    clearTimeout(nameTimer);
     const inputDelay = () =>
       setTimeout(() => {
         setNameChange(true);
         localStorage.setItem(e.target.id, e.target.value);
-        console.log(`Updated: ${e.target.id}`);
+        console.log(`Update: ${e.target.id}`);
       }, 500);
-    setTimer(inputDelay);
+    setNameTimer(inputDelay);
   };
 
+  /* ----------------------------- Reset Classname ---------------------------- */
   const handleResetName = (e) => {
     e.preventDefault();
     setNameChange(false);
-    Object.entries(dataSetting.initialData).map((section) => {
-      Object.entries(section[1]).map((name) => {
-        const keyName = `${section[0]}_${name[0]}`;
-        localStorage.setItem(keyName, [name[1]]);
 
-        if (section[0] == "header") {
-          if (name[0] == "item") setHeaderItem(name[1]);
-          if (name[0] == "link") setHeaderLink(name[1]);
-          if (name[0] == "acts") setHeaderActs(name[1]);
-        }
+    let db = "";
+    const sectionName = e.target.id.split("_")[0];
+    if (sectionName == "header") db = dataSetting.initialData.header;
+    if (sectionName == "drawer") db = dataSetting.initialData.drawer;
+    if (sectionName == "footer") db = dataSetting.initialData.footer;
+    if (sectionName == "sitemap") db = dataSetting.initialData.sitemap;
 
-        if (section[0] == "drawer") {
-          if (name[0] == "item") setDrawerItem(name[1]);
-          if (name[0] == "link") setDrawerLink(name[1]);
-          if (name[0] == "acts") setDrawerActs(name[1]);
-        }
+    Object.entries(db).map((section) => {
+      const storageName = `${sectionName}_${section[0]}`;
+      localStorage.setItem(storageName, section[1]);
 
-        if (section[0] == "footer") {
-          if (name[0] == "item") setFooterItem(name[1]);
-          if (name[0] == "link") setFooterLink(name[1]);
-          if (name[0] == "acts") setFooterActs(name[1]);
-        }
+      if (section[0] == "item") {
+        if (sectionName == "header") setHeaderItem(section[1]);
+        if (sectionName == "drawer") setDrawerItem(section[1]);
+        if (sectionName == "footer") setFooterItem(section[1]);
+        if (sectionName == "sitemap") setSitemapItem(section[1]);
+      }
 
-        if (section[0] == "sitemap") {
-          if (name[0] == "item") setSitemapItem(name[1]);
-          if (name[0] == "link") setSitemapLink(name[1]);
-          if (name[0] == "acts") setSitemapActs(name[1]);
-        }
-      });
+      if (section[0] == "link") {
+        if (sectionName == "header") setHeaderLink(section[1]);
+        if (sectionName == "drawer") setDrawerLink(section[1]);
+        if (sectionName == "footer") setFooterLink(section[1]);
+        if (sectionName == "sitemap") setSitemapLink(section[1]);
+      }
+
+      if (section[0] == "acts") {
+        if (sectionName == "header") setHeaderActs(section[1]);
+        if (sectionName == "drawer") setDrawerActs(section[1]);
+        if (sectionName == "footer") setFooterActs(section[1]);
+        if (sectionName == "sitemap") setSitemapActs(section[1]);
+      }
     });
-
-    console.log("Reset: Classnames");
   };
 
+  /* ----------------------------- Toggle Setting ----------------------------- */
+  const handleCollapseToggle = (e) => {
+    const section = e.target.id.split("_")[0];
+    if (section == "header") setHeaderTogg(!headerTogg);
+    if (section == "drawer") setDrawerTogg(!drawerTogg);
+    if (section == "footer") setFooterTogg(!footerTogg);
+    if (section == "sitemap") setSitemapTogg(!sitemapTogg);
+
+    clearTimeout(toggTimer);
+    const inputDelay = () =>
+      setTimeout(() => {
+        const keyName = `${section}_toggle`;
+        if (section == "header") localStorage.setItem(keyName, !headerTogg);
+        if (section == "drawer") localStorage.setItem(keyName, !drawerTogg);
+        if (section == "footer") localStorage.setItem(keyName, !footerTogg);
+        if (section == "sitemap") localStorage.setItem(keyName, !sitemapTogg);
+        console.log(`Update: ${keyName}`);
+      }, 500);
+    setToggTimer(inputDelay);
+  };
+
+  /* ----------------------------- Toggle (Sougou) ---------------------------- */
+  const handleSougouToggle = (e) => {
+    // e.preventDefault();
+    setSougouTogg(!sougouTogg);
+    localStorage.setItem("sougou_option", !sougouTogg);
+    console.log("Update: souguo_option");
+  };
+
+  /* -------------------------------- MAIN DATA ------------------------------- */
+  const mainFunction = {
+    handleCollapseToggle: handleCollapseToggle,
+    handleResetName: handleResetName,
+    handleChangeName: handleChangeName,
+  };
+  /* -------------------------------------------------------------------------- */
+
   return (
-    <>
-      <section className="input cmn-py">
-        <div className="input__wrapper">
-          <form className="input__form" onSubmit={handleSubmit}>
-            <div className="input__form-item">
-              <label htmlFor="slug">slug</label>
-              <input
-                type="text"
-                id="slug"
-                placeholder="news"
-                value={slug}
-                onChange={(e) => setSlug(e.target.value)}
-              />
-            </div>
-            <div className="input__form-item">
-              <label htmlFor="name">name</label>
-              <input
-                type="text"
-                id="name"
-                placeholder="お知らせ"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <button className="input__button" disabled={!(slug && name)}>
-              Generate Link
-            </button>
-          </form>
-        </div>
-      </section>
-      {/* 
-      <section className="display">
-        <div className="display__wrapper">
-          <ul className="display__list">
-            {masterList.map((item) => {
-              return (
-                <li className="display__item" key={item.slug}>
-                  <label htmlFor={item.slug}>
-                    <input type="checkbox" />
-                    {item.slug}, {item.name}
-                  </label>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section> */}
+    <main className="main">
+      <aside className="main__main-l">
+        <section className="input cmn-py">
+          <div className="input__wrapper">
+            <form
+              className="input__form input__form--side"
+              onSubmit={handleSubmit}
+            >
+              <div className="input__form-item">
+                <label htmlFor="slug">Slug name</label>
+                <input
+                  type="text"
+                  id="slug"
+                  placeholder="news"
+                  value={slug}
+                  onChange={(e) => setSlug(e.target.value)}
+                />
+              </div>
+              <div className="input__form-item">
+                <label htmlFor="name">Page name</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="お知らせ"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <button className="input__button" disabled={!(slug && name)}>
+                Generate Link →
+              </button>
+            </form>
+          </div>
+        </section>
 
-      <section className="output cmn-py">
-        <div className="output__wrapper">
-          <p className="output__title">Header</p>
-          <form
-            className="input__form input__form--setting"
-            onSubmit={handleResetName}
-          >
-            <div className="input__form-item">
-              <label htmlFor="headerItem">&lt;li&gt; classname</label>
-              <input
-                type="text"
-                id="header_item"
-                placeholder={headerItem}
-                value={headerItem}
-                // onChange={(e) => setHeaderItem(e.target.value)}
-                onChange={handleChangeName}
-              />
-            </div>
-            <div className="input__form-item">
-              <label htmlFor="headerLink">&lt;a&gt; classname</label>
-              <input
-                type="text"
-                id="header_link"
-                placeholder={headerLink}
-                value={headerLink}
-                // onChange={(e) => setHeaderLink(e.target.value)}
-                onChange={handleChangeName}
-              />
-            </div>
-            <div className="input__form-item">
-              <label htmlFor="headerActs">current classname</label>
-              <input
-                type="text"
-                id="header_acts"
-                placeholder={headerActs}
-                value={headerActs}
-                // onChange={(e) => setHeaderActs(e.target.value)}
-                onChange={handleChangeName}
-              />
-            </div>
-            <div className="input__form-item">
-              {/* <button className="input__button" disabled={!nameChange}>
-                Reset
-              </button> */}
-            </div>
-          </form>
-          <ul className="output__list">
-            {masterList.map((item) => {
-              return (
-                <li className="output__item" key={item.id}>
-                  {/* &lt;li class="{headerItem}"&gt;&lt;a class="
-                  {headerLink}" href="/{item.slug}/"&gt;
-                  {item.name}&lt;/a&gt;&lt;/li&gt; */}
-                  &lt;li class="{headerItem}"&gt;&lt;a class="{headerLink}{" "}
-                  &lt;?php if (get_meta('slug') == '{item.slug}') echo '
-                  {headerActs}' ?&gt;" href="/{item.slug}/"&gt;{item.name}
-                  &lt;/a&gt;&lt;/li&gt;
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
+        {/* <section className="display">
+          <div className="display__wrapper">
+            <ul className="display__list">
+              {masterList.map((item) => {
+                return (
+                  <li className="display__item" key={item.slug}>
+                    <label htmlFor={item.slug}>
+                      <input type="checkbox" />
+                      {item.slug}, {item.name}
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section> */}
 
-      <section className="option cmn-py">
-        <div className="option__wrapper">
-          <button
-            className="input__button"
-            onClick={handleResetName}
-            disabled={!nameChange}
-          >
-            Reset All Classname
-          </button>
-        </div>
+        <section className="option cmn-py">
+          <div className="option__wrapper">
+            <div className="option__item">
+              <input
+                type="checkbox"
+                id="sougou_handle"
+                checked={sougouTogg}
+                onChange={handleSougouToggle}
+              />
+              <label htmlFor="sougou_handle">総合トップあり</label>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <section className="main__main-r">
+        <Output
+          func={mainFunction}
+          data={{
+            title: "header",
+            item: headerItem,
+            link: headerLink,
+            acts: headerActs,
+            toggle: headerTogg,
+            masterList: masterList,
+            nameChange: nameChange,
+          }}
+        />
+{/* 
+        <Output
+          func={mainFunction}
+          data={{
+            title: "drawer",
+            item: drawerItem,
+            link: drawerLink,
+            acts: drawerActs,
+            toggle: drawerTogg,
+            masterList: masterList,
+            nameChange: nameChange,
+          }}
+        />
+
+        <Output
+          func={mainFunction}
+          data={{
+            title: "footer",
+            item: footerItem,
+            link: footerLink,
+            acts: footerActs,
+            toggle: footerTogg,
+            masterList: masterList,
+            nameChange: nameChange,
+          }}
+        />
+
+        <Output
+          func={mainFunction}
+          data={{
+            title: "sitemap",
+            item: sitemapItem,
+            link: sitemapLink,
+            acts: sitemapActs,
+            toggle: sitemapTogg,
+            masterList: masterList,
+            nameChange: nameChange,
+          }}
+        /> */}
       </section>
-    </>
+    </main>
   );
 }

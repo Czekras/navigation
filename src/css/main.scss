@@ -8,6 +8,11 @@ body {
   color: $clr;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
 .cmn-py {
   padding-block: 20px;
 }
@@ -25,20 +30,61 @@ a {
 }
 
 [class$="__wrapper"] {
-  width: min(100%, 800px);
-  margin-inline: auto;
+  // width: min(100%, 800px);
+  // margin-inline: auto;
 }
 
-header {
+/* ---------------------------------- Main ---------------------------------- */
+.main {
+  flex: 1 0 100vh;
+  // margin-top: 100px;
+  // margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-flow: row nowrap;
+
+  & > * {
+    padding-block: 100px 50px;
+  }
+
+  &__main-l {
+    width: min(100%, 240px);
+    padding-right: 40px;
+    border-right: 1px solid $bdc;
+    position: sticky;
+    height: 100dvh;
+    inset: 0 auto 0 0;
+  }
+
+  &__main-r {
+    width: min(100%, 840px);
+    padding-left: 40px;
+  }
+}
+
+/* --------------------------------- Header --------------------------------- */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  background-color: $bgc;
   padding: 20px;
   border-bottom: 1px solid $bdc;
+  z-index: 100;
 
-  .header__logo {
+  &__wrapper {
+    width: min(100%, 1080px);
+    margin-inline: auto;
+    display: flex;
+  }
+
+  &__logo {
     text-decoration: none;
     color: $clr;
   }
 }
 
+/* ---------------------------------- Input --------------------------------- */
 .input {
   &__form {
     display: flex;
@@ -46,6 +92,21 @@ header {
     align-items: flex-end;
     flex-flow: row nowrap;
     gap: 10px;
+
+    &--side {
+      flex-direction: column;
+
+      label {
+        display: block;
+        padding-inline: 5px;
+        margin-bottom: 5px;
+      }
+
+      button {
+        margin-top: 10px;
+        padding-inline: 20px;
+      }
+    }
 
     input {
       width: 100%;
@@ -68,25 +129,101 @@ header {
 
   &__button {
     white-space: nowrap;
+    margin-inline: auto;
+    cursor: pointer;
 
-    &:hover {
-      cursor: pointer;
+    &:disabled {
+      cursor: default;
+    }
+  }
+
+  &__icon {
+    all: unset;
+    color: $clr;
+    cursor: pointer;
+
+    &:disabled {
+      color: $clr2;
+      cursor: default;
     }
   }
 }
 
+/* --------------------------------- Display -------------------------------- */
 .display {
   background-color: $bgc;
-
 }
 
+/* --------------------------------- Option --------------------------------- */
+.option {
+  &__item {
+    input[type="checkbox"] {
+      margin-right: 10px;
+
+      &:hover,
+      &:focus {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+/* --------------------------------- Output --------------------------------- */
 .output {
-  &__title {
+  &__wrapper {
+    input[type="checkbox"] {
+      display: none;
+
+      &:checked ~ .output__setting {
+        height: auto;
+        overflow: visible;
+      }
+    }
+  }
+
+  &__setting {
+    overflow-y: hidden;
+    height: 0;
+    transition: height 0.3s ease;
+  }
+
+  &__header {
     // margin-bottom: 8px;
-    padding: 5px 10px;
     border: 1px solid $bdc;
     border-bottom: none;
+    text-transform: capitalize;
+  }
+
+  &__title {
+    font-size: clamp(16px, 2.5vw, 17px);
+    font-weight: 400;
+  }
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row nowrap;
+    padding: 5px 10px;
     background-color: transparentize($clr, 0.8);
+    transition: background-color 0.3s;
+    position: relative;
+
+    &:hover,
+    &:focus {
+      cursor: pointer;
+      background-color: transparentize($clr, 0.75);
+
+      .output__icon {
+        color: $clr;
+      }
+    }
+  }
+
+  &__icon {
+    font-size: 18px;
+    color: $clr2;
+    transition: color 0.3s;
   }
 
   &__list {
@@ -101,7 +238,7 @@ header {
   }
 }
 
-footer {
+.footer {
   position: fixed;
   background-color: $bgc;
   inset: auto 0 0 0;
@@ -109,4 +246,10 @@ footer {
   text-align: center;
   border-top: 1px solid $bdc;
   font-size: clamp(12px, 2.5vw, 14px);
+  z-index: 100;
+}
+
+/* ---------------------------------- Icons --------------------------------- */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
 }

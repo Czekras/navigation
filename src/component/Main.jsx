@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import dataSetting from "../data/settings.json";
 import Output from "./Output";
+import List from "./List";
 
 export default function Main() {
   const [slug, setSlug] = useState("");
@@ -45,7 +46,7 @@ export default function Main() {
   const loadSetting = (version, setting) => {
     if (!version) {
       console.log("Initialize: Settings");
-      localStorage.setItem("version", setting.version);
+      // localStorage.setItem("version", setting.version);
       Object.entries(setting.initialData).map((section) => {
         Object.entries(section[1]).map((name) => {
           const keyName = `${section[0]}_${name[0]}`;
@@ -328,6 +329,7 @@ export default function Main() {
       </aside>
 
       <section className="main__main-r">
+        {/* <List /> */}
         <Output
           func={mainFunction}
           data={{

@@ -121,8 +121,21 @@ a {
 }
 
 /* --------------------------------- Display -------------------------------- */
-.display {
+.display__list {
+  padding: 0;
+}
+.display__item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 15px;
+  padding: 5px 10px;
+  font-size: clamp(14px, 2.5vw, 15px);
   background-color: #f2f2f2;
+}
+.display__item:not(:last-child) {
+  margin-bottom: 3px;
 }
 
 /* --------------------------------- Option --------------------------------- */

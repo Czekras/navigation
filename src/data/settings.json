@@ -24,6 +24,10 @@
   },
   "initialList": [
     {
+      "slug": "entrance",
+      "name": "総合トップ"
+    },
+    {
       "slug": "top",
       "name": "トップページ"
     },

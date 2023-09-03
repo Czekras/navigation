@@ -29,10 +29,10 @@ a {
   transition: all 0.3s;
 }
 
-[class$="__wrapper"] {
-  // width: min(100%, 800px);
-  // margin-inline: auto;
-}
+// [class$="__wrapper"] {
+//   width: min(100%, 800px);
+//   margin-inline: auto;
+// }
 
 /* ---------------------------------- Main ---------------------------------- */
 .main {
@@ -45,7 +45,7 @@ a {
   flex-flow: row nowrap;
 
   & > * {
-    padding-block: 100px 50px;
+    padding-block: calc(89px + 20px) calc(42px + 20px);
   }
 
   &__main-l {

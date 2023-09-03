@@ -1,4 +1,54 @@
 export default function Output({ func, data }) {
+  let outputList = [];
+
+  // data.masterList.map((item, index) => {
+  //   let itemHref = item.slug ? `/${item.slug}/` : "";
+  //   const itemItem = data.item ? ` class="${data.item}` : "";
+  //   const itemLink = data.link ? `${data.link}` : "";
+  //   const itemActs = data.acts
+  //     ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
+  //     : "";
+  //   const itemSet =
+  //     itemLink || itemActs
+  //       ? ` class="${[itemLink, itemActs].filter((x) => x).join(" ")}"`
+  //       : "";
+
+  //   if (data.sougou) {
+  //     if (index == 0) itemHref = "/";
+  //     if (index == 1) itemHref = `/${item.slug}/`;
+  //   } else {
+  //     if (index == 0) return;
+  //     if (index == 1) itemHref = "/";
+  //   }
+  // });
+
+  // console.log(data.masterList);
+
+  // const newRoute = item.slug == "top" ? "/" : `/${item.slug}/`;
+  // const newItem = data.item ? ` class="${data.item}"` : "";
+  // const newLink = data.link ? `${data.link}` : "";
+  // const newActs = data.acts
+  //   ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
+  //   : "";
+  // const newSet =
+  //   newLink || newActs
+  //     ? ` class="${[newLink, newActs].filter((x) => x).join(" ")}"`
+  //     : "";
+
+  // if (!data.sougou) {
+  //   if (index == 0) {
+  //     return <li>SOUGOU!</li>;
+  //   }
+  // }
+
+  // return (
+  //   <li className="output__item" key={item.id}>
+  //     &lt;li{newItem}&gt;&lt;a{newSet} href="{newRoute}"&gt;
+  //     {item.name}
+  //     &lt;/a&gt;&lt;/li&gt;
+  //   </li>
+  // );
+
   return (
     <section className="output cmn-py">
       <div className="output__wrapper">
@@ -62,23 +112,29 @@ export default function Output({ func, data }) {
           </form>
         </div>
         <ul className="output__list">
-          {data.masterList.map((item) => {
-            let slugRoute = `/${item.slug}/`;
-            if (item.slug == "top") slugRoute = "/";
-
-            const newItem = data.item ? ` class="${data.item}"` : "";
-            const newLink = data.link ? `${data.link}` : "";
-            const newActs = data.acts
+          {data.masterList.map((item, index) => {
+            let itemHref = item.slug ? `/${item.slug}/` : "";
+            const itemItem = data.item ? ` class="${data.item}` : "";
+            const itemLink = data.link ? `${data.link}` : "";
+            const itemActs = data.acts
               ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
               : "";
-            const newSet =
-              newLink || newActs
-                ? ` class="${[newLink, newActs].filter(x => x).join(" ")}"`
+            const itemSet =
+              itemLink || itemActs
+                ? ` class="${[itemLink, itemActs].filter((x) => x).join(" ")}"`
                 : "";
+
+            if (data.sougou) {
+              if (index == 0) itemHref = "/";
+              if (index == 1) itemHref = `/${item.slug}/`;
+            } else {
+              if (index == 0) return;
+              if (index == 1) itemHref = "/";
+            }
 
             return (
               <li className="output__item" key={item.id}>
-                &lt;li{newItem}&gt;&lt;a{newSet} href="{slugRoute}"&gt;
+                &lt;li{itemItem}&gt;&lt;a{itemSet} href="{itemHref}"&gt;
                 {item.name}
                 &lt;/a&gt;&lt;/li&gt;
               </li>

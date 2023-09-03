@@ -336,6 +336,7 @@ export default function Main() {
             link: headerLink,
             acts: headerActs,
             toggle: headerTogg,
+            sougou: sougouTogg,
             masterList: masterList,
             nameChange: nameChange,
           }}
@@ -349,6 +350,7 @@ export default function Main() {
             link: drawerLink,
             acts: drawerActs,
             toggle: drawerTogg,
+            sougou: sougouTogg,
             masterList: masterList,
             nameChange: nameChange,
           }}
@@ -362,6 +364,7 @@ export default function Main() {
             link: footerLink,
             acts: footerActs,
             toggle: footerTogg,
+            sougou: sougouTogg,
             masterList: masterList,
             nameChange: nameChange,
           }}
@@ -375,6 +378,7 @@ export default function Main() {
             link: sitemapLink,
             acts: sitemapActs,
             toggle: sitemapTogg,
+            sougou: sougouTogg,
             masterList: masterList,
             nameChange: nameChange,
           }}

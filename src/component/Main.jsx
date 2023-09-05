@@ -329,7 +329,8 @@ export default function Main() {
       </aside>
 
       <section className="main__main-r">
-        {/* <List /> */}
+        <List data={{ masterIdList, masterList }} />
+
         <Output
           func={mainFunction}
           data={{

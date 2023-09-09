@@ -51,14 +51,24 @@ export default function Output({ func, data }) {
             </div>
             <div className="input__form-item">
               <label htmlFor={`${data.title}_acts`}>Activeクラス名</label>
-              <input
-                type="text"
-                id={`${data.title}_acts`}
-                placeholder={data.acts}
-                value={data.acts}
-                disabled={data.active}
-                onChange={func.handleChangeName}
-              />
+              {removeList.indexOf(data.title) > -1 ? (
+                <input
+                  type="text"
+                  id={`${data.title}_acts`}
+                  placeholder={data.acts}
+                  value={data.acts}
+                  disabled={!data.remove}
+                  onChange={func.handleChangeName}
+                />
+              ) : (
+                <input
+                  type="text"
+                  id={`${data.title}_acts`}
+                  placeholder={data.acts}
+                  value={data.acts}
+                  onChange={func.handleChangeName}
+                />
+              )}
             </div>
             <div className="input__form-item">
               {/* <button className="input__icon" disabled={!data.nameChange}> */}
@@ -90,7 +100,7 @@ export default function Output({ func, data }) {
               if (index == 1) itemHref = '/';
             }
 
-            if (removeList.indexOf(data.title) > -1 && !data.active) {
+            if (removeList.indexOf(data.title) > -1 && !data.remove) {
               itemSet = ` class="${itemLink}"`;
             }
 

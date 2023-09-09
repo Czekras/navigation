@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 import dataSetting from '../data/settings.json';
 import Output from './Output';
-import List from './List';
 
 export default function Main() {
   const [slug, setSlug] = useState('');
@@ -23,14 +24,14 @@ export default function Main() {
   const [headerActs, setHeaderActs] = useState('');
   const [headerTogg, setHeaderTogg] = useState(Boolean);
 
-  const [, setDrawerItem] = useState('');
-  const [, setDrawerLink] = useState('');
-  const [, setDrawerActs] = useState('');
+  const [drawerItem, setDrawerItem] = useState('');
+  const [drawerLink, setDrawerLink] = useState('');
+  const [drawerActs, setDrawerActs] = useState('');
   const [drawerTogg, setDrawerTogg] = useState(Boolean);
 
-  const [, setFooterItem] = useState('');
-  const [, setFooterLink] = useState('');
-  const [, setFooterActs] = useState('');
+  const [footerItem, setFooterItem] = useState('');
+  const [footerLink, setFooterLink] = useState('');
+  const [footerActs, setFooterActs] = useState('');
   const [footerTogg, setFooterTogg] = useState(Boolean);
 
   const [sitemapItem, setSitemapItem] = useState('');
@@ -40,8 +41,9 @@ export default function Main() {
 
   const [mainList, setMainList] = useState([]);
 
-  /* ---------------------------------- Main ---------------------------------- */
-
+  /* -------------------------------------------------------------------------- */
+  /*                                    Main                                    */
+  /* -------------------------------------------------------------------------- */
   useEffect(() => {
     const mainList = localStorage.getItem('mainList');
     loadSetting(mainList, dataSetting);
@@ -93,10 +95,10 @@ export default function Main() {
 
       console.log('Initialize: Option');
       const initSougou = setting.sougouToggle;
-      const initSitemap = setting.removeActs;
+      const initRemove = setting.removeActs;
 
       localStorage.setItem('sougou_option', initSougou);
-      localStorage.setItem('remove_option', initSitemap);
+      localStorage.setItem('remove_option', initRemove);
     }
 
     console.log('Load: Setting');
@@ -159,16 +161,6 @@ export default function Main() {
   };
 
   /* ------------------------------ Local Storage ----------------------------- */
-  const pushList = (list, index, newItem) => {
-    console.log('Update: List');
-    const newList = [
-      ...list.slice(0, index + 2),
-      newItem,
-      ...list.slice(index + 2),
-    ];
-    localStorage.setItem('mainList', JSON.stringify(newList));
-  };
-
   const pullList = () => {
     console.log('Load: List');
     const list = JSON.parse(localStorage.getItem('mainList'));
@@ -186,7 +178,14 @@ export default function Main() {
       name: name,
     };
 
-    pushList(mainList, itemsCount, newItem);
+    console.log('Update: List');
+    const newList = [
+      ...mainList.slice(0, itemsCount + 2),
+      newItem,
+      ...mainList.slice(itemsCount + 2),
+    ];
+    localStorage.setItem('mainList', JSON.stringify(newList));
+
     setMainList((currentItems) => {
       return [
         ...currentItems.slice(0, itemsCount + 2),
@@ -311,16 +310,57 @@ export default function Main() {
   /* -------------------------- Toggle (Remove Acts) -------------------------- */
   const handleRemoveActs = (e) => {
     setRemoveActs(!removeActs);
-    localStorage.setItem('active_option', !removeActs);
-    console.log('Update: active_option');
+    localStorage.setItem('remove_option', !removeActs);
+    console.log('Update: remove_option');
   };
 
-  /* -------------------------------- MAIN DATA ------------------------------- */
+  /* -------------------------------------------------------------------------- */
+  /*                             Draggable Functions                            */
+  /* -------------------------------------------------------------------------- */
+  const draggableList = sougouTogg ? mainList : mainList.slice(1);
+
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    return result;
+  };
+
+  const getItemStyle = (isDragging, draggableStyle) => ({
+    userSelect: 'none',
+    background: isDragging ? '#3a3a3a33' : '',
+    ...draggableStyle,
+  });
+
+  const pushList = (result) => {
+    console.log('Update: List');
+    localStorage.setItem('mainList', JSON.stringify(result));
+  };
+
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = reorder(
+      mainList,
+      result.source.index,
+      result.destination.index
+    );
+
+    setMainList(items);
+    pushList(items);
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                        Functions to pass to children                       */
+  /* -------------------------------------------------------------------------- */
   const mainFunction = {
     handleCollapseToggle: handleCollapseToggle,
     handleResetName: handleResetName,
     handleChangeName: handleChangeName,
   };
+
   /* -------------------------------------------------------------------------- */
 
   return (
@@ -361,8 +401,9 @@ export default function Main() {
           </div>
         </section>
 
-        <section className="option cmn-py">
+        <section className="option">
           <div className="option__wrapper">
+            <p className="option__note">オプション</p>
             <div className="option__item">
               <input
                 type="checkbox"
@@ -384,7 +425,53 @@ export default function Main() {
           </div>
         </section>
 
-        <List mainList={mainList} />
+        <section className="display cmn-py">
+          <div className="display__wrapper">
+            <p className="display__note">並び替える・削除する</p>
+            <DragDropContext onDragEnd={handleOnDragEnd}>
+              <Droppable droppableId="droppable">
+                {(provided, snapshot) => (
+                  <ul
+                    className="display__list"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {mainList.slice(1).map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <li
+                            className="display__item"
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                          >
+                            <span className="display__icon-drag material-symbols-outlined">
+                              drag_handle
+                            </span>
+                            {item.slug}
+                            <i className="display__fade">{item.name}</i>
+                            <span class="display__icon-trash material-symbols-outlined">
+                              delete
+                            </span>
+                          </li>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </ul>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
+        </section>
       </aside>
 
       <section className="main__main-r">
@@ -397,22 +484,7 @@ export default function Main() {
             acts: headerActs,
             toggle: headerTogg,
             sougou: sougouTogg,
-            active: false,
-            mainList: mainList,
-            nameChange: nameChange,
-          }}
-        />
-
-        {/* <Output
-          func={mainFunction}
-          data={{
-            title: "drawer",
-            item: drawerItem,
-            link: drawerLink,
-            acts: drawerActs,
-            toggle: drawerTogg,
-            sougou: sougouTogg,
-            active: false,
+            remove: removeActs,
             mainList: mainList,
             nameChange: nameChange,
           }}
@@ -421,17 +493,32 @@ export default function Main() {
         <Output
           func={mainFunction}
           data={{
-            title: "footer",
+            title: 'drawer',
+            item: drawerItem,
+            link: drawerLink,
+            acts: drawerActs,
+            toggle: drawerTogg,
+            sougou: sougouTogg,
+            remove: removeActs,
+            mainList: mainList,
+            nameChange: nameChange,
+          }}
+        />
+
+        <Output
+          func={mainFunction}
+          data={{
+            title: 'footer',
             item: footerItem,
             link: footerLink,
             acts: footerActs,
             toggle: footerTogg,
             sougou: sougouTogg,
-            active: false,
+            remove: removeActs,
             mainList: mainList,
             nameChange: nameChange,
           }}
-        /> */}
+        />
 
         <Output
           func={mainFunction}
@@ -442,7 +529,7 @@ export default function Main() {
             acts: sitemapActs,
             toggle: sitemapTogg,
             sougou: sougouTogg,
-            active: removeActs,
+            remove: removeActs,
             mainList: mainList,
             nameChange: nameChange,
           }}

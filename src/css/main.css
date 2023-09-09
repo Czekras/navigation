@@ -124,6 +124,13 @@ a {
 }
 
 /* --------------------------------- Display -------------------------------- */
+.display__note {
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #d2d2d2;
+  font-size: 12px;
+  color: rgba(58, 58, 58, 0.5);
+}
 .display__list {
   padding: 0;
 }
@@ -132,12 +139,10 @@ a {
   justify-content: flex-start;
   align-items: center;
   flex-flow: row nowrap;
-  gap: 15px;
   padding: 3px 10px;
-  font-size: clamp(13px, 2.5vw, 14px);
   background-color: #f2f2f2;
   transition: all 0.1s;
-  font-size: clamp(12px, 2.5vw, 14px);
+  font-size: 12px;
 }
 .display__item:not(:last-child) {
   margin-bottom: 3px;
@@ -146,10 +151,23 @@ a {
   background-color: rgba(58, 58, 58, 0.2);
 }
 .display__fade {
-  font-size: 12px;
   color: rgba(58, 58, 58, 0.4);
-  overflow-x: hidden;
   white-space: nowrap;
+  margin-inline: 5px 16px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+.display__icon-drag {
+  margin-right: 15px;
+}
+.display__icon-trash {
+  margin-inline: auto 0;
+  font-size: 16px;
+  z-index: 10000;
+}
+.display__icon-trash:hover {
+  cursor: pointer;
+  color: #ff4343;
 }
 
 /* --------------------------------- Option --------------------------------- */
@@ -158,6 +176,13 @@ a {
 }
 .option__item input[type=checkbox]:hover, .option__item input[type=checkbox]:focus {
   cursor: pointer;
+}
+.option__note {
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #d2d2d2;
+  font-size: 12px;
+  color: rgba(58, 58, 58, 0.5);
 }
 
 /* --------------------------------- Output --------------------------------- */
@@ -207,11 +232,12 @@ a {
 .output__list {
   padding: 5px;
   border: 1px solid #d2d2d2;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .output__item {
   white-space: nowrap;
   font-family: "Roboto Mono", monospace;
+  font-size: 14px;
 }
 
 .footer {

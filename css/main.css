@@ -37,15 +37,17 @@ a {
 }
 .main__main-l {
   width: min(100%, 240px);
-  padding-right: 30px;
+  padding-right: 40px;
   border-right: 1px solid #d2d2d2;
   position: sticky;
   height: 100dvh;
   inset: 0 auto 0 0;
+  padding-right: 20px;
+  background-color: red;
 }
 .main__main-r {
   width: min(100%, 840px);
-  padding-left: 30px;
+  padding-left: 40px;
 }
 
 /* --------------------------------- Header --------------------------------- */
@@ -79,10 +81,11 @@ a {
   flex-direction: column;
 }
 .input__form--side label {
-  display: none;
+  display: block;
+  padding-inline: 5px;
+  margin-bottom: 5px;
 }
 .input__form--side button {
-  width: 100%;
   margin-top: 10px;
   padding-inline: 20px;
 }

@@ -54,5 +54,6 @@
     "footer": true,
     "sitemap": true
   },
-  "sougouToggle": false
+  "sougouToggle": false,
+  "removeActs": false
 }

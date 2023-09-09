@@ -15,22 +15,22 @@ export default function Main() {
   const [nameChange, setNameChange] = useState(false);
 
   const [itemsCount, setItemsCount] = useState(Number);
-  const [masterList, setMasterList] = useState([]);
-  const [masterIdList, setMasterIdList] = useState([]);
+  // const [masterList, setMasterList] = useState([]);
+  // const [masterIdList, setMasterIdList] = useState([]);
 
   const [headerItem, setHeaderItem] = useState('');
   const [headerLink, setHeaderLink] = useState('');
   const [headerActs, setHeaderActs] = useState('');
   const [headerTogg, setHeaderTogg] = useState(Boolean);
 
-  const [drawerItem, setDrawerItem] = useState('');
-  const [drawerLink, setDrawerLink] = useState('');
-  const [drawerActs, setDrawerActs] = useState('');
+  const [, setDrawerItem] = useState('');
+  const [, setDrawerLink] = useState('');
+  const [, setDrawerActs] = useState('');
   const [drawerTogg, setDrawerTogg] = useState(Boolean);
 
-  const [footerItem, setFooterItem] = useState('');
-  const [footerLink, setFooterLink] = useState('');
-  const [footerActs, setFooterActs] = useState('');
+  const [, setFooterItem] = useState('');
+  const [, setFooterLink] = useState('');
+  const [, setFooterActs] = useState('');
   const [footerTogg, setFooterTogg] = useState(Boolean);
 
   const [sitemapItem, setSitemapItem] = useState('');
@@ -41,7 +41,6 @@ export default function Main() {
   const [mainList, setMainList] = useState([]);
 
   useEffect(() => {
-    const version = localStorage.getItem('version');
     const mainList = localStorage.getItem('mainList');
     loadSetting(mainList, dataSetting);
   }, []);
@@ -51,8 +50,10 @@ export default function Main() {
     if (!mainList) {
       console.log('Initialize: Settings');
       // localStorage.setItem('mainList', setting.mainList);
-      Object.entries(setting.initialData).map((section) => {
-        Object.entries(section[1]).map((name) => {
+      // Object.entries(setting.initialData).map((section) => {
+      //   Object.entries(section[1]).map((name) => {
+      setting.initialData.forEaach((section) => {
+        section[1].forEaach((name) => {
           const keyName = `${section[0]}_${name[0]}`;
           localStorage.setItem(keyName, [name[1]]);
         });
@@ -82,7 +83,8 @@ export default function Main() {
       localStorage.setItem('mainList', JSON.stringify(list));
 
       console.log('Initialize: Toggle');
-      Object.entries(setting.initialToggle).map((section) => {
+      // Object.entries(setting.initialToggle).map((section) => {
+      setting.initialToggle.forEach((section) => {
         const keyName = `${section[0]}_toggle`;
         localStorage.setItem(keyName, section[1]);
       });
@@ -201,28 +203,28 @@ export default function Main() {
     const [section, name] = e.target.id.split('_');
     const value = e.target.value;
 
-    if (section == 'header') {
-      if (name == 'item') setHeaderItem(value);
-      if (name == 'link') setHeaderLink(value);
-      if (name == 'acts') setHeaderActs(value);
+    if (section === 'header') {
+      if (name === 'item') setHeaderItem(value);
+      if (name === 'link') setHeaderLink(value);
+      if (name === 'acts') setHeaderActs(value);
     }
 
-    if (section == 'drawer') {
-      if (name == 'item') setDrawerItem(value);
-      if (name == 'link') setDrawerLink(value);
-      if (name == 'acts') setDrawerActs(value);
+    if (section === 'drawer') {
+      if (name === 'item') setDrawerItem(value);
+      if (name === 'link') setDrawerLink(value);
+      if (name === 'acts') setDrawerActs(value);
     }
 
-    if (section == 'footer') {
-      if (name == 'item') setFooterItem(value);
-      if (name == 'link') setFooterLink(value);
-      if (name == 'acts') setFooterActs(value);
+    if (section === 'footer') {
+      if (name === 'item') setFooterItem(value);
+      if (name === 'link') setFooterLink(value);
+      if (name === 'acts') setFooterActs(value);
     }
 
-    if (section == 'sitemap') {
-      if (name == 'item') setSitemapItem(value);
-      if (name == 'link') setSitemapLink(value);
-      if (name == 'acts') setSitemapActs(value);
+    if (section === 'sitemap') {
+      if (name === 'item') setSitemapItem(value);
+      if (name === 'link') setSitemapLink(value);
+      if (name === 'acts') setSitemapActs(value);
     }
 
     clearTimeout(nameTimer);
@@ -242,34 +244,35 @@ export default function Main() {
 
     let db = '';
     const sectionName = e.target.id.split('_')[0];
-    if (sectionName == 'header') db = dataSetting.initialData.header;
-    if (sectionName == 'drawer') db = dataSetting.initialData.drawer;
-    if (sectionName == 'footer') db = dataSetting.initialData.footer;
-    if (sectionName == 'sitemap') db = dataSetting.initialData.sitemap;
+    if (sectionName === 'header') db = dataSetting.initialData.header;
+    if (sectionName === 'drawer') db = dataSetting.initialData.drawer;
+    if (sectionName === 'footer') db = dataSetting.initialData.footer;
+    if (sectionName === 'sitemap') db = dataSetting.initialData.sitemap;
 
-    Object.entries(db).map((section) => {
+    // Object.entries(db).map((section) => {
+    db.forEach((section) => {
       const storageName = `${sectionName}_${section[0]}`;
       localStorage.setItem(storageName, section[1]);
 
-      if (section[0] == 'item') {
-        if (sectionName == 'header') setHeaderItem(section[1]);
-        if (sectionName == 'drawer') setDrawerItem(section[1]);
-        if (sectionName == 'footer') setFooterItem(section[1]);
-        if (sectionName == 'sitemap') setSitemapItem(section[1]);
+      if (section[0] === 'item') {
+        if (sectionName === 'header') setHeaderItem(section[1]);
+        if (sectionName === 'drawer') setDrawerItem(section[1]);
+        if (sectionName === 'footer') setFooterItem(section[1]);
+        if (sectionName === 'sitemap') setSitemapItem(section[1]);
       }
 
-      if (section[0] == 'link') {
-        if (sectionName == 'header') setHeaderLink(section[1]);
-        if (sectionName == 'drawer') setDrawerLink(section[1]);
-        if (sectionName == 'footer') setFooterLink(section[1]);
-        if (sectionName == 'sitemap') setSitemapLink(section[1]);
+      if (section[0] === 'link') {
+        if (sectionName === 'header') setHeaderLink(section[1]);
+        if (sectionName === 'drawer') setDrawerLink(section[1]);
+        if (sectionName === 'footer') setFooterLink(section[1]);
+        if (sectionName === 'sitemap') setSitemapLink(section[1]);
       }
 
-      if (section[0] == 'acts') {
-        if (sectionName == 'header') setHeaderActs(section[1]);
-        if (sectionName == 'drawer') setDrawerActs(section[1]);
-        if (sectionName == 'footer') setFooterActs(section[1]);
-        if (sectionName == 'sitemap') setSitemapActs(section[1]);
+      if (section[0] === 'acts') {
+        if (sectionName === 'header') setHeaderActs(section[1]);
+        if (sectionName === 'drawer') setDrawerActs(section[1]);
+        if (sectionName === 'footer') setFooterActs(section[1]);
+        if (sectionName === 'sitemap') setSitemapActs(section[1]);
       }
     });
   };
@@ -277,19 +280,19 @@ export default function Main() {
   /* ----------------------------- Toggle Setting ----------------------------- */
   const handleCollapseToggle = (e) => {
     const section = e.target.id.split('_')[0];
-    if (section == 'header') setHeaderTogg(!headerTogg);
-    if (section == 'drawer') setDrawerTogg(!drawerTogg);
-    if (section == 'footer') setFooterTogg(!footerTogg);
-    if (section == 'sitemap') setSitemapTogg(!sitemapTogg);
+    if (section === 'header') setHeaderTogg(!headerTogg);
+    if (section === 'drawer') setDrawerTogg(!drawerTogg);
+    if (section === 'footer') setFooterTogg(!footerTogg);
+    if (section === 'sitemap') setSitemapTogg(!sitemapTogg);
 
     clearTimeout(toggTimer);
     const inputDelay = () =>
       setTimeout(() => {
         const keyName = `${section}_toggle`;
-        if (section == 'header') localStorage.setItem(keyName, !headerTogg);
-        if (section == 'drawer') localStorage.setItem(keyName, !drawerTogg);
-        if (section == 'footer') localStorage.setItem(keyName, !footerTogg);
-        if (section == 'sitemap') localStorage.setItem(keyName, !sitemapTogg);
+        if (section === 'header') localStorage.setItem(keyName, !headerTogg);
+        if (section === 'drawer') localStorage.setItem(keyName, !drawerTogg);
+        if (section === 'footer') localStorage.setItem(keyName, !footerTogg);
+        if (section === 'sitemap') localStorage.setItem(keyName, !sitemapTogg);
         console.log(`Update: ${keyName}`);
       }, 500);
     setToggTimer(inputDelay);

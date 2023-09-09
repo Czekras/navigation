@@ -27,9 +27,10 @@ export default function Output({ func, data }) {
             className="input__form input__form--setting"
             id={`${data.title}_reset`}
             onSubmit={func.handleResetName}
+            autoComplete="off"
           >
             <div className="input__form-item">
-              <label htmlFor={`${data.title}Item`}>&lt;li&gt;クラス名</label>
+              <label htmlFor={`${data.title}_item`}>&lt;li&gt;クラス名</label>
               <input
                 type="text"
                 id={`${data.title}_item`}
@@ -39,7 +40,7 @@ export default function Output({ func, data }) {
               />
             </div>
             <div className="input__form-item">
-              <label htmlFor={`${data.title}Link`}>&lt;a&gt;クラス名</label>
+              <label htmlFor={`${data.title}_link`}>&lt;a&gt;クラス名</label>
               <input
                 type="text"
                 id={`${data.title}_link`}
@@ -49,7 +50,7 @@ export default function Output({ func, data }) {
               />
             </div>
             <div className="input__form-item">
-              <label htmlFor={`${data.title}Acts`}>Activeクラス名</label>
+              <label htmlFor={`${data.title}_acts`}>Activeクラス名</label>
               <input
                 type="text"
                 id={`${data.title}_acts`}

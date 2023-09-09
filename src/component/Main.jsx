@@ -11,7 +11,7 @@ export default function Main() {
   const [toggTimer, setToggTimer] = useState(null);
 
   const [sougouTogg, setSougouTogg] = useState(Boolean);
-  const [removeActs, setRemoveActs] = useState(Boolean)
+  const [removeActs, setRemoveActs] = useState(Boolean);
   const [nameChange, setNameChange] = useState(false);
 
   const [itemsCount, setItemsCount] = useState(Number);
@@ -40,6 +40,8 @@ export default function Main() {
 
   const [mainList, setMainList] = useState([]);
 
+  /* ---------------------------------- Main ---------------------------------- */
+
   useEffect(() => {
     const mainList = localStorage.getItem('mainList');
     loadSetting(mainList, dataSetting);
@@ -50,10 +52,10 @@ export default function Main() {
     if (!mainList) {
       console.log('Initialize: Settings');
       // localStorage.setItem('mainList', setting.mainList);
-      // Object.entries(setting.initialData).map((section) => {
-      //   Object.entries(section[1]).map((name) => {
-      setting.initialData.forEaach((section) => {
-        section[1].forEaach((name) => {
+      Object.entries(setting.initialData).map((section) => {
+        Object.entries(section[1]).map((name) => {
+          // setting.initialData.forEach((section) => {
+          //   section[1].forEach((name) => {
           const keyName = `${section[0]}_${name[0]}`;
           localStorage.setItem(keyName, [name[1]]);
         });
@@ -83,8 +85,8 @@ export default function Main() {
       localStorage.setItem('mainList', JSON.stringify(list));
 
       console.log('Initialize: Toggle');
-      // Object.entries(setting.initialToggle).map((section) => {
-      setting.initialToggle.forEach((section) => {
+      Object.entries(setting.initialToggle).map((section) => {
+        // setting.initialToggle.forEach((section) => {
         const keyName = `${section[0]}_toggle`;
         localStorage.setItem(keyName, section[1]);
       });
@@ -249,8 +251,8 @@ export default function Main() {
     if (sectionName === 'footer') db = dataSetting.initialData.footer;
     if (sectionName === 'sitemap') db = dataSetting.initialData.sitemap;
 
-    // Object.entries(db).map((section) => {
-    db.forEach((section) => {
+    Object.entries(db).map((section) => {
+      // db.forEach((section) => {
       const storageName = `${sectionName}_${section[0]}`;
       localStorage.setItem(storageName, section[1]);
 
@@ -329,6 +331,7 @@ export default function Main() {
             <form
               className="input__form input__form--side"
               onSubmit={handleSubmit}
+              autoComplete="off"
             >
               <div className="input__form-item">
                 <label htmlFor="slug">Slug name</label>
@@ -358,23 +361,6 @@ export default function Main() {
           </div>
         </section>
 
-        {/* <section className="display">
-          <div className="display__wrapper">
-            <ul className="display__list">
-              {masterList.map((item) => {
-                return (
-                  <li className="display__item" key={item.slug}>
-                    <label htmlFor={item.slug}>
-                      <input type="checkbox" />
-                      {item.slug}, {item.name}
-                    </label>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </section> */}
-
         <section className="option cmn-py">
           <div className="option__wrapper">
             <div className="option__item">
@@ -397,11 +383,11 @@ export default function Main() {
             </div>
           </div>
         </section>
+
+        <List mainList={mainList} />
       </aside>
 
       <section className="main__main-r">
-        {/* <List data={{ masterIdList, masterList }} /> */}
-
         <Output
           func={mainFunction}
           data={{

@@ -21,12 +21,12 @@ export default function Output({ func, data }) {
         </header>
         <div className="output__setting">
           <form
-            className="input__form input__form--setting"
+            className="output__form output__form--setting"
             id={`${data.title}_reset`}
             onSubmit={func.handleResetName}
             autoComplete="off"
           >
-            <div className="input__form-item">
+            <div className="output__form-item">
               <label htmlFor={`${data.title}_item`}>&lt;li&gt;クラス名</label>
               <input
                 type="text"
@@ -36,7 +36,7 @@ export default function Output({ func, data }) {
                 onChange={func.handleChangeName}
               />
             </div>
-            <div className="input__form-item">
+            <div className="output__form-item">
               <label htmlFor={`${data.title}_link`}>&lt;a&gt;クラス名</label>
               <input
                 type="text"
@@ -46,7 +46,7 @@ export default function Output({ func, data }) {
                 onChange={func.handleChangeName}
               />
             </div>
-            <div className="input__form-item">
+            <div className="output__form-item">
               <label htmlFor={`${data.title}_acts`}>Activeクラス名</label>
               {removeList.indexOf(data.title) > -1 ? (
                 <input
@@ -67,8 +67,7 @@ export default function Output({ func, data }) {
                 />
               )}
             </div>
-            <div className="input__form-item">
-              {/* <button className="input__icon" disabled={!data.nameChange}> */}
+            <div className="output__form-item">
               <button className="input__icon" disabled={false}>
                 <span className="material-symbols-outlined">restart_alt</span>
               </button>

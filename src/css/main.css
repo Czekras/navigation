@@ -1,7 +1,9 @@
-html {
-  scroll-behavior: smooth;
-}
-
+/* -------------------------------------------------------------------------- */
+/*                                  Variables                                 */
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                    Base                                    */
+/* -------------------------------------------------------------------------- */
 body {
   font-family: "Noto Sans JP", sans-serif;
   color: #3a3a3a;
@@ -20,19 +22,14 @@ body {
   margin-bottom: 10px;
 }
 
-.cmn-hover:hover {
-  opacity: 0.8;
-}
-
-.dp-none {
-  display: none !important;
-}
-
 a {
+  color: inherit;
   transition: all 0.3s;
 }
 
-/* ---------------------------------- Main ---------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                    Main                                    */
+/* -------------------------------------------------------------------------- */
 .main {
   flex: 1 0 100vh;
   display: flex;
@@ -56,11 +53,12 @@ a {
   padding-left: 30px;
 }
 
-/* --------------------------------- Header --------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                   Header                                   */
+/* -------------------------------------------------------------------------- */
 .header {
   position: fixed;
   inset: 0 0 auto 0;
-  background-color: #f2f2f2;
   padding: 20px;
   border-bottom: 1px solid #d2d2d2;
   z-index: 100;
@@ -72,24 +70,82 @@ a {
 }
 .header__logo {
   text-decoration: none;
-  color: #3a3a3a;
 }
 
-/* ---------------------------------- Input --------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                   Display                                  */
+/* -------------------------------------------------------------------------- */
+.display__note {
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #d2d2d2;
+}
+.display__list {
+  padding: 0;
+}
+.display__item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: row nowrap;
+  position: relative;
+}
+.display__item:not(:last-child) {
+  margin-bottom: 3px;
+}
+.display__item-none {
+  display: none !important;
+}
+.display__fade, .display__text {
+  white-space: nowrap;
+}
+.display__text {
+  margin-right: 5px;
+}
+.display__fade {
+  overflow-x: hidden;
+}
+.display__icon-drag {
+  margin-right: 15px;
+}
+.display__btn-trash {
+  all: unset;
+  padding-inline: 5px;
+  margin-inline: auto 0;
+}
+.display__btn-trash:hover {
+  cursor: pointer;
+}
+/* -------------------------------------------------------------------------- */
+/*                                   Option                                   */
+/* -------------------------------------------------------------------------- */
+.option__item input[type=checkbox] {
+  margin-right: 10px;
+}
+.option__item input[type=checkbox]:hover, .option__item input[type=checkbox]:focus {
+  cursor: pointer;
+}
+.option__note {
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #d2d2d2;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                    Input                                   */
+/* -------------------------------------------------------------------------- */
 .input__form {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   flex-flow: row nowrap;
   gap: 10px;
-}
-.input__form--side {
   flex-direction: column;
 }
-.input__form--side label {
+.input__form label {
   display: none;
 }
-.input__form--side button {
+.input__form button {
   width: 100%;
   margin-top: 10px;
   padding-inline: 20px;
@@ -98,16 +154,6 @@ a {
   width: 100%;
   padding-inline: 5px;
   border: 1px solid #d2d2d2;
-  color: #878787;
-}
-.input__form input:focus {
-  color: #3a3a3a;
-}
-.input__form--setting {
-  padding: 10px;
-  background-color: #f2f2f2;
-  border: 1px solid #d2d2d2;
-  border-bottom: none;
 }
 .input__button {
   white-space: nowrap;
@@ -119,84 +165,15 @@ a {
 }
 .input__icon {
   all: unset;
-  color: #3a3a3a;
   cursor: pointer;
 }
 .input__icon:disabled {
-  color: #878787;
   cursor: default;
 }
 
-/* --------------------------------- Display -------------------------------- */
-.display__note {
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #d2d2d2;
-  color: rgba(58, 58, 58, 0.5);
-}
-.display__list {
-  padding: 0;
-}
-.display__item {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-flow: row nowrap;
-  padding: 3px 0 3px 10px;
-  background-color: #f2f2f2;
-  transition: all 0.1s;
-  position: relative;
-}
-.display__item:not(:last-child) {
-  margin-bottom: 3px;
-}
-.display__item:hover {
-  background-color: rgba(58, 58, 58, 0.2);
-}
-.display__fade, .display__text {
-  white-space: nowrap;
-  font-size: 12px;
-  font-family: "Roboto Mono", monospace;
-}
-.display__text {
-  margin-right: 5px;
-}
-.display__fade {
-  color: rgba(58, 58, 58, 0.4);
-  overflow-x: hidden;
-}
-.display__icon-drag {
-  margin-right: 15px;
-}
-.display__btn-trash {
-  all: unset;
-  color: #3a3a3a;
-  padding-inline: 5px;
-  margin-inline: auto 0;
-}
-.display__btn-trash:hover {
-  cursor: pointer;
-  color: #ff4343;
-}
-.display__icon-trash {
-  font-size: 16px;
-}
-
-/* --------------------------------- Option --------------------------------- */
-.option__item input[type=checkbox] {
-  margin-right: 10px;
-}
-.option__item input[type=checkbox]:hover, .option__item input[type=checkbox]:focus {
-  cursor: pointer;
-}
-.option__note {
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #d2d2d2;
-  color: rgba(58, 58, 58, 0.5);
-}
-
-/* --------------------------------- Output --------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                   Output                                   */
+/* -------------------------------------------------------------------------- */
 .output__wrapper input[type=checkbox] {
   display: none;
 }
@@ -204,19 +181,32 @@ a {
   height: auto;
   overflow: visible;
 }
+.output__form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-flow: row nowrap;
+  border: 1px solid #d2d2d2;
+  border-bottom: none;
+  padding: 10px;
+  gap: 10px;
+}
+.output__form button {
+  width: 100%;
+  margin-top: 10px;
+  padding-inline: 20px;
+}
+.output__form input {
+  width: 100%;
+  padding-inline: 5px;
+  border: 1px solid #d2d2d2;
+}
 .output__setting {
   overflow-y: hidden;
   height: 0;
-  transition: height 0.3s ease;
 }
 .output__header {
-  border: 1px solid #d2d2d2;
-  border-bottom: none;
   text-transform: capitalize;
-}
-.output__title {
-  font-size: clamp(16px, 2.5vw, 17px);
-  font-weight: 400;
 }
 .output__label {
   display: flex;
@@ -224,57 +214,45 @@ a {
   align-items: center;
   flex-flow: row nowrap;
   padding: 5px 10px;
-  background-color: rgba(58, 58, 58, 0.2);
-  transition: background-color 0.3s;
+  border: 1px solid #d2d2d2;
+  border-bottom: none;
   position: relative;
 }
 .output__label:hover, .output__label:focus {
   cursor: pointer;
-  background-color: rgba(58, 58, 58, 0.25);
-}
-.output__label:hover .output__icon, .output__label:focus .output__icon {
-  color: #3a3a3a;
-}
-.output__icon {
-  font-size: 18px;
-  color: #878787;
-  transition: color 0.3s;
 }
 .output__list {
-  padding: 5px;
-  border: 1px solid #d2d2d2;
+  padding: 10px !important;
   overflow-x: auto;
+  border: 1px solid #d2d2d2;
 }
 .output__item {
   white-space: nowrap;
-  font-family: "Roboto Mono", monospace;
-  font-size: 14px;
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                   Footer                                   */
+/* -------------------------------------------------------------------------- */
 .footer {
   position: fixed;
-  background-color: #f2f2f2;
   inset: auto 0 0 0;
   padding: 10px;
   text-align: center;
   border-top: 1px solid #d2d2d2;
-  font-size: clamp(12px, 2.5vw, 14px);
   z-index: 100;
 }
 
-/* ----------------------------- Generate Button ---------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                   Others                                   */
+/* -------------------------------------------------------------------------- */
 .generate-button {
   all: unset;
   width: 100%;
   text-align: center;
   padding: 5px 0;
-  color: #878787;
-  transition: all 0.3s;
-  font-size: 14px;
 }
 .generate-button:hover, .generate-button:focus {
   cursor: pointer;
-  color: #3a3a3a;
 }
 
 /* ---------------------------------- Icons --------------------------------- */

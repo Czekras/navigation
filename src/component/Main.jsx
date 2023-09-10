@@ -374,7 +374,7 @@ export default function Main() {
         <section className="input cmn-py">
           <div className="input__wrapper">
             <form
-              className="input__form input__form--side"
+              className="input__form"
               onSubmit={handleSubmit}
               autoComplete="off"
             >
@@ -449,7 +449,7 @@ export default function Main() {
                     {mainList.length > 1 ? (
                       mainList.map((item, index) => {
                         const isEntrance =
-                          item.slug === 'entrance' ? 'dp-none' : '';
+                          item.slug === 'entrance' ? 'display__item-none' : '';
 
                         return (
                           <Draggable

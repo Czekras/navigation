@@ -1,16 +1,20 @@
+/* -------------------------------------------------------------------------- */
+/*                                  Variables                                 */
+/* -------------------------------------------------------------------------- */
 $clr: #3a3a3a;
 $clr-lgt: #878787;
 $clr-del: #ff4343;
 $bdc: #d2d2d2;
 $bgc: #f2f2f2;
+
 $ff-sans: 'Noto Sans JP', sans-serif;
 $ff-mono: 'Roboto Mono', monospace;
 
-html {
-  scroll-behavior: smooth;
-  // scrollbar-gutter: stable;
-}
+$transition: all 0.3s;
 
+/* -------------------------------------------------------------------------- */
+/*                                    Base                                    */
+/* -------------------------------------------------------------------------- */
 body {
   font-family: $ff-sans;
   color: $clr;
@@ -29,24 +33,14 @@ body {
   margin-bottom: 10px;
 }
 
-.cmn-hover:hover {
-  opacity: 0.8;
-}
-
-.dp-none {
-  display: none !important;
-}
-
 a {
-  transition: all 0.3s;
+  color: inherit;
+  transition: $transition;
 }
 
-// [class$="__wrapper"] {
-//   width: min(100%, 800px);
-//   margin-inline: auto;
-// }
-
-/* ---------------------------------- Main ---------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                    Main                                    */
+/* -------------------------------------------------------------------------- */
 .main {
   flex: 1 0 100vh;
   // margin-top: 100px;
@@ -76,11 +70,12 @@ a {
   }
 }
 
-/* --------------------------------- Header --------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                   Header                                   */
+/* -------------------------------------------------------------------------- */
 .header {
   position: fixed;
   inset: 0 0 auto 0;
-  background-color: $bgc;
   padding: 20px;
   border-bottom: 1px solid $bdc;
   z-index: 100;
@@ -93,85 +88,17 @@ a {
 
   &__logo {
     text-decoration: none;
-    color: $clr;
   }
 }
 
-/* ---------------------------------- Input --------------------------------- */
-.input {
-  &__form {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    flex-flow: row nowrap;
-    gap: 10px;
-
-    &--side {
-      flex-direction: column;
-
-      label {
-        // display: block;
-        // padding-inline: 5px;
-        // margin-bottom: 5px;
-        display: none;
-      }
-
-      button {
-        width: 100%;
-        margin-top: 10px;
-        padding-inline: 20px;
-      }
-    }
-
-    input {
-      width: 100%;
-      padding-inline: 5px;
-      border: 1px solid $bdc;
-      color: $clr-lgt;
-
-      &:focus {
-        color: $clr;
-      }
-    }
-
-    &--setting {
-      padding: 10px;
-      background-color: $bgc;
-      border: 1px solid $bdc;
-      border-bottom: none;
-    }
-  }
-
-  &__button {
-    white-space: nowrap;
-    margin-inline: auto;
-    cursor: pointer;
-
-    &:disabled {
-      cursor: default;
-    }
-  }
-
-  &__icon {
-    all: unset;
-    color: $clr;
-    cursor: pointer;
-
-    &:disabled {
-      color: $clr-lgt;
-      cursor: default;
-    }
-  }
-}
-
-/* --------------------------------- Display -------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                   Display                                  */
+/* -------------------------------------------------------------------------- */
 .display {
   &__note {
     padding-bottom: 5px;
     margin-bottom: 10px;
     border-bottom: 1px solid $bdc;
-    // font-size: 12px;
-    color: transparentize($clr, 0.5);
   }
 
   &__list {
@@ -183,10 +110,7 @@ a {
     justify-content: flex-start;
     align-items: center;
     flex-flow: row nowrap;
-    // gap: 15px;
-    padding: 3px 0 3px 10px;
-    background-color: $bgc;
-    transition: all 0.1s;
+    // padding: 3px 0 3px 10px;
     position: relative;
 
     &:not(:last-child) {
@@ -194,18 +118,16 @@ a {
     }
 
     &:hover {
-      background-color: transparentize($clr, 0.8);
+    }
+
+    &-none {
+      display: none !important;
     }
   }
 
   &__fade,
   &__text {
     white-space: nowrap;
-    font-size: 12px;
-    font-family: $ff-mono;
-    // text-overflow: ellipsis;
-    // overflow-x: hidden;
-    // width: 50%;
   }
 
   &__text {
@@ -213,7 +135,6 @@ a {
   }
 
   &__fade {
-    color: transparentize($clr, 0.6);
     overflow-x: hidden;
   }
 
@@ -223,22 +144,21 @@ a {
 
   &__btn-trash {
     all: unset;
-    color: $clr;
     padding-inline: 5px;
     margin-inline: auto 0;
 
     &:hover {
       cursor: pointer;
-      color: $clr-del;
     }
   }
 
   &__icon-trash {
-    font-size: 16px;
   }
 }
 
-/* --------------------------------- Option --------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                   Option                                   */
+/* -------------------------------------------------------------------------- */
 .option {
   &__item {
     input[type='checkbox'] {
@@ -255,12 +175,65 @@ a {
     padding-bottom: 5px;
     margin-bottom: 10px;
     border-bottom: 1px solid $bdc;
-    // font-size: 12px;
-    color: transparentize($clr, 0.5);
   }
 }
 
-/* --------------------------------- Output --------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                    Input                                   */
+/* -------------------------------------------------------------------------- */
+.input {
+  &__form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-flow: row nowrap;
+    gap: 10px;
+
+    flex-direction: column;
+
+    label {
+      display: none;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding-inline: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding-inline: 5px;
+      border: 1px solid $bdc;
+
+      &:focus {
+      }
+    }
+  }
+
+  &__button {
+    white-space: nowrap;
+    margin-inline: auto;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: default;
+    }
+  }
+
+  &__icon {
+    all: unset;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: default;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Output                                   */
+/* -------------------------------------------------------------------------- */
 .output {
   &__wrapper {
     input[type='checkbox'] {
@@ -272,23 +245,46 @@ a {
       }
     }
   }
+  
+  &__form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-flow: row nowrap;
+    border: 1px solid $bdc;
+    border-bottom: none;
+    padding: 10px;
+    gap: 10px;
+
+    label {
+    }
+
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding-inline: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding-inline: 5px;
+      border: 1px solid $bdc;
+
+      &:focus {
+      }
+    }
+  }
 
   &__setting {
     overflow-y: hidden;
     height: 0;
-    transition: height 0.3s ease;
   }
 
   &__header {
-    // margin-bottom: 8px;
-    border: 1px solid $bdc;
-    border-bottom: none;
     text-transform: capitalize;
   }
 
   &__title {
-    font-size: clamp(16px, 2.5vw, 17px);
-    font-weight: 400;
   }
 
   &__label {
@@ -297,65 +293,57 @@ a {
     align-items: center;
     flex-flow: row nowrap;
     padding: 5px 10px;
-    background-color: transparentize($clr, 0.8);
-    transition: background-color 0.3s;
+    border: 1px solid $bdc;
+    border-bottom: none;
     position: relative;
 
     &:hover,
     &:focus {
       cursor: pointer;
-      background-color: transparentize($clr, 0.75);
 
       .output__icon {
-        color: $clr;
       }
     }
   }
 
   &__icon {
-    font-size: 18px;
-    color: $clr-lgt;
-    transition: color 0.3s;
   }
 
   &__list {
-    padding: 5px;
-    border: 1px solid $bdc;
+    padding: 10px !important;
     overflow-x: auto;
+    border: 1px solid $bdc;
   }
 
   &__item {
     white-space: nowrap;
-    font-family: $ff-mono;
-    font-size: 14px;
   }
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                   Footer                                   */
+/* -------------------------------------------------------------------------- */
 .footer {
   position: fixed;
-  background-color: $bgc;
   inset: auto 0 0 0;
   padding: 10px;
   text-align: center;
   border-top: 1px solid $bdc;
-  font-size: clamp(12px, 2.5vw, 14px);
   z-index: 100;
 }
 
-/* ----------------------------- Generate Button ---------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                                   Others                                   */
+/* -------------------------------------------------------------------------- */
 .generate-button {
   all: unset;
   width: 100%;
   text-align: center;
   padding: 5px 0;
-  color: $clr-lgt;
-  transition: all 0.3s;
-  font-size: 14px;
 
   &:hover,
   &:focus {
     cursor: pointer;
-    color: $clr;
   }
 }
 

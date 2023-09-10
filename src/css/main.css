@@ -24,6 +24,10 @@ body {
   opacity: 0.8;
 }
 
+.dp-none {
+  display: none !important;
+}
+
 a {
   transition: all 0.3s;
 }
@@ -128,7 +132,6 @@ a {
   padding-bottom: 5px;
   margin-bottom: 10px;
   border-bottom: 1px solid #d2d2d2;
-  font-size: 12px;
   color: rgba(58, 58, 58, 0.5);
 }
 .display__list {
@@ -139,10 +142,10 @@ a {
   justify-content: flex-start;
   align-items: center;
   flex-flow: row nowrap;
-  padding: 3px 10px;
+  padding: 3px 0 3px 10px;
   background-color: #f2f2f2;
   transition: all 0.1s;
-  font-size: 12px;
+  position: relative;
 }
 .display__item:not(:last-child) {
   margin-bottom: 3px;
@@ -150,24 +153,33 @@ a {
 .display__item:hover {
   background-color: rgba(58, 58, 58, 0.2);
 }
+.display__fade, .display__text {
+  white-space: nowrap;
+  font-size: 12px;
+  font-family: "Roboto Mono", monospace;
+}
+.display__text {
+  margin-right: 5px;
+}
 .display__fade {
   color: rgba(58, 58, 58, 0.4);
-  white-space: nowrap;
-  margin-inline: 5px 16px;
-  text-overflow: ellipsis;
   overflow-x: hidden;
 }
 .display__icon-drag {
   margin-right: 15px;
 }
-.display__icon-trash {
+.display__btn-trash {
+  all: unset;
+  color: #3a3a3a;
+  padding-inline: 5px;
   margin-inline: auto 0;
-  font-size: 16px;
-  z-index: 10000;
 }
-.display__icon-trash:hover {
+.display__btn-trash:hover {
   cursor: pointer;
   color: #ff4343;
+}
+.display__icon-trash {
+  font-size: 16px;
 }
 
 /* --------------------------------- Option --------------------------------- */
@@ -181,7 +193,6 @@ a {
   padding-bottom: 5px;
   margin-bottom: 10px;
   border-bottom: 1px solid #d2d2d2;
-  font-size: 12px;
   color: rgba(58, 58, 58, 0.5);
 }
 
@@ -249,6 +260,21 @@ a {
   border-top: 1px solid #d2d2d2;
   font-size: clamp(12px, 2.5vw, 14px);
   z-index: 100;
+}
+
+/* ----------------------------- Generate Button ---------------------------- */
+.generate-button {
+  all: unset;
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
+  color: #878787;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+.generate-button:hover, .generate-button:focus {
+  cursor: pointer;
+  color: #3a3a3a;
 }
 
 /* ---------------------------------- Icons --------------------------------- */

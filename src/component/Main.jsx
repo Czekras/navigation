@@ -53,7 +53,6 @@ export default function Main() {
   const loadSetting = (mainList, setting) => {
     if (!mainList) {
       console.log('Initialize: Settings');
-      // localStorage.setItem('mainList', setting.mainList);
       Object.entries(setting.initialData).map((section) => {
         Object.entries(section[1]).map((name) => {
           // setting.initialData.forEach((section) => {
@@ -64,19 +63,6 @@ export default function Main() {
       });
 
       console.log('Initialize: List');
-      // const list = Object.entries(setting.initialList).map((key) => {
-      //   return { id: crypto.randomUUID(), data: key[1] };
-      // });
-
-      // let initialList = [];
-      // list.map((item) => {
-      //   initialList.push(item.id);
-      //   localStorage.setItem(item.id, JSON.stringify(item.data));
-      //   setMasterIdList((prevArray) => [...prevArray, item.id]);
-      // });
-
-      // localStorage.setItem("masterIdList", JSON.stringify(initialList));
-
       const list = Object.entries(setting.initialList).map((key) => {
         return {
           id: crypto.randomUUID(),
@@ -300,8 +286,7 @@ export default function Main() {
   };
 
   /* ----------------------------- Toggle (Sougou) ---------------------------- */
-  const handleSougouToggle = (e) => {
-    // e.preventDefault();
+  const handleSougouToggle = () => {
     setSougouTogg(!sougouTogg);
     localStorage.setItem('sougou_option', !sougouTogg);
     console.log('Update: souguo_option');
@@ -314,11 +299,23 @@ export default function Main() {
     console.log('Update: remove_option');
   };
 
+  /* -------------------------- Generate Initial List ------------------------- */
+  const generateInitList = () => {
+    console.log('Initialize: List');
+    const list = Object.entries(dataSetting.initialList).map((key) => {
+      return {
+        id: crypto.randomUUID(),
+        slug: key[1].slug,
+        name: key[1].name,
+      };
+    });
+    localStorage.setItem('mainList', JSON.stringify(list));
+    setMainList(list);
+  };
+
   /* -------------------------------------------------------------------------- */
   /*                             Draggable Functions                            */
   /* -------------------------------------------------------------------------- */
-  const draggableList = sougouTogg ? mainList : mainList.slice(1);
-
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
@@ -352,6 +349,13 @@ export default function Main() {
     pushList(items);
   };
 
+  const handleDeleteItem = (id, index) => {
+    const oldList = [...mainList];
+    const newList = [...oldList.slice(0, index), ...oldList.slice(index + 1)];
+    setMainList(newList);
+    pushList(newList);
+  };
+
   /* -------------------------------------------------------------------------- */
   /*                        Functions to pass to children                       */
   /* -------------------------------------------------------------------------- */
@@ -359,6 +363,7 @@ export default function Main() {
     handleCollapseToggle: handleCollapseToggle,
     handleResetName: handleResetName,
     handleChangeName: handleChangeName,
+    generateInitList: generateInitList,
   };
 
   /* -------------------------------------------------------------------------- */
@@ -403,7 +408,9 @@ export default function Main() {
 
         <section className="option">
           <div className="option__wrapper">
-            <p className="option__note">オプション</p>
+            <p className="option__note">
+              <small>オプション</small>
+            </p>
             <div className="option__item">
               <input
                 type="checkbox"
@@ -427,7 +434,9 @@ export default function Main() {
 
         <section className="display cmn-py">
           <div className="display__wrapper">
-            <p className="display__note">並び替える・削除する</p>
+            <p className="display__note">
+              <small>並び替える・削除する</small>
+            </p>
             <DragDropContext onDragEnd={handleOnDragEnd}>
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
@@ -436,35 +445,57 @@ export default function Main() {
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
-                    {mainList.slice(1).map((item, index) => (
-                      <Draggable
-                        key={item.id}
-                        draggableId={item.id}
-                        index={index}
-                      >
-                        {(provided, snapshot) => (
-                          <li
-                            className="display__item"
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={getItemStyle(
-                              snapshot.isDragging,
-                              provided.draggableProps.style
-                            )}
+                    {' '}
+                    {mainList.length > 1 ? (
+                      mainList.map((item, index) => {
+                        const isEntrance =
+                          item.slug === 'entrance' ? 'dp-none' : '';
+
+                        return (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
                           >
-                            <span className="display__icon-drag material-symbols-outlined">
-                              drag_handle
-                            </span>
-                            {item.slug}
-                            <i className="display__fade">{item.name}</i>
-                            <span class="display__icon-trash material-symbols-outlined">
-                              delete
-                            </span>
-                          </li>
-                        )}
-                      </Draggable>
-                    ))}
+                            {(provided, snapshot) => (
+                              <li
+                                className={`display__item ${isEntrance}`}
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={getItemStyle(
+                                  snapshot.isDragging,
+                                  provided.draggableProps.style
+                                )}
+                              >
+                                <span className="display__icon-drag material-symbols-outlined">
+                                  drag_handle
+                                </span>
+                                <p className="display__text">{item.slug}</p>
+                                <i className="display__fade">{item.name}</i>
+                                <button
+                                  className="display__btn-trash"
+                                  onClick={() =>
+                                    handleDeleteItem(item.id, index)
+                                  }
+                                >
+                                  <span className="display__icon-trash material-symbols-outlined">
+                                    delete
+                                  </span>
+                                </button>
+                              </li>
+                            )}
+                          </Draggable>
+                        );
+                      })
+                    ) : (
+                      <button
+                        className="generate-button"
+                        onClick={() => generateInitList()}
+                      >
+                        <small>初期リストを生成する</small>
+                      </button>
+                    )}
                     {provided.placeholder}
                   </ul>
                 )}

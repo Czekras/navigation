@@ -1,6 +1,3 @@
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-
 export default function Output({ func, data }) {
   const removeList = ['sitemap'];
 
@@ -79,40 +76,50 @@ export default function Output({ func, data }) {
           </form>
         </div>
         <ul className="output__list">
-          {/* {data.masterList.map((item, index) => { */}
-          {data.mainList.map((item, index) => {
-            let itemHref = item.slug ? `/${item.slug}/` : '';
-            const itemItem = data.item ? ` class="${data.item}` : '';
-            const itemLink = data.link ? `${data.link}` : '';
-            const itemActs = data.acts
-              ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
-              : '';
-            let itemSet =
-              itemLink || itemActs
-                ? ` class="${[itemLink, itemActs].filter((x) => x).join(' ')}"`
+          {data.mainList.length > 1 ? (
+            data.mainList.map((item, index) => {
+              let itemHref = item.slug ? `/${item.slug}/` : '';
+              const itemItem = data.item ? ` class="${data.item}` : '';
+              const itemLink = data.link ? `${data.link}` : '';
+              const itemActs = data.acts
+                ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
                 : '';
+              let itemSet =
+                itemLink || itemActs
+                  ? ` class="${[itemLink, itemActs]
+                      .filter((x) => x)
+                      .join(' ')}"`
+                  : '';
 
-            if (data.sougou) {
-              if (index == 0) itemHref = '/';
-              if (index == 1) itemHref = `/${item.slug}/`;
-            } else {
-              if (index == 0) return;
-              if (index == 1) itemHref = '/';
-            }
+              if (data.sougou) {
+                if (index == 0) itemHref = '/';
+                if (index == 1) itemHref = `/${item.slug}/`;
+              } else {
+                if (index == 0) return;
+                if (index == 1) itemHref = '/';
+              }
 
-            if (removeList.indexOf(data.title) > -1 && !data.remove) {
-              itemSet = ` class="${itemLink}"`;
-            }
+              if (removeList.indexOf(data.title) > -1 && !data.remove) {
+                itemSet = ` class="${itemLink}"`;
+              }
 
-            return (
-              // <li key={index}>{item.id}, {item.slug}</li>
-              <li className="output__item" key={item.id}>
-                &lt;li{itemItem}&gt;&lt;a{itemSet} href="{itemHref}"&gt;
-                {item.name}
-                &lt;/a&gt;&lt;/li&gt;
-              </li>
-            );
-          })}
+              return (
+                // <li key={index}>{item.id}, {item.slug}</li>
+                <li className="output__item" key={item.id}>
+                  &lt;li{itemItem}&gt;&lt;a{itemSet} href="{itemHref}"&gt;
+                  {item.name}
+                  &lt;/a&gt;&lt;/li&gt;
+                </li>
+              );
+            })
+          ) : (
+            <button
+              className="generate-button"
+              onClick={func.generateInitList}
+            >
+              <small>初期リストを生成する</small>
+            </button>
+          )}
         </ul>
       </div>
     </section>

@@ -1,23 +1,86 @@
 /* -------------------------------------------------------------------------- */
 /*                                  Variables                                 */
 /* -------------------------------------------------------------------------- */
-$clr: #3a3a3a;
-$clr-lgt: #878787;
-$clr-del: #ff4343;
-$bdc: #d2d2d2;
-$bgc: #f2f2f2;
+$clr-main: #d7dae0;
+$clr-sub: #6b6e76;
+$clr-white: #d7dae0;
+$clr-gray: #abb2bf;
+$clr-red: #e06c75;
+$clr-green: #98c379;
+$clr-purple: #c678dd;
+$clr-orange: #e5c07b;
+$clr-blue: #61afef;
+$clr-cyan: #56b6c2;
+
+$bdc: #45484e;
+
+/* -------------------------------------------------------------------------- */
+
+$bgc-main: #ffffff;
+$bgc-sub: #dfdfdf;
+$bgc-accent: #f1f1f1;
+
+$clr-main: #464646;
+$clr-sub: #adadad;
+$clr-accent: #f1f1f1;
+
+// $clr-white: #ffffff;
+// $clr-gray: #abb2bf;
+// $clr-red: #f52334;
+// $clr-green: #12832b;
+// $clr-purple: #c678dd;
+// $clr-orange: #e09626;
+// $clr-blue: #61afef;
+// $clr-cyan: #56b6c2;
+
+$bdc: #d1d1d1;
+
+/* -------------------------------------------------------------------------- */
 
 $ff-sans: 'Noto Sans JP', sans-serif;
-$ff-mono: 'Roboto Mono', monospace;
+$ff-mono: 'Source Code Pro', monospace;
 
 $transition: all 0.3s;
+
+/* -------------------------------------------------------------------------- */
+.clr-white {
+  color: $clr-white;
+}
+
+.clr-gray {
+  color: $clr-gray;
+}
+
+.clr-red {
+  color: $clr-red;
+}
+
+.clr-green {
+  color: $clr-green;
+}
+
+.clr-purple {
+  color: $clr-purple;
+}
+
+.clr-orange {
+  color: $clr-orange;
+}
+
+.clr-blue {
+  color: $clr-blue;
+}
+
+.clr-cyan {
+  color: $clr-cyan;
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                    Base                                    */
 /* -------------------------------------------------------------------------- */
 body {
   font-family: $ff-sans;
-  color: $clr;
+  color: $clr-main;
   font-size: 14px;
 }
 
@@ -37,20 +100,61 @@ body {
 a {
   color: inherit;
   transition: $transition;
+  text-decoration: none;
+}
+
+.input-text {
+  label {
+    color: $clr-sub;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input {
+    border: none;
+    outline: 1px solid $clr-sub;
+    background-color: $bgc-main;
+
+    &::placeholder {
+      color: $clr-sub;
+    }
+  }
+}
+
+.button-icon {
+  all: unset;
+  transition: $transition;
+  color: $clr-sub;
+
+  &:hover {
+    color: $clr-main;
+    cursor: pointer;
+  }
+
+  &--delete:hover {
+    color: $clr-red;
+  }
+}
+
+.side-note {
+  color: $clr-sub;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid $bdc;
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                    Main                                    */
 /* -------------------------------------------------------------------------- */
 .main {
+  background-color: $bgc-main;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-flow: row nowrap;
-  gap: 40px;
 
   & > * {
-    padding-block: calc(89px + 20px) calc(42px + 20px);
+    padding-block: calc(79px + 15px) calc(28px + 15px);
   }
 
   &__main-l {
@@ -59,10 +163,15 @@ a {
     position: sticky;
     inset: 0 auto 0 0;
     border-right: 1px solid $bdc;
+    padding-right: 30px;
+
+    display: flex;
+    flex-flow: column nowrap;
   }
 
   &__main-r {
     width: min(100%, 840px);
+    padding-left: 30px;
   }
 }
 
@@ -70,16 +179,28 @@ a {
 /*                                   Header                                   */
 /* -------------------------------------------------------------------------- */
 .header {
+  background-color: $bgc-main;
   position: fixed;
   inset: 0 0 auto 0;
-  padding: 20px;
+  padding-block: 15px;
   border-bottom: 1px solid $bdc;
   z-index: 100;
+
+  &__list,
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-flow: row nowrap;
+  }
 
   &__wrapper {
     width: min(100%, 1080px);
     margin-inline: auto;
-    display: flex;
+  }
+
+  &__list {
+    gap: 15px;
   }
 
   &__logo {
@@ -91,12 +212,6 @@ a {
 /*                                   Display                                  */
 /* -------------------------------------------------------------------------- */
 .display {
-  &__note {
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid $bdc;
-  }
-
   &__list {
     padding: 0;
   }
@@ -106,14 +221,17 @@ a {
     justify-content: flex-start;
     align-items: center;
     flex-flow: row nowrap;
-    // padding: 3px 0 3px 10px;
+    padding: 2px 0 2px 5px;
     position: relative;
+    background-color: $bgc-accent;
+    transition: $transition;
 
     &:not(:last-child) {
-      margin-bottom: 3px;
+      margin-bottom: 5px;
     }
 
     &:hover {
+      background-color: $bgc-sub;
     }
 
     &-none {
@@ -121,34 +239,31 @@ a {
     }
   }
 
-  &__fade,
-  &__text {
+  &__name,
+  &__slug {
     white-space: nowrap;
   }
 
-  &__text {
+  &__slug {
     margin-right: 5px;
   }
 
-  &__fade {
+  &__name {
     overflow-x: hidden;
+    color: $clr-sub;
   }
 
   &__icon-drag {
-    margin-right: 15px;
+    margin-right: 10px;
   }
 
   &__btn-trash {
-    all: unset;
     padding-inline: 5px;
     margin-inline: auto 0;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   &__icon-trash {
+    font-size: 16px;
   }
 }
 
@@ -166,12 +281,6 @@ a {
       }
     }
   }
-
-  &__note {
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid $bdc;
-  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -182,14 +291,8 @@ a {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     gap: 10px;
-
-    flex-direction: column;
-
-    label {
-      display: none;
-    }
 
     button {
       width: 100%;
@@ -200,16 +303,14 @@ a {
     input {
       width: 100%;
       padding-inline: 5px;
-      border: 1px solid $bdc;
+    }
 
-      &:focus {
-      }
+    label {
+      display: none;
     }
   }
 
   &__button {
-    white-space: nowrap;
-    margin-inline: auto;
     cursor: pointer;
 
     &:disabled {
@@ -218,7 +319,6 @@ a {
   }
 
   &__icon {
-    all: unset;
     cursor: pointer;
 
     &:disabled {
@@ -235,13 +335,13 @@ a {
     input[type='checkbox'] {
       display: none;
 
-      &:checked ~ .output__setting {
+      &:checked ~ .output__config {
         height: auto;
         overflow: visible;
       }
     }
   }
-  
+
   &__form {
     display: flex;
     justify-content: center;
@@ -252,67 +352,85 @@ a {
     padding: 10px;
     gap: 10px;
 
-    label {
-    }
-
-    button {
-      width: 100%;
-      margin-top: 10px;
-      padding-inline: 20px;
-    }
-
     input {
       width: 100%;
       padding-inline: 5px;
-      border: 1px solid $bdc;
-
-      &:focus {
-      }
     }
   }
 
-  &__setting {
+  &__config {
     overflow-y: hidden;
     height: 0;
   }
 
   &__header {
     text-transform: capitalize;
-  }
-
-  &__title {
+    font-size: 12px;
   }
 
   &__label {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex-flow: row nowrap;
     padding: 5px 10px;
     border: 1px solid $bdc;
     border-bottom: none;
     position: relative;
+    background-color: $bgc-accent;
+    transition: $transition;
 
     &:hover,
     &:focus {
+      background-color: $bgc-sub;
       cursor: pointer;
 
       .output__icon {
+        color: $clr-main;
       }
     }
   }
 
-  &__icon {
-  }
-
   &__list {
     padding: 10px !important;
-    overflow-x: auto;
     border: 1px solid $bdc;
+    overflow-x: auto;
+    font-family: $ff-mono;
+    // color: $clr-white;
+    // background-color: #23272e;
   }
 
   &__item {
     white-space: nowrap;
+  }
+
+  &__icon {
+    transition: $transition;
+    color: $clr-sub;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Setting                                  */
+/* -------------------------------------------------------------------------- */
+.setting {
+  margin-top: auto;
+
+  &__list {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-flow: row nowrap;
+    gap: 15px;
+  }
+
+  &__item {
+    color: $clr-sub;
+
+    &:hover,
+    &:focus {
+      color: $clr-main;
+    }
   }
 }
 
@@ -320,9 +438,10 @@ a {
 /*                                   Footer                                   */
 /* -------------------------------------------------------------------------- */
 .footer {
+  background-color: $bgc-main;
   position: fixed;
   inset: auto 0 0 0;
-  padding: 10px;
+  padding-block: 4px;
   text-align: center;
   border-top: 1px solid $bdc;
   z-index: 100;

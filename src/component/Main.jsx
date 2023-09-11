@@ -114,35 +114,7 @@ export default function Main() {
     setSougouTogg(JSON.parse(localStorage.getItem('sougou_option')));
     setRemoveActs(JSON.parse(localStorage.getItem('remove_option')));
 
-    // console.log('Load: List');
     const itemCount = pullList();
-    // const initialList = JSON.parse(localStorage.getItem('masterIdList'));
-    // Object.entries(initialList).map((id) => {
-    //   setMasterIdList((prevArray) => [...prevArray, id[1]]);
-    //   const item = JSON.parse(localStorage.getItem(id[1]));
-    //   setMasterList((prevArray) => [
-    //     ...prevArray,
-    //     {
-    //       slug: item.slug,
-    //       name: item.name,
-    //     },
-    //   ]);
-    // });
-    // const initialList = JSON.parse(localStorage.getItem('mainList'));
-    // Object.entries(initialList).map((listItem) => {
-    //   console.log(listItem)
-    // })
-    // initialList.map((item) => {
-    //   setMainList((prevArray) => [
-    //     ...prevArray,
-    //     {
-    //       id: item.id,
-    //       slug: item.slug,
-    //       name: item.name,
-    //     },
-    //   ]);
-    // });
-
     setItemsCount(Math.abs(itemCount - setting.initialList.length));
   };
 
@@ -325,7 +297,7 @@ export default function Main() {
 
   const getItemStyle = (isDragging, draggableStyle) => ({
     userSelect: 'none',
-    background: isDragging ? '#3a3a3a33' : '',
+    // background: isDragging ? '#3a3a3a33' : '',
     ...draggableStyle,
   });
 
@@ -378,7 +350,7 @@ export default function Main() {
               onSubmit={handleSubmit}
               autoComplete="off"
             >
-              <div className="input__form-item">
+              <div className="input__form-item input-text">
                 <label htmlFor="slug">Slug name</label>
                 <input
                   type="text"
@@ -389,7 +361,7 @@ export default function Main() {
                   onChange={(e) => setSlug(e.target.value)}
                 />
               </div>
-              <div className="input__form-item">
+              <div className="input__form-item input-text">
                 <label htmlFor="name">Page name</label>
                 <input
                   type="text"
@@ -408,7 +380,7 @@ export default function Main() {
 
         <section className="option">
           <div className="option__wrapper">
-            <p className="option__note">
+            <p className="side-note">
               <small>オプション</small>
             </p>
             <div className="option__item">
@@ -434,7 +406,7 @@ export default function Main() {
 
         <section className="display cmn-py">
           <div className="display__wrapper">
-            <p className="display__note">
+            <p className="side-note">
               <small>並び替える・削除する</small>
             </p>
             <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -471,10 +443,12 @@ export default function Main() {
                                 <span className="display__icon-drag material-symbols-outlined">
                                   drag_handle
                                 </span>
-                                <p className="display__text">{item.slug}</p>
-                                <i className="display__fade">{item.name}</i>
+                                <p className="display__slug">{item.slug}</p>
+                                <small className="display__name">
+                                  {item.name}
+                                </small>
                                 <button
-                                  className="display__btn-trash"
+                                  className="display__btn-trash button-icon button-icon--delete"
                                   onClick={() =>
                                     handleDeleteItem(item.id, index)
                                   }
@@ -501,6 +475,23 @@ export default function Main() {
                 )}
               </Droppable>
             </DragDropContext>
+          </div>
+        </section>
+
+        <section className="setting">
+          <div className="setting__wrapper">
+            <ul className="setting__list">
+              <li className="setting__item">
+                <a className="setting__link" href="">
+                  <span class="material-symbols-outlined">info</span>
+                </a>
+              </li>
+              <li className="setting__item">
+                <a className="setting__link" href="">
+                  <span class="material-symbols-outlined">dark_mode</span>
+                </a>
+              </li>
+            </ul>
           </div>
         </section>
       </aside>

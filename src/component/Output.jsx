@@ -13,20 +13,20 @@ export default function Output({ func, data }) {
         />
         <header className="output__header">
           <label className="output__label" htmlFor={`${data.title}_handle`}>
-            <h2 className="output__title">{data.title}</h2>
             <span className="output__icon material-symbols-outlined">
-              {data.toggle ? 'expand_less' : 'expand_more'}
+              {data.toggle ? 'expand_less' : 'chevron_right'}
             </span>
+            <h2 className="output__title">{data.title}</h2>
           </label>
         </header>
-        <div className="output__setting">
+        <div className="output__config">
           <form
-            className="output__form output__form--setting"
+            className="output__form"
             id={`${data.title}_reset`}
             onSubmit={func.handleResetName}
             autoComplete="off"
           >
-            <div className="output__form-item">
+            <div className="output__form-item input-text">
               <label htmlFor={`${data.title}_item`}>&lt;li&gt;クラス名</label>
               <input
                 type="text"
@@ -36,7 +36,7 @@ export default function Output({ func, data }) {
                 onChange={func.handleChangeName}
               />
             </div>
-            <div className="output__form-item">
+            <div className="output__form-item input-text">
               <label htmlFor={`${data.title}_link`}>&lt;a&gt;クラス名</label>
               <input
                 type="text"
@@ -46,7 +46,7 @@ export default function Output({ func, data }) {
                 onChange={func.handleChangeName}
               />
             </div>
-            <div className="output__form-item">
+            <div className="output__form-item input-text">
               <label htmlFor={`${data.title}_acts`}>Activeクラス名</label>
               {removeList.indexOf(data.title) > -1 ? (
                 <input
@@ -68,7 +68,7 @@ export default function Output({ func, data }) {
               )}
             </div>
             <div className="output__form-item">
-              <button className="input__icon" disabled={false}>
+              <button className="output__icon button-icon" disabled={false}>
                 <span className="material-symbols-outlined">restart_alt</span>
               </button>
             </div>
@@ -78,7 +78,7 @@ export default function Output({ func, data }) {
           {data.mainList.length > 1 ? (
             data.mainList.map((item, index) => {
               let itemHref = item.slug ? `/${item.slug}/` : '';
-              const itemItem = data.item ? ` class="${data.item}` : '';
+              const itemItem = data.item ? ` class="${data.item}"` : '';
               const itemLink = data.link ? `${data.link}` : '';
               const itemActs = data.acts
                 ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
@@ -102,20 +102,72 @@ export default function Output({ func, data }) {
                 itemSet = ` class="${itemLink}"`;
               }
 
+              /* -------------------------------------------------------------------------- */
+              // const htmlTag = (tag, attribute, content) => (
+              //   <>
+              //     &lt;<span className="clr-red">{tag}</span> {attribute}&gt;
+              //     {content}
+              //     &lt;/<span className="clr-red">{tag}</span>&gt;
+              //   </>
+              // );
+              // const htmlAttribute = (attribute, value, value2) => {
+              //   const set = (value2 = [value, value2].join(' '));
+              //   if (!attribute) return;
+              //   return !data.acts ? (
+              //     <>
+              //       <span className="clr-orange">{attribute}</span>=
+              //       <span className="clr-green">"{value}"</span>
+              //     </>
+              //   ) : (
+              //     <>
+              //       <span className="clr-orange">{attribute}</span>=
+              //       <span className="clr-green">
+              //         {/* "{value} {value2}" */}"{set}"
+              //       </span>
+              //     </>
+              //   );
+              // };
+              // const htmlPHP = (slug, active) => {
+              //   return (
+              //     <>
+              //       <span className="clr-red">&lt;?php </span>
+              //       <span className="clr-purple">if </span>
+              //       <span className="clr-orange">(</span>
+              //       <span className="clr-blue">get_meta</span>
+              //       <span className="clr-purple">(</span>
+              //       <span className="clr-green">'slug'</span>
+              //       <span className="clr-purple">) </span>
+              //       <span className="clr-blue"> == </span>
+              //       <span className="clr-green">'{slug}'</span>
+              //       <span className="clr-orange">) </span>
+              //       <span className="clr-blue">echo </span>
+              //       <span className="clr-green">'{active}'</span>
+              //       <span className="clr-red">?&gt;</span>
+              //     </>
+              //   );
+              // };
+
+              // const phpString = data.acts ? [htmlPHP(data.acts, item.slug)] : '';
+
               return (
-                // <li key={index}>{item.id}, {item.slug}</li>
                 <li className="output__item" key={item.id}>
                   &lt;li{itemItem}&gt;&lt;a{itemSet} href="{itemHref}"&gt;
                   {item.name}
                   &lt;/a&gt;&lt;/li&gt;
+                  {/* {htmlTag(
+                    'li',
+                    htmlAttribute('class', data.item),
+                    htmlTag(
+                      'a',
+                      htmlAttribute('class', data.link, phpString),
+                      item.name
+                    )
+                  )} */}
                 </li>
               );
             })
           ) : (
-            <button
-              className="generate-button"
-              onClick={func.generateInitList}
-            >
+            <button className="generate-button" onClick={func.generateInitList}>
               <small>初期リストを生成する</small>
             </button>
           )}

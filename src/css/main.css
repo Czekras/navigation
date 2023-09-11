@@ -2,11 +2,46 @@
 /*                                  Variables                                 */
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+.clr-white {
+  color: #d7dae0;
+}
+
+.clr-gray {
+  color: #abb2bf;
+}
+
+.clr-red {
+  color: #e06c75;
+}
+
+.clr-green {
+  color: #98c379;
+}
+
+.clr-purple {
+  color: #c678dd;
+}
+
+.clr-orange {
+  color: #e5c07b;
+}
+
+.clr-blue {
+  color: #61afef;
+}
+
+.clr-cyan {
+  color: #56b6c2;
+}
+
+/* -------------------------------------------------------------------------- */
 /*                                    Base                                    */
 /* -------------------------------------------------------------------------- */
 body {
   font-family: "Noto Sans JP", sans-serif;
-  color: #3a3a3a;
+  color: #464646;
   font-size: 14px;
 }
 
@@ -26,46 +61,94 @@ body {
 a {
   color: inherit;
   transition: all 0.3s;
+  text-decoration: none;
+}
+
+.input-text label {
+  color: #adadad;
+  display: block;
+  margin-bottom: 5px;
+}
+.input-text input {
+  border: none;
+  outline: 1px solid #adadad;
+  background-color: #ffffff;
+}
+.input-text input::placeholder {
+  color: #adadad;
+}
+
+.button-icon {
+  all: unset;
+  transition: all 0.3s;
+  color: #adadad;
+}
+.button-icon:hover {
+  color: #464646;
+  cursor: pointer;
+}
+.button-icon--delete:hover {
+  color: #e06c75;
+}
+
+.side-note {
+  color: #adadad;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #d1d1d1;
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                    Main                                    */
 /* -------------------------------------------------------------------------- */
 .main {
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-flow: row nowrap;
-  gap: 40px;
 }
 .main > * {
-  padding-block: 109px 62px;
+  padding-block: 94px 43px;
 }
 .main__main-l {
   width: min(100%, 240px);
   height: 100dvh;
   position: sticky;
   inset: 0 auto 0 0;
-  border-right: 1px solid #d2d2d2;
+  border-right: 1px solid #d1d1d1;
+  padding-right: 30px;
+  display: flex;
+  flex-flow: column nowrap;
 }
 .main__main-r {
   width: min(100%, 840px);
+  padding-left: 30px;
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                   Header                                   */
 /* -------------------------------------------------------------------------- */
 .header {
+  background-color: #ffffff;
   position: fixed;
   inset: 0 0 auto 0;
-  padding: 20px;
-  border-bottom: 1px solid #d2d2d2;
+  padding-block: 15px;
+  border-bottom: 1px solid #d1d1d1;
   z-index: 100;
+}
+.header__list, .header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-flow: row nowrap;
 }
 .header__wrapper {
   width: min(100%, 1080px);
   margin-inline: auto;
-  display: flex;
+}
+.header__list {
+  gap: 15px;
 }
 .header__logo {
   text-decoration: none;
@@ -74,11 +157,6 @@ a {
 /* -------------------------------------------------------------------------- */
 /*                                   Display                                  */
 /* -------------------------------------------------------------------------- */
-.display__note {
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #d2d2d2;
-}
 .display__list {
   padding: 0;
 }
@@ -87,34 +165,41 @@ a {
   justify-content: flex-start;
   align-items: center;
   flex-flow: row nowrap;
+  padding: 2px 0 2px 5px;
   position: relative;
+  background-color: #f1f1f1;
+  transition: all 0.3s;
 }
 .display__item:not(:last-child) {
-  margin-bottom: 3px;
+  margin-bottom: 5px;
+}
+.display__item:hover {
+  background-color: #dfdfdf;
 }
 .display__item-none {
   display: none !important;
 }
-.display__fade, .display__text {
+.display__name, .display__slug {
   white-space: nowrap;
 }
-.display__text {
+.display__slug {
   margin-right: 5px;
 }
-.display__fade {
+.display__name {
   overflow-x: hidden;
+  color: #adadad;
 }
 .display__icon-drag {
-  margin-right: 15px;
+  margin-right: 10px;
 }
 .display__btn-trash {
-  all: unset;
   padding-inline: 5px;
   margin-inline: auto 0;
 }
-.display__btn-trash:hover {
-  cursor: pointer;
+.display__icon-trash {
+  font-size: 16px;
 }
+
 /* -------------------------------------------------------------------------- */
 /*                                   Option                                   */
 /* -------------------------------------------------------------------------- */
@@ -124,11 +209,6 @@ a {
 .option__item input[type=checkbox]:hover, .option__item input[type=checkbox]:focus {
   cursor: pointer;
 }
-.option__note {
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #d2d2d2;
-}
 
 /* -------------------------------------------------------------------------- */
 /*                                    Input                                   */
@@ -137,12 +217,8 @@ a {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   gap: 10px;
-  flex-direction: column;
-}
-.input__form label {
-  display: none;
 }
 .input__form button {
   width: 100%;
@@ -152,18 +228,17 @@ a {
 .input__form input {
   width: 100%;
   padding-inline: 5px;
-  border: 1px solid #d2d2d2;
+}
+.input__form label {
+  display: none;
 }
 .input__button {
-  white-space: nowrap;
-  margin-inline: auto;
   cursor: pointer;
 }
 .input__button:disabled {
   cursor: default;
 }
 .input__icon {
-  all: unset;
   cursor: pointer;
 }
 .input__icon:disabled {
@@ -176,7 +251,7 @@ a {
 .output__wrapper input[type=checkbox] {
   display: none;
 }
-.output__wrapper input[type=checkbox]:checked ~ .output__setting {
+.output__wrapper input[type=checkbox]:checked ~ .output__config {
   height: auto;
   overflow: visible;
 }
@@ -185,59 +260,86 @@ a {
   justify-content: center;
   align-items: flex-end;
   flex-flow: row nowrap;
-  border: 1px solid #d2d2d2;
+  border: 1px solid #d1d1d1;
   border-bottom: none;
   padding: 10px;
   gap: 10px;
 }
-.output__form button {
-  width: 100%;
-  margin-top: 10px;
-  padding-inline: 20px;
-}
 .output__form input {
   width: 100%;
   padding-inline: 5px;
-  border: 1px solid #d2d2d2;
 }
-.output__setting {
+.output__config {
   overflow-y: hidden;
   height: 0;
 }
 .output__header {
   text-transform: capitalize;
+  font-size: 12px;
 }
 .output__label {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-flow: row nowrap;
   padding: 5px 10px;
-  border: 1px solid #d2d2d2;
+  border: 1px solid #d1d1d1;
   border-bottom: none;
   position: relative;
+  background-color: #f1f1f1;
+  transition: all 0.3s;
 }
 .output__label:hover, .output__label:focus {
+  background-color: #dfdfdf;
   cursor: pointer;
+}
+.output__label:hover .output__icon, .output__label:focus .output__icon {
+  color: #464646;
 }
 .output__list {
   padding: 10px !important;
+  border: 1px solid #d1d1d1;
   overflow-x: auto;
-  border: 1px solid #d2d2d2;
+  font-family: "Source Code Pro", monospace;
 }
 .output__item {
   white-space: nowrap;
+}
+.output__icon {
+  transition: all 0.3s;
+  color: #adadad;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Setting                                  */
+/* -------------------------------------------------------------------------- */
+.setting {
+  margin-top: auto;
+}
+.setting__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 15px;
+}
+.setting__item {
+  color: #adadad;
+}
+.setting__item:hover, .setting__item:focus {
+  color: #464646;
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                   Footer                                   */
 /* -------------------------------------------------------------------------- */
 .footer {
+  background-color: #ffffff;
   position: fixed;
   inset: auto 0 0 0;
-  padding: 10px;
+  padding-block: 4px;
   text-align: center;
-  border-top: 1px solid #d2d2d2;
+  border-top: 1px solid #d1d1d1;
   z-index: 100;
 }
 

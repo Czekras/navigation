@@ -50,9 +50,9 @@
   ],
   "initialToggle": {
     "header": true,
-    "drawer": true,
-    "footer": true,
-    "sitemap": true
+    "drawer": false,
+    "footer": false,
+    "sitemap":false 
   },
   "sougouToggle": false,
   "removeActs": false

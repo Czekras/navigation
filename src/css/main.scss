@@ -119,6 +119,13 @@ a {
       color: $clr-sub;
     }
   }
+
+  &--full {
+    flex: 1 0 auto;
+     input {
+      width: 100%;
+     }
+  }
 }
 
 .button-icon {
@@ -351,11 +358,6 @@ a {
     border-bottom: none;
     padding: 10px;
     gap: 10px;
-
-    input {
-      width: 100%;
-      padding-inline: 5px;
-    }
   }
 
   &__config {
@@ -416,21 +418,12 @@ a {
 .setting {
   margin-top: auto;
 
-  &__list {
+  &__wrapper {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     flex-flow: row nowrap;
     gap: 15px;
-  }
-
-  &__item {
-    color: $clr-sub;
-
-    &:hover,
-    &:focus {
-      color: $clr-main;
-    }
   }
 }
 
@@ -455,10 +448,14 @@ a {
   width: 100%;
   text-align: center;
   padding: 5px 0;
+  color: $clr-sub;
+  transition: $transition;
+  font-family: $ff-mono;
 
   &:hover,
   &:focus {
     cursor: pointer;
+    color: $clr-main;
   }
 }
 

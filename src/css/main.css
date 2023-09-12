@@ -77,6 +77,12 @@ a {
 .input-text input::placeholder {
   color: #adadad;
 }
+.input-text--full {
+  flex: 1 0 auto;
+}
+.input-text--full input {
+  width: 100%;
+}
 
 .button-icon {
   all: unset;
@@ -265,10 +271,6 @@ a {
   padding: 10px;
   gap: 10px;
 }
-.output__form input {
-  width: 100%;
-  padding-inline: 5px;
-}
 .output__config {
   overflow-y: hidden;
   height: 0;
@@ -316,18 +318,12 @@ a {
 .setting {
   margin-top: auto;
 }
-.setting__list {
+.setting__wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: row nowrap;
   gap: 15px;
-}
-.setting__item {
-  color: #adadad;
-}
-.setting__item:hover, .setting__item:focus {
-  color: #464646;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -351,9 +347,13 @@ a {
   width: 100%;
   text-align: center;
   padding: 5px 0;
+  color: #adadad;
+  transition: all 0.3s;
+  font-family: "Source Code Pro", monospace;
 }
 .generate-button:hover, .generate-button:focus {
   cursor: pointer;
+  color: #464646;
 }
 
 /* ---------------------------------- Icons --------------------------------- */

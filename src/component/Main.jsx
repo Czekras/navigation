@@ -3,6 +3,8 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import dataSetting from '../data/settings.json';
 import Output from './Output';
+import Setting from './Setting';
+import Options from './Options';
 
 export default function Main() {
   const [slug, setSlug] = useState('');
@@ -16,8 +18,6 @@ export default function Main() {
   const [nameChange, setNameChange] = useState(false);
 
   const [itemsCount, setItemsCount] = useState(Number);
-  // const [masterList, setMasterList] = useState([]);
-  // const [masterIdList, setMasterIdList] = useState([]);
 
   const [headerItem, setHeaderItem] = useState('');
   const [headerLink, setHeaderLink] = useState('');
@@ -58,7 +58,7 @@ export default function Main() {
           // setting.initialData.forEach((section) => {
           //   section[1].forEach((name) => {
           const keyName = `${section[0]}_${name[0]}`;
-          localStorage.setItem(keyName, [name[1]]);
+          return localStorage.setItem(keyName, [name[1]]);
         });
       });
 
@@ -328,6 +328,15 @@ export default function Main() {
     pushList(newList);
   };
 
+
+  /* ------------------------------- Components ------------------------------- */
+
+  const generateButton = (
+    <button className="generate-button" onClick={() => generateInitList()}>
+      <small>Generate Initial List</small>
+    </button>
+  );
+
   /* -------------------------------------------------------------------------- */
   /*                        Functions to pass to children                       */
   /* -------------------------------------------------------------------------- */
@@ -336,6 +345,7 @@ export default function Main() {
     handleResetName: handleResetName,
     handleChangeName: handleChangeName,
     generateInitList: generateInitList,
+    generateButton: generateButton
   };
 
   /* -------------------------------------------------------------------------- */
@@ -378,31 +388,13 @@ export default function Main() {
           </div>
         </section>
 
-        <section className="option">
-          <div className="option__wrapper">
-            <p className="side-note">
-              <small>オプション</small>
-            </p>
-            <div className="option__item">
-              <input
-                type="checkbox"
-                id="sougou_handle"
-                checked={sougouTogg}
-                onChange={handleSougouToggle}
-              />
-              <label htmlFor="sougou_handle">総合トップ</label>
-            </div>
-            <div className="option__item">
-              <input
-                type="checkbox"
-                id="remove_handle"
-                checked={removeActs}
-                onChange={handleRemoveActs}
-              />
-              <label htmlFor="remove_handle">サイトマップActive</label>
-            </div>
-          </div>
-        </section>
+        <Options
+          func={{
+            handleSougouToggle: handleSougouToggle,
+            handleRemoveActs: handleRemoveActs,
+          }}
+          data={{ sougouTogg: sougouTogg, removeActs: removeActs }}
+        />
 
         <section className="display cmn-py">
           <div className="display__wrapper">
@@ -463,12 +455,7 @@ export default function Main() {
                         );
                       })
                     ) : (
-                      <button
-                        className="generate-button"
-                        onClick={() => generateInitList()}
-                      >
-                        <small>初期リストを生成する</small>
-                      </button>
+                      generateButton
                     )}
                     {provided.placeholder}
                   </ul>
@@ -478,22 +465,7 @@ export default function Main() {
           </div>
         </section>
 
-        <section className="setting">
-          <div className="setting__wrapper">
-            <ul className="setting__list">
-              <li className="setting__item">
-                <a className="setting__link" href="">
-                  <span class="material-symbols-outlined">info</span>
-                </a>
-              </li>
-              <li className="setting__item">
-                <a className="setting__link" href="">
-                  <span class="material-symbols-outlined">dark_mode</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </section>
+        <Setting />
       </aside>
 
       <section className="main__main-r">

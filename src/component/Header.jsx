@@ -8,12 +8,12 @@ export default function Header() {
         {/* <ul className="header__list">
           <li className="heade__item">
             <a className="header__link" href="">
-              <span class="material-symbols-outlined">code</span>
+              <span className="material-symbols-outlined">code</span>
             </a>
           </li>
           <li className="heade__item">
             <a className="header__link" href="">
-              <span class="material-symbols-outlined">dark_mode</span>
+              <span className="material-symbols-outlined">dark_mode</span>
             </a>
           </li>
         </ul> */}

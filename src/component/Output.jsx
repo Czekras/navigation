@@ -1,5 +1,8 @@
+import { useState } from 'react';
+
 export default function Output({ func, data }) {
   const removeList = ['sitemap'];
+  let copy = [];
 
   return (
     <section className="output cmn-py">
@@ -26,7 +29,7 @@ export default function Output({ func, data }) {
             onSubmit={func.handleResetName}
             autoComplete="off"
           >
-            <div className="output__form-item input-text">
+            <div className="output__form-item input-text input-text--full">
               <label htmlFor={`${data.title}_item`}>&lt;li&gt;クラス名</label>
               <input
                 type="text"
@@ -36,7 +39,7 @@ export default function Output({ func, data }) {
                 onChange={func.handleChangeName}
               />
             </div>
-            <div className="output__form-item input-text">
+            <div className="output__form-item input-text input-text--full">
               <label htmlFor={`${data.title}_link`}>&lt;a&gt;クラス名</label>
               <input
                 type="text"
@@ -46,7 +49,7 @@ export default function Output({ func, data }) {
                 onChange={func.handleChangeName}
               />
             </div>
-            <div className="output__form-item input-text">
+            <div className="output__form-item input-text input-text--full">
               <label htmlFor={`${data.title}_acts`}>Activeクラス名</label>
               {removeList.indexOf(data.title) > -1 ? (
                 <input
@@ -74,87 +77,98 @@ export default function Output({ func, data }) {
             </div>
           </form>
         </div>
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText(copy.join('\n'));
+          }}
+        >
+          copy
+        </button>
         <ul className="output__list">
-          {data.mainList.length > 1 ? (
-            data.mainList.map((item, index) => {
-              let itemHref = item.slug ? `/${item.slug}/` : '';
-              const itemItem = data.item ? ` class="${data.item}"` : '';
-              const itemLink = data.link ? `${data.link}` : '';
-              const itemActs = data.acts
-                ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
-                : '';
-              let itemSet =
-                itemLink || itemActs
-                  ? ` class="${[itemLink, itemActs]
-                      .filter((x) => x)
-                      .join(' ')}"`
+          {data.mainList.length > 1
+            ? data.mainList.map((item, index) => {
+                let itemHref = item.slug ? `/${item.slug}/` : '';
+                const itemItem = data.item ? ` class="${data.item}"` : '';
+                const itemLink = data.link ? `${data.link}` : '';
+                const itemActs = data.acts
+                  ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
                   : '';
+                let itemSet =
+                  itemLink || itemActs
+                    ? ` class="${[itemLink, itemActs]
+                        .filter((x) => x)
+                        .join(' ')}"`
+                    : '';
 
-              if (data.sougou) {
-                if (index == 0) itemHref = '/';
-                if (index == 1) itemHref = `/${item.slug}/`;
-              } else {
-                if (index == 0) return;
-                if (index == 1) itemHref = '/';
-              }
+                if (data.sougou) {
+                  if (index === 0) itemHref = '/';
+                  if (index === 1) itemHref = `/${item.slug}/`;
+                } else {
+                  if (index === 0) return;
+                  if (index === 1) itemHref = '/';
+                }
 
-              if (removeList.indexOf(data.title) > -1 && !data.remove) {
-                itemSet = ` class="${itemLink}"`;
-              }
+                if (removeList.indexOf(data.title) > -1 && !data.remove) {
+                  itemSet = ` class="${itemLink}"`;
+                }
 
-              /* -------------------------------------------------------------------------- */
-              // const htmlTag = (tag, attribute, content) => (
-              //   <>
-              //     &lt;<span className="clr-red">{tag}</span> {attribute}&gt;
-              //     {content}
-              //     &lt;/<span className="clr-red">{tag}</span>&gt;
-              //   </>
-              // );
-              // const htmlAttribute = (attribute, value, value2) => {
-              //   const set = (value2 = [value, value2].join(' '));
-              //   if (!attribute) return;
-              //   return !data.acts ? (
-              //     <>
-              //       <span className="clr-orange">{attribute}</span>=
-              //       <span className="clr-green">"{value}"</span>
-              //     </>
-              //   ) : (
-              //     <>
-              //       <span className="clr-orange">{attribute}</span>=
-              //       <span className="clr-green">
-              //         {/* "{value} {value2}" */}"{set}"
-              //       </span>
-              //     </>
-              //   );
-              // };
-              // const htmlPHP = (slug, active) => {
-              //   return (
-              //     <>
-              //       <span className="clr-red">&lt;?php </span>
-              //       <span className="clr-purple">if </span>
-              //       <span className="clr-orange">(</span>
-              //       <span className="clr-blue">get_meta</span>
-              //       <span className="clr-purple">(</span>
-              //       <span className="clr-green">'slug'</span>
-              //       <span className="clr-purple">) </span>
-              //       <span className="clr-blue"> == </span>
-              //       <span className="clr-green">'{slug}'</span>
-              //       <span className="clr-orange">) </span>
-              //       <span className="clr-blue">echo </span>
-              //       <span className="clr-green">'{active}'</span>
-              //       <span className="clr-red">?&gt;</span>
-              //     </>
-              //   );
-              // };
+                /* -------------------------------------------------------------------------- */
+                // const htmlTag = (tag, attribute, content) => (
+                //   <>
+                //     &lt;<span className="clr-red">{tag}</span> {attribute}&gt;
+                //     {content}
+                //     &lt;/<span className="clr-red">{tag}</span>&gt;
+                //   </>
+                // );
+                // const htmlAttribute = (attribute, value, value2) => {
+                //   const set = (value2 = [value, value2].join(' '));
+                //   if (!attribute) return;
+                //   return !data.acts ? (
+                //     <>
+                //       <span className="clr-orange">{attribute}</span>=
+                //       <span className="clr-green">"{value}"</span>
+                //     </>
+                //   ) : (
+                //     <>
+                //       <span className="clr-orange">{attribute}</span>=
+                //       <span className="clr-green">
+                //         {/* "{value} {value2}" */}"{set}"
+                //       </span>
+                //     </>
+                //   );
+                // };
+                // const htmlPHP = (slug, active) => {
+                //   return (
+                //     <>
+                //       <span className="clr-red">&lt;?php </span>
+                //       <span className="clr-purple">if </span>
+                //       <span className="clr-orange">(</span>
+                //       <span className="clr-blue">get_meta</span>
+                //       <span className="clr-purple">(</span>
+                //       <span className="clr-green">'slug'</span>
+                //       <span className="clr-purple">) </span>
+                //       <span className="clr-blue"> == </span>
+                //       <span className="clr-green">'{slug}'</span>
+                //       <span className="clr-orange">) </span>
+                //       <span className="clr-blue">echo </span>
+                //       <span className="clr-green">'{active}'</span>
+                //       <span className="clr-red">?&gt;</span>
+                //     </>
+                //   );
+                // };
 
-              // const phpString = data.acts ? [htmlPHP(data.acts, item.slug)] : '';
+                // const phpString = data.acts ? [htmlPHP(data.acts, item.slug)] : '';
 
-              return (
-                <li className="output__item" key={item.id}>
-                  &lt;li{itemItem}&gt;&lt;a{itemSet} href="{itemHref}"&gt;
+                const itemString = `<li${itemItem}><a${itemSet} href="${itemHref}">${item.name}</a></li>`;
+                copy.push(itemString)
+
+                return (
+                  <li className="output__item" key={item.id}>
+                    {/* &lt;li{itemItem}&gt;&lt;a{itemSet} href="{itemHref}"&gt;
                   {item.name}
-                  &lt;/a&gt;&lt;/li&gt;
-                  {/* {htmlTag(
+                  &lt;/a&gt;&lt;/li&gt; */}
+                    {itemString}
+                    {/* {htmlTag(
                     'li',
                     htmlAttribute('class', data.item),
                     htmlTag(
@@ -163,14 +177,10 @@ export default function Output({ func, data }) {
                       item.name
                     )
                   )} */}
-                </li>
-              );
-            })
-          ) : (
-            <button className="generate-button" onClick={func.generateInitList}>
-              <small>初期リストを生成する</small>
-            </button>
-          )}
+                  </li>
+                );
+              })
+            : func.generateButton}
         </ul>
       </div>
     </section>

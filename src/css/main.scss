@@ -122,9 +122,9 @@ a {
 
   &--full {
     flex: 1 0 auto;
-     input {
+    input {
       width: 100%;
-     }
+    }
   }
 }
 
@@ -140,6 +140,16 @@ a {
 
   &--delete:hover {
     color: $clr-red;
+  }
+
+  &--small {
+    font-size: 16px;
+  }
+
+  &:disabled {
+    &:hover {
+      cursor: default;
+    }
   }
 }
 
@@ -268,10 +278,6 @@ a {
     padding-inline: 5px;
     margin-inline: auto 0;
   }
-
-  &__icon-trash {
-    font-size: 16px;
-  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -368,29 +374,35 @@ a {
   &__header {
     text-transform: capitalize;
     font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row nowrap;
+    border: 1px solid $bdc;
+    border-bottom: none;
+
+    & > * {
+      background-color: $bgc-accent;
+      transition: $transition;
+      padding: 5px 10px;
+
+      &:hover,
+      &:focus {
+        // background-color: $bgc-sub;
+        cursor: pointer;
+
+        .output__icon {
+          color: $clr-main;
+        }
+      }
+    }
   }
 
   &__label {
+    flex-grow: 1;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
     flex-flow: row nowrap;
-    padding: 5px 10px;
-    border: 1px solid $bdc;
-    border-bottom: none;
-    position: relative;
-    background-color: $bgc-accent;
-    transition: $transition;
-
-    &:hover,
-    &:focus {
-      background-color: $bgc-sub;
-      cursor: pointer;
-
-      .output__icon {
-        color: $clr-main;
-      }
-    }
   }
 
   &__list {
@@ -451,6 +463,11 @@ a {
   color: $clr-sub;
   transition: $transition;
   font-family: $ff-mono;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 7px;
 
   &:hover,
   &:focus {

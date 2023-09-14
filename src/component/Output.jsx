@@ -2,7 +2,18 @@ import { useState } from 'react';
 
 export default function Output({ func, data }) {
   const removeList = ['sitemap'];
-  let copy = [];
+  const [copy, setCopy] = useState(false);
+  let copyItem = [];
+
+  const copyDisable = data.mainList.length <= 1;
+  const copytToClipboard = (copy) => {
+    console.log(`Copy: ${data.title}`);
+    navigator.clipboard.writeText(copy.join('\n'));
+    setCopy(true);
+    setTimeout(() => {
+      setCopy(false);
+    }, 1500);
+  };
 
   return (
     <section className="output cmn-py">
@@ -21,6 +32,21 @@ export default function Output({ func, data }) {
             </span>
             <h2 className="output__title">{data.title}</h2>
           </label>
+          <div className="output__copy">
+            <button
+              className="button-icon button-icon--still"
+              disabled={copyDisable}
+              onClick={() => copytToClipboard(copyItem)}
+            >
+              <span className="material-symbols-outlined">
+                {copyDisable
+                  ? 'content_paste_off'
+                  : !copyDisable && copy
+                  ? 'inventory'
+                  : 'content_paste'}
+              </span>
+            </button>
+          </div>
         </header>
         <div className="output__config">
           <form
@@ -77,13 +103,6 @@ export default function Output({ func, data }) {
             </div>
           </form>
         </div>
-        <button
-          onClick={() => {
-            navigator.clipboard.writeText(copy.join('\n'));
-          }}
-        >
-          copy
-        </button>
         <ul className="output__list">
           {data.mainList.length > 1
             ? data.mainList.map((item, index) => {
@@ -160,7 +179,7 @@ export default function Output({ func, data }) {
                 // const phpString = data.acts ? [htmlPHP(data.acts, item.slug)] : '';
 
                 const itemString = `<li${itemItem}><a${itemSet} href="${itemHref}">${item.name}</a></li>`;
-                copy.push(itemString)
+                copyItem.push(itemString);
 
                 return (
                   <li className="output__item" key={item.id}>

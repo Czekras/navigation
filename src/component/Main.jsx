@@ -328,12 +328,14 @@ export default function Main() {
     pushList(newList);
   };
 
-
   /* ------------------------------- Components ------------------------------- */
 
   const generateButton = (
     <button className="generate-button" onClick={() => generateInitList()}>
-      <small>Generate Initial List</small>
+      {/* <span class="button_icon button-icon--small material-symbols-outlined">
+        edit
+      </span> */}
+      初期リストを作成する
     </button>
   );
 
@@ -345,7 +347,7 @@ export default function Main() {
     handleResetName: handleResetName,
     handleChangeName: handleChangeName,
     generateInitList: generateInitList,
-    generateButton: generateButton
+    generateButton: generateButton,
   };
 
   /* -------------------------------------------------------------------------- */
@@ -410,53 +412,53 @@ export default function Main() {
                     ref={provided.innerRef}
                   >
                     {' '}
-                    {mainList.length > 1 ? (
-                      mainList.map((item, index) => {
-                        const isEntrance =
-                          item.slug === 'entrance' ? 'display__item-none' : '';
+                    {mainList.length > 1
+                      ? mainList.map((item, index) => {
+                          const isEntrance =
+                            item.slug === 'entrance'
+                              ? 'display__item-none'
+                              : '';
 
-                        return (
-                          <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={index}
-                          >
-                            {(provided, snapshot) => (
-                              <li
-                                className={`display__item ${isEntrance}`}
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                style={getItemStyle(
-                                  snapshot.isDragging,
-                                  provided.draggableProps.style
-                                )}
-                              >
-                                <span className="display__icon-drag material-symbols-outlined">
-                                  drag_handle
-                                </span>
-                                <p className="display__slug">{item.slug}</p>
-                                <small className="display__name">
-                                  {item.name}
-                                </small>
-                                <button
-                                  className="display__btn-trash button-icon button-icon--delete"
-                                  onClick={() =>
-                                    handleDeleteItem(item.id, index)
-                                  }
+                          return (
+                            <Draggable
+                              key={item.id}
+                              draggableId={item.id}
+                              index={index}
+                            >
+                              {(provided, snapshot) => (
+                                <li
+                                  className={`display__item ${isEntrance}`}
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  style={getItemStyle(
+                                    snapshot.isDragging,
+                                    provided.draggableProps.style
+                                  )}
                                 >
-                                  <span className="display__icon-trash material-symbols-outlined">
-                                    delete
+                                  <span className="display__icon-drag material-symbols-outlined">
+                                    drag_handle
                                   </span>
-                                </button>
-                              </li>
-                            )}
-                          </Draggable>
-                        );
-                      })
-                    ) : (
-                      generateButton
-                    )}
+                                  <p className="display__slug">{item.slug}</p>
+                                  <small className="display__name">
+                                    {item.name}
+                                  </small>
+                                  <button
+                                    className="display__btn-trash button-icon button-icon--delete"
+                                    onClick={() =>
+                                      handleDeleteItem(item.id, index)
+                                    }
+                                  >
+                                    <span className="button-icon--small material-symbols-outlined">
+                                      delete
+                                    </span>
+                                  </button>
+                                </li>
+                              )}
+                            </Draggable>
+                          );
+                        })
+                      : generateButton}
                     {provided.placeholder}
                   </ul>
                 )}

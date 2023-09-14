@@ -96,6 +96,12 @@ a {
 .button-icon--delete:hover {
   color: #e06c75;
 }
+.button-icon--small {
+  font-size: 16px;
+}
+.button-icon:disabled:hover {
+  cursor: default;
+}
 
 .side-note {
   color: #adadad;
@@ -202,9 +208,6 @@ a {
   padding-inline: 5px;
   margin-inline: auto 0;
 }
-.display__icon-trash {
-  font-size: 16px;
-}
 
 /* -------------------------------------------------------------------------- */
 /*                                   Option                                   */
@@ -278,25 +281,29 @@ a {
 .output__header {
   text-transform: capitalize;
   font-size: 12px;
-}
-.output__label {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-flow: row nowrap;
-  padding: 5px 10px;
   border: 1px solid #d1d1d1;
   border-bottom: none;
-  position: relative;
+}
+.output__header > * {
   background-color: #f1f1f1;
   transition: all 0.3s;
+  padding: 5px 10px;
 }
-.output__label:hover, .output__label:focus {
-  background-color: #dfdfdf;
+.output__header > *:hover, .output__header > *:focus {
   cursor: pointer;
 }
-.output__label:hover .output__icon, .output__label:focus .output__icon {
+.output__header > *:hover .output__icon, .output__header > *:focus .output__icon {
   color: #464646;
+}
+.output__label {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
 }
 .output__list {
   padding: 10px !important;
@@ -350,6 +357,11 @@ a {
   color: #adadad;
   transition: all 0.3s;
   font-family: "Source Code Pro", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 7px;
 }
 .generate-button:hover, .generate-button:focus {
   cursor: pointer;

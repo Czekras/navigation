@@ -41,7 +41,7 @@ $bdc: #d1d1d1;
 /* -------------------------------------------------------------------------- */
 
 $ff-sans: 'Noto Sans JP', sans-serif;
-$ff-mono: 'Source Code Pro', monospace;
+$ff-mono: 'Source Code Pro', 'M PLUS 1 Code', monospace;
 
 $transition: all 0.3s;
 
@@ -222,6 +222,7 @@ a {
   border-bottom: 1px solid $bdc;
   z-index: 100;
   font-size: 14px;
+  z-index: 100;
 
   &__wrapper {
     padding-inline: calc(50% - 540px);
@@ -378,7 +379,7 @@ a {
     text-transform: capitalize;
     font-size: 12px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-flow: row nowrap;
     border: 1px solid $bdc;
     border-bottom: none;
@@ -449,6 +450,11 @@ a {
   text-align: center;
   border-top: 1px solid $bdc;
   z-index: 100;
+
+  small {
+    margin-inline: 15px;
+    white-space: nowrap;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -472,6 +478,19 @@ a {
   &:focus {
     cursor: pointer;
     color: $clr-main;
+  }
+}
+
+.hidden {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  h2 {
+    margin-bottom: 5px;
   }
 }
 

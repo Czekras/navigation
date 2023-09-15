@@ -8,7 +8,7 @@
     visibility: visible !important;
   }
   .main__main-l {
-    width: 170px;
+    min-width: 170px;
   }
   .output__form {
     flex-direction: column;
@@ -29,5 +29,18 @@
   }
   .output__reset, .output__copy {
     padding: 5px 3px;
+  }
+}
+@media screen and (width <= 340px) {
+  .main {
+    display: none;
+  }
+  .hidden {
+    display: flex;
+  }
+}
+@media screen and (width <= 148px) {
+  body {
+    min-width: 148px;
   }
 }

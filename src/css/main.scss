@@ -96,6 +96,10 @@ body {
 
 .cmn-py {
   padding-block: 20px;
+
+  &--output {
+    padding-block: 20px clamp(0px, 1vw, 20px);
+  }
 }
 
 .cmn-mb {
@@ -169,7 +173,8 @@ a {
 /*                                    Main                                    */
 /* -------------------------------------------------------------------------- */
 .main {
-  width: min(100%, calc(1110px));
+  // width: min(100%, calc(1110px));
+  width: min(100%, 1080px);
   margin-inline: auto;
   padding-inline: 15px;
   background-color: $bgc-main;
@@ -180,7 +185,7 @@ a {
   // gap: clamp(30px, 2.5vw, 60px);
 
   & > * {
-    padding-block: calc(79px + 15px) calc(28px + 15px);
+    padding-block: 75px 35px;
   }
 
   &__main-l {
@@ -197,7 +202,6 @@ a {
     // display: none;
     // flex: 0 0 20%;
     // flex: 0 1 20%;
-
   }
 
   &__main-r {
@@ -225,9 +229,7 @@ a {
   padding-block: 15px;
   border-bottom: 1px solid $bdc;
   z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 14px;
 
   // &__list,
   // &__wrapper {
@@ -238,8 +240,10 @@ a {
   // }
 
   &__wrapper {
+    padding-inline: calc(50% - 540px);
+    margin-inline: 15px;
     // width: min(100%, 1080px);
-    margin-inline: auto;
+    // margin-inline: auto;
   }
 
   // &__list {

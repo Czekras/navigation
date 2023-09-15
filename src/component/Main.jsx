@@ -353,7 +353,7 @@ export default function Main() {
   /* -------------------------------------------------------------------------- */
 
   return (
-    <main className="main">
+    <main className="main cmn-px">
       <aside className="main__main-l">
         <section className="input cmn-py">
           <div className="input__wrapper">

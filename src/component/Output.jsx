@@ -16,7 +16,7 @@ export default function Output({ func, data }) {
   };
 
   return (
-    <section className="output cmn-py">
+    <section className="output cmn-py--output">
       <div className="output__wrapper">
         <input
           type="checkbox"

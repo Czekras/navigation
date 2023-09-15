@@ -197,12 +197,16 @@ export default function Main() {
   };
 
   /* ----------------------------- Reset Classname ---------------------------- */
-  const handleResetName = (e) => {
+  const handleResetName = (e, id) => {
     e.preventDefault();
     setNameChange(false);
 
     let db = '';
-    const sectionName = e.target.id.split('_')[0];
+    const sectionName =
+      id === '' ? e.target.id.split('_')[0] : id.split('_')[0];
+
+    console.log(`Reset: ${sectionName}`);
+
     if (sectionName === 'header') db = dataSetting.initialData.header;
     if (sectionName === 'drawer') db = dataSetting.initialData.drawer;
     if (sectionName === 'footer') db = dataSetting.initialData.footer;
@@ -362,7 +366,7 @@ export default function Main() {
               onSubmit={handleSubmit}
               autoComplete="off"
             >
-              <div className="">
+              <div className="input-text">
                 <label htmlFor="slug">Slug name</label>
                 <input
                   type="text"
@@ -373,7 +377,7 @@ export default function Main() {
                   onChange={(e) => setSlug(e.target.value)}
                 />
               </div>
-              <div className="">
+              <div className="input-text">
                 <label htmlFor="name">Page name</label>
                 <input
                   type="text"

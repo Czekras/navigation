@@ -1,0 +1,33 @@
+@media screen and (width <= 768px) {
+  .sp-none {
+    display: none !important;
+    visibility: visible !important;
+  }
+  .pc-none {
+    display: inline !important;
+    visibility: visible !important;
+  }
+  .main__main-l {
+    width: 170px;
+  }
+  .output__form {
+    flex-direction: column;
+  }
+  .output__form-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row nowrap;
+  }
+  .output__form-item label {
+    white-space: nowrap;
+    margin: 0 5px 0 0;
+    width: 45px;
+  }
+  .output__form-item input {
+    flex-grow: 1;
+  }
+  .output__reset, .output__copy {
+    padding: 5px 3px;
+  }
+}

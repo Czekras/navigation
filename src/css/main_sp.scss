@@ -1,0 +1,45 @@
+@media screen and (width <= 768px) {
+  .sp-none {
+    display: none !important;
+    visibility: visible !important;
+  }
+
+  .pc-none {
+    display: inline !important;
+    visibility: visible !important;
+  }
+
+  .main {
+    &__main-l {
+      width: 170px;
+    }
+  }
+
+  .output {
+    &__form {
+      flex-direction: column;
+
+      &-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row nowrap;
+
+        label {
+          white-space: nowrap;
+          margin: 0 5px 0 0;
+          width: 45px;
+        }
+
+        input {
+          flex-grow: 1;
+        }
+      }
+    }
+
+    &__reset,
+    &__copy {
+      padding: 5px 3px;
+    }
+  }
+}

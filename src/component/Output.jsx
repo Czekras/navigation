@@ -32,9 +32,20 @@ export default function Output({ func, data }) {
             </span>
             <h2 className="output__title">{data.title}</h2>
           </label>
+          <div className="output__reset">
+            <button
+              className="button-icon pc-none"
+              disabled={false}
+              onClick={(event) =>
+                func.handleResetName(event, `${data.title}_reset`)
+              }
+            >
+              <span className="material-symbols-outlined">restart_alt</span>
+            </button>
+          </div>
           <div className="output__copy">
             <button
-              className="button-icon button-icon--still"
+              className="button-icon"
               disabled={copyDisable}
               onClick={() => copytToClipboard(copyItem)}
             >
@@ -52,11 +63,13 @@ export default function Output({ func, data }) {
           <form
             className="output__form"
             id={`${data.title}_reset`}
-            onSubmit={func.handleResetName}
+            onSubmit={(event) => func.handleResetName(event, '')}
             autoComplete="off"
           >
             <div className="output__form-item input-text input-text--full">
-              <label htmlFor={`${data.title}_item`}>&lt;li&gt;クラス名</label>
+              <label htmlFor={`${data.title}_item`}>
+                &lt;li&gt;<span className="sp-none">クラス名</span>
+              </label>
               <input
                 type="text"
                 id={`${data.title}_item`}
@@ -66,7 +79,9 @@ export default function Output({ func, data }) {
               />
             </div>
             <div className="output__form-item input-text input-text--full">
-              <label htmlFor={`${data.title}_link`}>&lt;a&gt;クラス名</label>
+              <label htmlFor={`${data.title}_link`}>
+                &lt;a&gt;<span className="sp-none">クラス名</span>
+              </label>
               <input
                 type="text"
                 id={`${data.title}_link`}
@@ -76,7 +91,9 @@ export default function Output({ func, data }) {
               />
             </div>
             <div className="output__form-item input-text input-text--full">
-              <label htmlFor={`${data.title}_acts`}>Activeクラス名</label>
+              <label htmlFor={`${data.title}_acts`}>
+                Active<span className="sp-none">クラス名</span>
+              </label>
               {removeList.indexOf(data.title) > -1 ? (
                 <input
                   type="text"
@@ -96,7 +113,7 @@ export default function Output({ func, data }) {
                 />
               )}
             </div>
-            <div className="output__form-item">
+            <div className="output__form-item sp-none">
               <button className="output__icon button-icon" disabled={false}>
                 <span className="material-symbols-outlined">restart_alt</span>
               </button>
@@ -128,7 +145,11 @@ export default function Output({ func, data }) {
                 }
 
                 if (removeList.indexOf(data.title) > -1 && !data.remove) {
-                  itemSet = ` class="${itemLink}"`;
+                  if (data.link.length > 0) {
+                    itemSet = ` class="${itemLink}"`;
+                  } else {
+                    itemSet = '';
+                  }
                 }
 
                 /* -------------------------------------------------------------------------- */

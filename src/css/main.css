@@ -4,44 +4,13 @@
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
-.clr-white {
-  color: #d7dae0;
-}
-
-.clr-gray {
-  color: #abb2bf;
-}
-
-.clr-red {
-  color: #e06c75;
-}
-
-.clr-green {
-  color: #98c379;
-}
-
-.clr-purple {
-  color: #c678dd;
-}
-
-.clr-orange {
-  color: #e5c07b;
-}
-
-.clr-blue {
-  color: #61afef;
-}
-
-.clr-cyan {
-  color: #56b6c2;
-}
-
 /* -------------------------------------------------------------------------- */
 /*                                    Base                                    */
 /* -------------------------------------------------------------------------- */
 body {
   font-family: "Noto Sans JP", sans-serif;
   color: #464646;
+  background-color: #ffffff;
   font-size: clamp(12px, 1.5vw, 14px);
 }
 
@@ -50,11 +19,16 @@ body {
   flex-direction: column;
 }
 
+.pc-none {
+  display: none !important;
+  visibility: hidden !important;
+}
+
 .cmn-py {
   padding-block: 20px;
 }
 .cmn-py--output {
-  padding-block: 20px clamp(0px, 1vw, 20px);
+  padding-block: 20px clamp(0px, 1vw, 10px);
 }
 
 .cmn-mb {
@@ -76,6 +50,7 @@ a {
   border: none;
   outline: 1px solid #adadad;
   background-color: #ffffff;
+  padding-inline: 5px;
 }
 .input-text input::placeholder {
   color: #adadad;
@@ -135,8 +110,10 @@ a {
   padding-right: clamp(15px, 2.5vw, 30px);
   display: flex;
   flex-flow: column nowrap;
+  transition: all 0.3s;
 }
 .main__main-r {
+  width: min(100%, 755px);
   overflow: auto;
   padding-left: clamp(15px, 2.5vw, 30px);
 }
@@ -255,13 +232,13 @@ a {
   overflow: visible;
 }
 .output__form {
+  padding: 10px;
+  border: 1px solid #d1d1d1;
+  border-bottom: none;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   flex-flow: row nowrap;
-  border: 1px solid #d1d1d1;
-  border-bottom: none;
-  padding: 10px;
   gap: 10px;
 }
 .output__config {
@@ -279,7 +256,6 @@ a {
   border-bottom: none;
 }
 .output__header > * {
-  background-color: #f1f1f1;
   transition: all 0.3s;
   padding: 5px 10px;
 }
@@ -318,10 +294,10 @@ a {
 }
 .setting__wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-flow: row nowrap;
-  gap: 15px;
+  gap: 12px;
 }
 
 /* -------------------------------------------------------------------------- */

@@ -42,7 +42,7 @@
 body {
   font-family: "Noto Sans JP", sans-serif;
   color: #464646;
-  font-size: 14px;
+  font-size: clamp(12px, 1.5vw, 14px);
 }
 
 #root {
@@ -78,7 +78,7 @@ a {
   color: #adadad;
 }
 .input-text--full {
-  flex: 1 0 auto;
+  width: 100%;
 }
 .input-text--full input {
   width: 100%;
@@ -114,28 +114,28 @@ a {
 /*                                    Main                                    */
 /* -------------------------------------------------------------------------- */
 .main {
+  width: min(100%, 1110px);
+  margin-inline: auto;
+  padding-inline: 15px;
   background-color: #ffffff;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
   flex-flow: row nowrap;
 }
 .main > * {
   padding-block: 94px 43px;
 }
 .main__main-l {
-  width: min(100%, 240px);
   height: 100dvh;
   position: sticky;
   inset: 0 auto 0 0;
   border-right: 1px solid #d1d1d1;
-  padding-right: 30px;
+  padding-right: clamp(15px, 2.5vw, 30px);
   display: flex;
   flex-flow: column nowrap;
 }
 .main__main-r {
-  width: min(100%, 840px);
-  padding-left: 30px;
+  overflow: auto;
+  padding-left: clamp(15px, 2.5vw, 30px);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -148,22 +148,12 @@ a {
   padding-block: 15px;
   border-bottom: 1px solid #d1d1d1;
   z-index: 100;
-}
-.header__list, .header__wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
 }
 .header__wrapper {
-  width: min(100%, 1080px);
   margin-inline: auto;
-}
-.header__list {
-  gap: 15px;
-}
-.header__logo {
-  text-decoration: none;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -225,7 +215,6 @@ a {
 .input__form {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
   flex-flow: column nowrap;
   gap: 10px;
 }
@@ -234,12 +223,11 @@ a {
   margin-top: 10px;
   padding-inline: 20px;
 }
-.input__form input {
-  width: 100%;
-  padding-inline: 5px;
-}
 .input__form label {
   display: none;
+}
+.input__form input {
+  width: 100%;
 }
 .input__button {
   cursor: pointer;
@@ -275,6 +263,7 @@ a {
   gap: 10px;
 }
 .output__config {
+  background-color: #ffffff;
   overflow-y: hidden;
   height: 0;
 }
@@ -283,7 +272,6 @@ a {
   font-size: 12px;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-flow: row nowrap;
   border: 1px solid #d1d1d1;
   border-bottom: none;
@@ -308,8 +296,9 @@ a {
 .output__list {
   padding: 10px !important;
   border: 1px solid #d1d1d1;
-  overflow-x: auto;
+  background-color: #ffffff;
   font-family: "Source Code Pro", monospace;
+  overflow-x: auto;
 }
 .output__item {
   white-space: nowrap;

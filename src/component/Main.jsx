@@ -362,7 +362,7 @@ export default function Main() {
               onSubmit={handleSubmit}
               autoComplete="off"
             >
-              <div className="input__form-item input-text">
+              <div className="">
                 <label htmlFor="slug">Slug name</label>
                 <input
                   type="text"
@@ -373,7 +373,7 @@ export default function Main() {
                   onChange={(e) => setSlug(e.target.value)}
                 />
               </div>
-              <div className="input__form-item input-text">
+              <div className="">
                 <label htmlFor="name">Page name</label>
                 <input
                   type="text"

@@ -24,6 +24,9 @@ $clr-main: #464646;
 $clr-sub: #adadad;
 $clr-accent: #f1f1f1;
 
+$clr-code-bg: #ffffff;
+$clr-config-bg: #ffffff;
+
 // $clr-white: #ffffff;
 // $clr-gray: #abb2bf;
 // $clr-red: #f52334;
@@ -79,9 +82,11 @@ $transition: all 0.3s;
 /*                                    Base                                    */
 /* -------------------------------------------------------------------------- */
 body {
+  // min-width: 1100px;
   font-family: $ff-sans;
   color: $clr-main;
-  font-size: 14px;
+  // font-size: 14px;
+  font-size: clamp(12px, 1.5vw, 14px);
 }
 
 #root {
@@ -121,7 +126,7 @@ a {
   }
 
   &--full {
-    flex: 1 0 auto;
+    width: 100%;
     input {
       width: 100%;
     }
@@ -164,31 +169,49 @@ a {
 /*                                    Main                                    */
 /* -------------------------------------------------------------------------- */
 .main {
+  width: min(100%, calc(1110px));
+  margin-inline: auto;
+  padding-inline: 15px;
   background-color: $bgc-main;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  // justify-content: space-between;
+  // align-items: flex-start;
   flex-flow: row nowrap;
+  // gap: clamp(30px, 2.5vw, 60px);
 
   & > * {
     padding-block: calc(79px + 15px) calc(28px + 15px);
   }
 
   &__main-l {
-    width: min(100%, 240px);
+    // width: min(100%, 240px);
+    // width: 240px;
     height: 100dvh;
     position: sticky;
     inset: 0 auto 0 0;
     border-right: 1px solid $bdc;
-    padding-right: 30px;
+    padding-right: clamp(15px, 2.5vw, 30px);
 
     display: flex;
     flex-flow: column nowrap;
+    // display: none;
+    // flex: 0 0 20%;
+    // flex: 0 1 20%;
+
   }
 
   &__main-r {
-    width: min(100%, 840px);
-    padding-left: 30px;
+    overflow: auto;
+    // width: calc(60%);
+
+    // flex: 1 1 auto;
+    // width: min(100%, 840px);
+    // flex: 1 1 840px;
+    // flex-shrink: 1;
+    // width: 840px;
+    // padding-left: 30px;
+    // width: min(80%, 840px);
+    padding-left: clamp(15px, 2.5vw, 30px);
   }
 }
 
@@ -202,27 +225,30 @@ a {
   padding-block: 15px;
   border-bottom: 1px solid $bdc;
   z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  &__list,
-  &__wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-flow: row nowrap;
-  }
+  // &__list,
+  // &__wrapper {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: flex-end;
+  //   flex-flow: row nowrap;
+  // }
 
   &__wrapper {
-    width: min(100%, 1080px);
+    // width: min(100%, 1080px);
     margin-inline: auto;
   }
 
-  &__list {
-    gap: 15px;
-  }
+  // &__list {
+  //   gap: 15px;
+  // }
 
-  &__logo {
-    text-decoration: none;
-  }
+  // &__logo {
+  //   text-decoration: none;
+  // }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -303,7 +329,6 @@ a {
   &__form {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
     flex-flow: column nowrap;
     gap: 10px;
 
@@ -313,13 +338,12 @@ a {
       padding-inline: 20px;
     }
 
-    input {
-      width: 100%;
-      padding-inline: 5px;
-    }
-
     label {
       display: none;
+    }
+
+    input {
+      width: 100%;
     }
   }
 
@@ -367,6 +391,7 @@ a {
   }
 
   &__config {
+    background-color: $clr-config-bg;
     overflow-y: hidden;
     height: 0;
   }
@@ -376,7 +401,6 @@ a {
     font-size: 12px;
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-flow: row nowrap;
     border: 1px solid $bdc;
     border-bottom: none;
@@ -408,10 +432,11 @@ a {
   &__list {
     padding: 10px !important;
     border: 1px solid $bdc;
-    overflow-x: auto;
+    background-color: $clr-code-bg;
     font-family: $ff-mono;
     // color: $clr-white;
     // background-color: #23272e;
+    overflow-x: auto;
   }
 
   &__item {

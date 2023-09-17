@@ -108,7 +108,7 @@ a {
   position: sticky;
   inset: 0 auto 0 0;
   border-right: 1px solid #d1d1d1;
-  padding-right: clamp(15px, 2.5vw, 30px);
+  padding-inline: 3px clamp(15px, 2.5vw, 30px);
   display: flex;
   flex-flow: column nowrap;
   transition: all 0.3s;

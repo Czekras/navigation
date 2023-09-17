@@ -101,6 +101,7 @@ a {
 }
 .main > * {
   padding-block: 75px 35px;
+  overflow: auto;
 }
 .main__main-l {
   height: 100dvh;
@@ -115,7 +116,6 @@ a {
 }
 .main__main-r {
   width: min(100%, 755px);
-  overflow: auto;
   padding-left: clamp(15px, 2.5vw, 30px);
 }
 

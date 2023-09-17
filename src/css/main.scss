@@ -192,6 +192,7 @@ a {
 
   & > * {
     padding-block: 75px 35px;
+    overflow: auto;
   }
 
   &__main-l {
@@ -208,7 +209,6 @@ a {
 
   &__main-r {
     width: min(100%, 755px);
-    overflow: auto;
     padding-left: clamp(15px, 2.5vw, 30px);
   }
 }

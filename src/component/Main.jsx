@@ -47,12 +47,14 @@ export default function Main() {
   useEffect(() => {
     const mainList = localStorage.getItem('mainList');
     loadSetting(mainList, dataSetting);
+    // eslint-disable-next-line
   }, []);
 
   /* ----------------------------- Initial Loding ----------------------------- */
   const loadSetting = (mainList, setting) => {
     if (!mainList) {
       console.log('Initialize: Settings');
+      // eslint-disable-next-line
       Object.entries(setting.initialData).map((section) => {
         Object.entries(section[1]).map((name) => {
           // setting.initialData.forEach((section) => {
@@ -73,6 +75,7 @@ export default function Main() {
       localStorage.setItem('mainList', JSON.stringify(list));
 
       console.log('Initialize: Toggle');
+      // eslint-disable-next-line
       Object.entries(setting.initialToggle).map((section) => {
         // setting.initialToggle.forEach((section) => {
         const keyName = `${section[0]}_toggle`;
@@ -142,6 +145,7 @@ export default function Main() {
       newItem,
       ...mainList.slice(itemsCount + 2),
     ];
+
     localStorage.setItem('mainList', JSON.stringify(newList));
 
     setMainList((currentItems) => {
@@ -212,6 +216,7 @@ export default function Main() {
     if (sectionName === 'footer') db = dataSetting.initialData.footer;
     if (sectionName === 'sitemap') db = dataSetting.initialData.sitemap;
 
+    // eslint-disable-next-line
     Object.entries(db).map((section) => {
       // db.forEach((section) => {
       const storageName = `${sectionName}_${section[0]}`;

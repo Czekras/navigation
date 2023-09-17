@@ -138,10 +138,12 @@ export default function Output({ func, data }) {
 
                 if (data.sougou) {
                   if (index === 0) itemHref = '/';
-                  if (index === 1) itemHref = `/${item.slug}/`;
+                  // if (index === 1) itemHref = `/${item.slug}/`;
+                  if (item.slug === 'top') itemHref = `/${item.slug}/`;
                 } else {
                   if (index === 0) return;
-                  if (index === 1) itemHref = '/';
+                  if (item.slug === 'top') itemHref = '/';
+                  // if (index === 1) itemHref = '/';
                 }
 
                 if (removeList.indexOf(data.title) > -1 && !data.remove) {

@@ -141,6 +141,7 @@ export default function Output({ func, data }) {
                   // if (index === 1) itemHref = `/${item.slug}/`;
                   if (item.slug === 'top') itemHref = `/${item.slug}/`;
                 } else {
+                  // eslint-disable-next-line
                   if (index === 0) return;
                   if (item.slug === 'top') itemHref = '/';
                   // if (index === 1) itemHref = '/';

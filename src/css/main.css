@@ -136,6 +136,16 @@ a {
   padding-inline: calc(50% - 540px);
   margin-inline: 15px;
 }
+.header__logo {
+  width: fit-content;
+  display: block;
+}
+.header__title {
+  letter-spacing: 2px;
+}
+.header__title span {
+  color: #9e9e9e;
+}
 
 /* -------------------------------------------------------------------------- */
 /*                                   Display                                  */

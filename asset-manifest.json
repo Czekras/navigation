@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/navizen/static/css/main.a3fb597f.css",
-    "main.js": "/navizen/static/js/main.d7847093.js",
+    "main.css": "/navizen/static/css/main.93646196.css",
+    "main.js": "/navizen/static/js/main.c5bfbc9d.js",
     "static/js/496.26efcddf.chunk.js": "/navizen/static/js/496.26efcddf.chunk.js",
     "index.html": "/navizen/index.html",
-    "main.a3fb597f.css.map": "/navizen/static/css/main.a3fb597f.css.map",
-    "main.d7847093.js.map": "/navizen/static/js/main.d7847093.js.map",
+    "main.93646196.css.map": "/navizen/static/css/main.93646196.css.map",
+    "main.c5bfbc9d.js.map": "/navizen/static/js/main.c5bfbc9d.js.map",
     "496.26efcddf.chunk.js.map": "/navizen/static/js/496.26efcddf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a3fb597f.css",
-    "static/js/main.d7847093.js"
+    "static/css/main.93646196.css",
+    "static/js/main.c5bfbc9d.js"
   ]
 }

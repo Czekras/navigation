@@ -5,7 +5,8 @@ export default function Header() {
     <header className="header">
       <div className="header__wrapper">
         <a className="header__logo" href={currentPage}>
-          <h1 className="header__title">NAVI<span>ZEN</span></h1>
+          {/* <h1 className="header__title">NAVI<span>ZEN</span></h1> */}
+          <h1 className="header__title">navigation</h1>
         </a>
       </div>
     </header>

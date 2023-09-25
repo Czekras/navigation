@@ -150,7 +150,7 @@ a {
 .button-icon {
   all: unset;
   transition: $transition;
-  color: $clr-sub;
+  // color: $clr-sub;
 
   &:hover {
     color: $clr-main;
@@ -306,6 +306,11 @@ a {
 /* -------------------------------------------------------------------------- */
 .option {
   &__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: row nowrap;
+
     input[type='checkbox'] {
       margin-right: 10px;
 

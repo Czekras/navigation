@@ -65,7 +65,6 @@ a {
 .button-icon {
   all: unset;
   transition: all 0.3s;
-  color: #adadad;
 }
 .button-icon:hover {
   color: #464646;
@@ -191,6 +190,12 @@ a {
 /* -------------------------------------------------------------------------- */
 /*                                   Option                                   */
 /* -------------------------------------------------------------------------- */
+.option__item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: row nowrap;
+}
 .option__item input[type=checkbox] {
   margin-right: 10px;
 }

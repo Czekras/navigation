@@ -114,7 +114,7 @@ a {
   width: 23%;
 }
 .main__main-r {
-  width: min(100%, 755px);
+  width: min(100%, 810px);
   padding-left: clamp(15px, 2.5vw, 30px);
 }
 

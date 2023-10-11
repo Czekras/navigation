@@ -4,7 +4,6 @@
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- */
 /*                                    Base                                    */
 /* -------------------------------------------------------------------------- */
 body {
@@ -286,15 +285,17 @@ a {
   justify-content: flex-start;
   flex-flow: row nowrap;
 }
-.output__list {
-  padding: 10px !important;
+.output__code {
   border: 1px solid #d1d1d1;
-  background-color: #ffffff;
-  font-family: "Source Code Pro", "M PLUS 1 Code", monospace;
-  overflow-x: auto;
 }
-.output__item {
-  white-space: nowrap;
+.output__code pre {
+  margin: 0;
+}
+.output__code code {
+  font-family: "Source Code Pro", "M PLUS 1 Code", monospace;
+}
+.output__empty {
+  padding-block: 15px;
 }
 .output__icon {
   transition: all 0.3s;

@@ -1,9 +1,13 @@
 import { useState } from 'react';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { githubGist as style } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Tooltip } from 'react-tooltip';
 
 export default function Output({ func, data }) {
   const removeList = ['sitemap'];
   const [copy, setCopy] = useState(false);
-  let copyItem = [];
+  const copyItem = [];
+  const mainItem = [];
 
   const copyDisable = data.mainList.length <= 1;
   const copytToClipboard = (copy) => {
@@ -14,6 +18,43 @@ export default function Output({ func, data }) {
       setCopy(false);
     }, 1500);
   };
+
+  if (data.mainList.length > 1) {
+    data.mainList.map((item, index) => {
+      let itemHref = item.slug ? `/${item.slug}/` : '';
+      const itemItem = data.item ? ` class="${data.item}"` : '';
+      const itemLink = data.link ? `${data.link}` : '';
+      const itemActs = data.acts
+        ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
+        : '';
+      let itemSet =
+        itemLink || itemActs
+          ? ` class="${[itemLink, itemActs].filter((x) => x).join(' ')}"`
+          : '';
+
+      if (data.sougou) {
+        if (index === 0) itemHref = '/';
+        if (item.slug === 'top') itemHref = `/${item.slug}/`;
+      } else {
+        // eslint-disable-next-line
+        if (index === 0) return;
+        if (item.slug === 'top') itemHref = '/';
+      }
+
+      if (removeList.indexOf(data.title) > -1 && !data.remove) {
+        if (data.link.length > 0) {
+          itemSet = ` class="${itemLink}"`;
+        } else {
+          itemSet = '';
+        }
+      }
+
+      const itemString = `<li${itemItem}><a${itemSet} href="${itemHref}">${item.name}</a></li>`;
+
+      copyItem.push(itemString);
+      mainItem.push(itemString);
+    });
+  }
 
   return (
     <section className="output cmn-py--output">
@@ -48,15 +89,19 @@ export default function Output({ func, data }) {
               className="button-icon"
               disabled={copyDisable}
               onClick={() => copytToClipboard(copyItem)}
+              data-tooltip-id="copy-tooltip"
+              data-tooltip-content={'コピー'}
+              data-tooltip-place="left"
             >
               <span className="material-symbols-outlined">
                 {copyDisable
                   ? 'content_paste_off'
                   : !copyDisable && copy
                   ? 'inventory'
-                  : 'content_paste'}
+                  : 'integration_instructions'}
               </span>
             </button>
+            <Tooltip id="copy-tooltip" />
           </div>
         </header>
         <div className="output__config">
@@ -120,111 +165,20 @@ export default function Output({ func, data }) {
             </div>
           </form>
         </div>
-        <ul className="output__list">
-          {data.mainList.length > 1
-            ? data.mainList.map((item, index) => {
-                let itemHref = item.slug ? `/${item.slug}/` : '';
-                const itemItem = data.item ? ` class="${data.item}"` : '';
-                const itemLink = data.link ? `${data.link}` : '';
-                const itemActs = data.acts
-                  ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
-                  : '';
-                let itemSet =
-                  itemLink || itemActs
-                    ? ` class="${[itemLink, itemActs]
-                        .filter((x) => x)
-                        .join(' ')}"`
-                    : '';
-
-                if (data.sougou) {
-                  if (index === 0) itemHref = '/';
-                  // if (index === 1) itemHref = `/${item.slug}/`;
-                  if (item.slug === 'top') itemHref = `/${item.slug}/`;
-                } else {
-                  // eslint-disable-next-line
-                  if (index === 0) return;
-                  if (item.slug === 'top') itemHref = '/';
-                  // if (index === 1) itemHref = '/';
-                }
-
-                if (removeList.indexOf(data.title) > -1 && !data.remove) {
-                  if (data.link.length > 0) {
-                    itemSet = ` class="${itemLink}"`;
-                  } else {
-                    itemSet = '';
-                  }
-                }
-
-                /* -------------------------------------------------------------------------- */
-                // const htmlTag = (tag, attribute, content) => (
-                //   <>
-                //     &lt;<span className="clr-red">{tag}</span> {attribute}&gt;
-                //     {content}
-                //     &lt;/<span className="clr-red">{tag}</span>&gt;
-                //   </>
-                // );
-                // const htmlAttribute = (attribute, value, value2) => {
-                //   const set = (value2 = [value, value2].join(' '));
-                //   if (!attribute) return;
-                //   return !data.acts ? (
-                //     <>
-                //       <span className="clr-orange">{attribute}</span>=
-                //       <span className="clr-green">"{value}"</span>
-                //     </>
-                //   ) : (
-                //     <>
-                //       <span className="clr-orange">{attribute}</span>=
-                //       <span className="clr-green">
-                //         {/* "{value} {value2}" */}"{set}"
-                //       </span>
-                //     </>
-                //   );
-                // };
-                // const htmlPHP = (slug, active) => {
-                //   return (
-                //     <>
-                //       <span className="clr-red">&lt;?php </span>
-                //       <span className="clr-purple">if </span>
-                //       <span className="clr-orange">(</span>
-                //       <span className="clr-blue">get_meta</span>
-                //       <span className="clr-purple">(</span>
-                //       <span className="clr-green">'slug'</span>
-                //       <span className="clr-purple">) </span>
-                //       <span className="clr-blue"> == </span>
-                //       <span className="clr-green">'{slug}'</span>
-                //       <span className="clr-orange">) </span>
-                //       <span className="clr-blue">echo </span>
-                //       <span className="clr-green">'{active}'</span>
-                //       <span className="clr-red">?&gt;</span>
-                //     </>
-                //   );
-                // };
-
-                // const phpString = data.acts ? [htmlPHP(data.acts, item.slug)] : '';
-
-                const itemString = `<li${itemItem}><a${itemSet} href="${itemHref}">${item.name}</a></li>`;
-                copyItem.push(itemString);
-
-                return (
-                  <li className="output__item" key={item.id}>
-                    {/* &lt;li{itemItem}&gt;&lt;a{itemSet} href="{itemHref}"&gt;
-                  {item.name}
-                  &lt;/a&gt;&lt;/li&gt; */}
-                    {itemString}
-                    {/* {htmlTag(
-                    'li',
-                    htmlAttribute('class', data.item),
-                    htmlTag(
-                      'a',
-                      htmlAttribute('class', data.link, phpString),
-                      item.name
-                    )
-                  )} */}
-                  </li>
-                );
-              })
-            : func.generateButton}
-        </ul>
+        {/* <ul className="output__list">{outputItems(dataLength)}</ul> */}
+        <div className="output__code">
+          {data.mainList.length > 1 ? (
+            <SyntaxHighlighter
+              language="php-template"
+              style={style}
+              showLineNumbers
+            >
+              {mainItem.join('\n')}
+            </SyntaxHighlighter>
+          ) : (
+            <div className="output__empty">{func.generateButton}</div>
+          )}
+        </div>
       </div>
     </section>
   );

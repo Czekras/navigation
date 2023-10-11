@@ -70,6 +70,7 @@ export default function Main() {
           id: crypto.randomUUID(),
           slug: key[1].slug,
           name: key[1].name,
+          initial: true,
         };
       });
       localStorage.setItem('mainList', JSON.stringify(list));
@@ -117,8 +118,9 @@ export default function Main() {
     setSougouTogg(JSON.parse(localStorage.getItem('sougou_option')));
     setRemoveActs(JSON.parse(localStorage.getItem('remove_option')));
 
-    const itemCount = pullList();
-    setItemsCount(Math.abs(itemCount - setting.initialList.length));
+    pullList();
+    // const itemCount = pullList();
+    // setItemsCount(Math.abs(itemCount - setting.initialList.length));
   };
 
   /* ------------------------------ Local Storage ----------------------------- */
@@ -126,7 +128,7 @@ export default function Main() {
     console.log('Load: List');
     const list = JSON.parse(localStorage.getItem('mainList'));
     setMainList(list);
-    return list.length;
+    // return list.length;
   };
 
   /* ---------------------------- Submit Classname ---------------------------- */
@@ -137,6 +139,7 @@ export default function Main() {
       id: crypto.randomUUID(),
       slug: slug,
       name: name,
+      initial: false,
     };
 
     console.log('Update: List');
@@ -148,14 +151,15 @@ export default function Main() {
 
     localStorage.setItem('mainList', JSON.stringify(newList));
 
-    setMainList((currentItems) => {
-      return [
-        ...currentItems.slice(0, itemsCount + 2),
-        newItem,
-        ...currentItems.slice(itemsCount + 2),
-      ];
-    });
+    // setMainList((currentItems) => {
+    //   return [
+    //     ...currentItems.slice(0, itemsCount + 2),
+    //     newItem,
+    //     ...currentItems.slice(itemsCount + 2),
+    //   ];
+    // });
 
+    setMainList(newList);
     setSlug('');
     setName('');
     setItemsCount(itemsCount + 1);
@@ -288,6 +292,7 @@ export default function Main() {
         id: crypto.randomUUID(),
         slug: key[1].slug,
         name: key[1].name,
+        initial: true,
       };
     });
     localStorage.setItem('mainList', JSON.stringify(list));
@@ -330,9 +335,12 @@ export default function Main() {
     pushList(items);
   };
 
-  const handleDeleteItem = (id, index) => {
+  const handleDeleteItem = (itemInitial, index) => {
     const oldList = [...mainList];
     const newList = [...oldList.slice(0, index), ...oldList.slice(index + 1)];
+
+    if (!itemInitial) setItemsCount(itemsCount - 1);
+
     setMainList(newList);
     pushList(newList);
   };
@@ -372,6 +380,16 @@ export default function Main() {
               autoComplete="off"
             >
               <div className="input-text">
+                <label htmlFor="name">Page name</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="ページ名"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="input-text">
                 <label htmlFor="slug">Slug name</label>
                 <input
                   type="text"
@@ -380,16 +398,6 @@ export default function Main() {
                   placeholder="スラッグ名"
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
-                />
-              </div>
-              <div className="input-text">
-                <label htmlFor="name">Page name</label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="ページ名"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <button className="input__button" disabled={!(slug || name)}>
@@ -455,7 +463,7 @@ export default function Main() {
                                   <button
                                     className="display__btn-trash button-icon button-icon--delete"
                                     onClick={() =>
-                                      handleDeleteItem(item.id, index)
+                                      handleDeleteItem(item.initial, index)
                                     }
                                   >
                                     <span className="button-icon--small material-symbols-outlined">

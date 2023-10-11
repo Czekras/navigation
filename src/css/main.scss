@@ -24,67 +24,19 @@ $clr-main: #464646;
 $clr-sub: #adadad;
 $clr-accent: #f1f1f1;
 $clr-accent: #f9f9f9;
-
 $clr-code-bg: #ffffff;
 $clr-config-bg: #ffffff;
-
-// $clr-white: #ffffff;
-// $clr-gray: #abb2bf;
-// $clr-red: #f52334;
-// $clr-green: #12832b;
-// $clr-purple: #c678dd;
-// $clr-orange: #e09626;
-// $clr-blue: #61afef;
-// $clr-cyan: #56b6c2;
-
 $bdc: #d1d1d1;
 
 /* -------------------------------------------------------------------------- */
 
 $ff-sans: 'Noto Sans JP', sans-serif;
 $ff-mono: 'Source Code Pro', 'M PLUS 1 Code', monospace;
-
 $transition: all 0.3s;
-
-/* -------------------------------------------------------------------------- */
-// .clr-white {
-//   color: $clr-white;
-// }
-
-// .clr-gray {
-//   color: $clr-gray;
-// }
-
-// .clr-red {
-//   color: $clr-red;
-// }
-
-// .clr-green {
-//   color: $clr-green;
-// }
-
-// .clr-purple {
-//   color: $clr-purple;
-// }
-
-// .clr-orange {
-//   color: $clr-orange;
-// }
-
-// .clr-blue {
-//   color: $clr-blue;
-// }
-
-// .clr-cyan {
-//   color: $clr-cyan;
-// }
 
 /* -------------------------------------------------------------------------- */
 /*                                    Base                                    */
 /* -------------------------------------------------------------------------- */
-html {
-  // filter: invert(.98);
-}
 
 body {
   font-family: $ff-sans;
@@ -241,9 +193,9 @@ a {
     letter-spacing: 2px;
     text-transform: uppercase;
 
-  //  span {
-  //   color: #9e9e9e;
-  //   }
+    //  span {
+    //   color: #9e9e9e;
+    //   }
   }
 }
 
@@ -428,16 +380,20 @@ a {
     flex-flow: row nowrap;
   }
 
-  &__list {
-    padding: 10px !important;
+  &__code {
     border: 1px solid $bdc;
-    background-color: $clr-code-bg;
-    font-family: $ff-mono;
-    overflow-x: auto;
+
+    pre {
+      margin: 0;
+    }
+
+    code {
+      font-family: $ff-mono;
+    }
   }
 
-  &__item {
-    white-space: nowrap;
+  &__empty {
+    padding-block: 15px;
   }
 
   &__icon {

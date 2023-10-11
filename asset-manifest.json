@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/navizen/static/css/main.88b46b02.css",
-    "main.js": "/navizen/static/js/main.f8832033.js",
-    "static/js/496.0f8578a1.chunk.js": "/navizen/static/js/496.0f8578a1.chunk.js",
+    "main.css": "/navizen/static/css/main.a5756099.css",
+    "main.js": "/navizen/static/js/main.c9ab4176.js",
+    "static/js/496.4cc70f48.chunk.js": "/navizen/static/js/496.4cc70f48.chunk.js",
     "index.html": "/navizen/index.html",
-    "main.88b46b02.css.map": "/navizen/static/css/main.88b46b02.css.map",
-    "main.f8832033.js.map": "/navizen/static/js/main.f8832033.js.map",
-    "496.0f8578a1.chunk.js.map": "/navizen/static/js/496.0f8578a1.chunk.js.map"
+    "main.a5756099.css.map": "/navizen/static/css/main.a5756099.css.map",
+    "main.c9ab4176.js.map": "/navizen/static/js/main.c9ab4176.js.map",
+    "496.4cc70f48.chunk.js.map": "/navizen/static/js/496.4cc70f48.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.88b46b02.css",
-    "static/js/main.f8832033.js"
+    "static/css/main.a5756099.css",
+    "static/js/main.c9ab4176.js"
   ]
 }

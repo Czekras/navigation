@@ -2,7 +2,7 @@
   "name": "navigation",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://czekras.github.io/navizen",
+  "homepage": "https://czekras.github.io/navigation",
   "dependencies": {
     "@testing-library/jest-dom": "^6.1.3",
     "@testing-library/react": "^14.0.0",

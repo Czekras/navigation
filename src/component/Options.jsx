@@ -23,6 +23,15 @@ export default function Options({ func, data }) {
           />
           <label htmlFor="remove_handle">サイトマップActive</label>
         </div>
+        <div className="option__item">
+          <input
+            type="checkbox"
+            id="remove_color"
+            checked={data.removeColr}
+            onChange={func.handleRemoveColor}
+          />
+          <label htmlFor="remove_handle">カラー</label>
+        </div>
       </div>
     </section>
   );

@@ -15,6 +15,8 @@ export default function Main() {
 
   const [sougouTogg, setSougouTogg] = useState(Boolean);
   const [removeActs, setRemoveActs] = useState(Boolean);
+  const [removeColr, setRemoveColr] = useState(Boolean);
+
   const [nameChange, setNameChange] = useState(false);
 
   const [itemsCount, setItemsCount] = useState(Number);
@@ -86,9 +88,11 @@ export default function Main() {
       console.log('Initialize: Option');
       const initSougou = setting.sougouToggle;
       const initRemove = setting.removeActs;
+      const initColors = setting.removeColor;
 
       localStorage.setItem('sougou_option', initSougou);
       localStorage.setItem('remove_option', initRemove);
+      localStorage.setItem('colors_option', initColors);
     }
 
     console.log('Load: Setting');
@@ -117,6 +121,7 @@ export default function Main() {
     console.log('Load: Option');
     setSougouTogg(JSON.parse(localStorage.getItem('sougou_option')));
     setRemoveActs(JSON.parse(localStorage.getItem('remove_option')));
+    setRemoveColr(JSON.parse(localStorage.getItem('colors_option')));
 
     pullList();
     // const itemCount = pullList();
@@ -284,6 +289,13 @@ export default function Main() {
     console.log('Update: remove_option');
   };
 
+  /* -------------------------- Toggle (Remove Color) ------------------------- */
+  const handleRemoveColor = (e) => {
+    setRemoveColr(!removeColr);
+    localStorage.setItem('colors_option', !removeColr);
+    console.log('Update: colors_option');
+  };
+
   /* -------------------------- Generate Initial List ------------------------- */
   const generateInitList = () => {
     console.log('Initialize: List');
@@ -411,8 +423,13 @@ export default function Main() {
           func={{
             handleSougouToggle: handleSougouToggle,
             handleRemoveActs: handleRemoveActs,
+            handleRemoveColor: handleRemoveColor,
           }}
-          data={{ sougouTogg: sougouTogg, removeActs: removeActs }}
+          data={{
+            sougouTogg: sougouTogg,
+            removeActs: removeActs,
+            removeColr: removeColr,
+          }}
         />
 
         <section className="display cmn-py">
@@ -498,6 +515,7 @@ export default function Main() {
             toggle: headerTogg,
             sougou: sougouTogg,
             remove: removeActs,
+            colors: removeColr,
             mainList: mainList,
             nameChange: nameChange,
           }}
@@ -513,6 +531,7 @@ export default function Main() {
             toggle: drawerTogg,
             sougou: sougouTogg,
             remove: removeActs,
+            colors: removeColr,
             mainList: mainList,
             nameChange: nameChange,
           }}
@@ -528,6 +547,7 @@ export default function Main() {
             toggle: footerTogg,
             sougou: sougouTogg,
             remove: removeActs,
+            colors: removeColr,
             mainList: mainList,
             nameChange: nameChange,
           }}
@@ -543,6 +563,7 @@ export default function Main() {
             toggle: sitemapTogg,
             sougou: sougouTogg,
             remove: removeActs,
+            colors: removeColr,
             mainList: mainList,
             nameChange: nameChange,
           }}

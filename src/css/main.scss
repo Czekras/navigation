@@ -1,20 +1,7 @@
 /* -------------------------------------------------------------------------- */
 /*                                  Variables                                 */
 /* -------------------------------------------------------------------------- */
-// $clr-main: #d7dae0;
-// $clr-sub: #6b6e76;
-// $clr-white: #d7dae0;
-// $clr-gray: #abb2bf;
 $clr-red: #e06c75;
-// $clr-green: #98c379;
-// $clr-purple: #c678dd;
-// $clr-orange: #e5c07b;
-// $clr-blue: #61afef;
-// $clr-cyan: #56b6c2;
-
-// $bdc: #45484e;
-
-/* -------------------------------------------------------------------------- */
 
 $bgc-main: #ffffff;
 $bgc-sub: #dfdfdf;
@@ -27,8 +14,6 @@ $clr-accent: #f9f9f9;
 $clr-code-bg: #ffffff;
 $clr-config-bg: #ffffff;
 $bdc: #d1d1d1;
-
-/* -------------------------------------------------------------------------- */
 
 $ff-sans: 'Noto Sans JP', sans-serif;
 $ff-mono: 'Source Code Pro', 'M PLUS 1 Code', monospace;
@@ -82,7 +67,9 @@ a {
 
   input {
     border: none;
-    outline: 1px solid $clr-sub;
+    // outline: 1px solid $clr-sub;
+    outline: none;
+    border: 1px solid $bdc;
     background-color: $bgc-main;
     padding-inline: 5px;
 
@@ -389,6 +376,10 @@ a {
 
     code {
       font-family: $ff-mono;
+
+      * {
+        font-weight: 400 !important;
+      }
     }
   }
 

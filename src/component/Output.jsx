@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { githubGist as style } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import {
+  githubGist,
+  ascetic,
+} from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Tooltip } from 'react-tooltip';
 
 export default function Output({ func, data }) {
@@ -18,6 +21,8 @@ export default function Output({ func, data }) {
       setCopy(false);
     }, 1500);
   };
+
+  const colorTheme = !data.colors ? ascetic : githubGist;
 
   if (data.mainList.length > 1) {
     data.mainList.map((item, index) => {
@@ -159,7 +164,11 @@ export default function Output({ func, data }) {
               )}
             </div>
             <div className="output__form-item sp-none">
-              <button className="output__icon button-icon" disabled={false}>
+              <button
+                className="output__icon button-icon"
+                disabled={false}
+                type="button"
+              >
                 <span className="material-symbols-outlined">restart_alt</span>
               </button>
             </div>
@@ -170,7 +179,7 @@ export default function Output({ func, data }) {
           {data.mainList.length > 1 ? (
             <SyntaxHighlighter
               language="php-template"
-              style={style}
+              style={colorTheme}
               showLineNumbers
             >
               {mainItem.join('\n')}

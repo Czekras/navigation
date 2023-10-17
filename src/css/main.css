@@ -2,8 +2,6 @@
 /*                                  Variables                                 */
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- */
 /*                                    Base                                    */
 /* -------------------------------------------------------------------------- */
 body {
@@ -47,7 +45,8 @@ a {
 }
 .input-text input {
   border: none;
-  outline: 1px solid #adadad;
+  outline: none;
+  border: 1px solid #d1d1d1;
   background-color: #ffffff;
   padding-inline: 5px;
 }
@@ -293,6 +292,9 @@ a {
 }
 .output__code code {
   font-family: "Source Code Pro", "M PLUS 1 Code", monospace;
+}
+.output__code code * {
+  font-weight: 400 !important;
 }
 .output__empty {
   padding-block: 15px;

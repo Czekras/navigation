@@ -52,8 +52,9 @@
     "header": true,
     "drawer": false,
     "footer": false,
-    "sitemap":false 
+    "sitemap": false
   },
   "sougouToggle": false,
-  "removeActs": false
+  "removeActs": false,
+  "removeColor": false
 }

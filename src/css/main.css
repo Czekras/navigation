@@ -85,6 +85,32 @@ a {
   border-bottom: 1px solid #d1d1d1;
 }
 
+.cmn-button {
+  width: 100%;
+  transition: all 0.3s;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding-block: 3px;
+  border: none;
+  font-family: "Noto Sans JP", sans-serif;
+}
+.cmn-button:hover {
+  cursor: pointer;
+  background-color: #dfdfdf;
+}
+.cmn-button:not(:last-child) {
+  margin-bottom: 7px;
+}
+.cmn-button:disabled {
+  background-color: #f0f0f0;
+}
+.cmn-button:disabled:hover {
+  cursor: auto;
+}
+.cmn-button--dark {
+  background-color: #e2e2e2;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                    Main                                    */
 /* -------------------------------------------------------------------------- */

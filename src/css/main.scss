@@ -118,6 +118,38 @@ a {
   border-bottom: 1px solid $bdc;
 }
 
+.cmn-button {
+  width: 100%;
+  transition: $transition;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  // border: 1px solid $bdc;
+  padding-block: 3px;
+  border: none;
+  font-family: $ff-sans;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #dfdfdf;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 7px;
+  }
+
+  &:disabled {
+    background-color: #f0f0f0;
+
+    &:hover {
+      cursor: auto;
+    }
+  }
+
+  &--dark {
+    background-color: #e2e2e2;
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                    Main                                    */
 /* -------------------------------------------------------------------------- */

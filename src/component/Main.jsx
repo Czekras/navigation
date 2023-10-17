@@ -412,7 +412,7 @@ export default function Main() {
                   onChange={(e) => setSlug(e.target.value)}
                 />
               </div>
-              <button className="input__button" disabled={!(slug || name)}>
+              <button className="cmn-button" disabled={!(slug || name)}>
                 追加する
               </button>
             </form>

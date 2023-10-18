@@ -167,7 +167,7 @@ export default function Output({ func, data }) {
               <button
                 className="output__icon button-icon"
                 disabled={false}
-                type="button"
+                // type="button"
               >
                 <span className="material-symbols-outlined">restart_alt</span>
               </button>

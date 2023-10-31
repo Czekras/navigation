@@ -1,25 +1,28 @@
 {
-  "version": "v1.0.0",
-  "initialData": {
+  "initialSetting": {
     "header": {
       "item": "header__item",
       "link": "header__link",
-      "acts": "header__link--active"
+      "acts": "header__link--active",
+      "toggle": true
     },
     "drawer": {
       "item": "drawer__item",
       "link": "drawer__link",
-      "acts": "drawer__link--active"
+      "acts": "drawer__link--active",
+      "toggle": false
     },
     "footer": {
       "item": "footer__item",
       "link": "footer__link",
-      "acts": "footer__link--active"
+      "acts": "footer__link--active",
+      "toggle": false
     },
     "sitemap": {
       "item": "sitemap__item",
       "link": "sitemap__link",
-      "acts": "sitemap__link--active"
+      "acts": "",
+      "toggle": false
     }
   },
   "initialList": [
@@ -48,13 +51,9 @@
       "name": "サイトマップ"
     }
   ],
-  "initialToggle": {
-    "header": true,
-    "drawer": false,
-    "footer": false,
-    "sitemap": false
-  },
-  "sougouToggle": false,
-  "removeActs": false,
-  "removeColor": false
+  "initialOption": {
+    "removeSougou": false,
+    "removeActive": false,
+    "removeColors": false
+  }
 }

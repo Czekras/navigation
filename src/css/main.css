@@ -321,6 +321,7 @@ a {
 }
 .output__code code * {
   font-weight: 400 !important;
+  min-width: 2.25em !important;
 }
 .output__empty {
   padding-block: 15px;

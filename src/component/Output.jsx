@@ -7,14 +7,18 @@ import {
 import { Tooltip } from 'react-tooltip';
 
 export default function Output({ func, data }) {
-  const removeList = ['sitemap'];
+  // const removeList = ['sitemap'];
   const [copy, setCopy] = useState(false);
   const copyItem = [];
   const mainItem = [];
 
-  const copyDisable = data.mainList.length <= 1;
+  const outputTitle = data.title;
+  const userList = data.userList;
+  const userSetting = data.userSetting[data.title];
+  const userOptions = data.userOptions;
+
+  const copyDisable = userList.length <= 1;
   const copytToClipboard = (copy) => {
-    console.log(`Copy: ${data.title}`);
     navigator.clipboard.writeText(copy.join('\n'));
     setCopy(true);
     setTimeout(() => {
@@ -22,22 +26,22 @@ export default function Output({ func, data }) {
     }, 1500);
   };
 
-  const colorTheme = !data.colors ? ascetic : githubGist;
+  const colorTheme = !userOptions.removeColors ? ascetic : githubGist;
 
-  if (data.mainList.length > 1) {
-    data.mainList.map((item, index) => {
+  if (userList.length > 1) {
+    userList.map((item, index) => {
       let itemHref = item.slug ? `/${item.slug}/` : '';
-      const itemItem = data.item ? ` class="${data.item}"` : '';
-      const itemLink = data.link ? `${data.link}` : '';
-      const itemActs = data.acts
-        ? `<?php if (get_meta('slug') == '${item.slug}') echo '${data.acts}'?>`
+      const itemItem = userSetting.item ? ` class="${userSetting.item}"` : '';
+      const itemLink = userSetting.link ? `${userSetting.link}` : '';
+      const itemActs = userSetting.acts
+        ? `<?php if (get_meta('slug') == '${item.slug}') echo '${userSetting.acts}'?>`
         : '';
       let itemSet =
         itemLink || itemActs
           ? ` class="${[itemLink, itemActs].filter((x) => x).join(' ')}"`
           : '';
 
-      if (data.sougou) {
+      if (userOptions.removeSougou) {
         if (index === 0) itemHref = '/';
         if (item.slug === 'top') itemHref = `/${item.slug}/`;
       } else {
@@ -46,13 +50,13 @@ export default function Output({ func, data }) {
         if (item.slug === 'top') itemHref = '/';
       }
 
-      if (removeList.indexOf(data.title) > -1 && !data.remove) {
-        if (data.link.length > 0) {
-          itemSet = ` class="${itemLink}"`;
-        } else {
-          itemSet = '';
-        }
-      }
+      // if (removeList.indexOf(outputTitle) > -1 && !userOptions.removeActive) {
+      //   if (userSetting.link.length > 0) {
+      //     itemSet = ` class="${itemLink}"`;
+      //   } else {
+      //     itemSet = '';
+      //   }
+      // }
 
       const itemString = `<li${itemItem}><a${itemSet} href="${itemHref}">${item.name}</a></li>`;
 
@@ -61,29 +65,36 @@ export default function Output({ func, data }) {
     });
   }
 
+  const outputSetting = userSetting || {
+    item: '',
+    link: '',
+    acts: '',
+    toggle: false,
+  };
+
   return (
     <section className="output cmn-py--output">
       <div className="output__wrapper">
         <input
           type="checkbox"
           name="collapse"
-          id={`${data.title}_handle`}
-          checked={data.toggle}
-          onChange={func.handleCollapseToggle}
+          id={`${outputTitle}_handle`}
+          checked={outputSetting.toggle}
+          onChange={(e) => func.handleSettings(e)}
         />
         <header className="output__header">
-          <label className="output__label" htmlFor={`${data.title}_handle`}>
+          <label className="output__label" htmlFor={`${outputTitle}_handle`}>
             <span className="output__icon material-symbols-outlined">
-              {data.toggle ? 'expand_less' : 'chevron_right'}
+              {outputSetting.toggle ? 'expand_less' : 'chevron_right'}
             </span>
-            <h2 className="output__title">{data.title}</h2>
+            <h2 className="output__title">{outputTitle}</h2>
           </label>
           <div className="output__reset">
             <button
               className="button-icon pc-none"
               disabled={false}
               onClick={(event) =>
-                func.handleResetName(event, `${data.title}_reset`)
+                func.handleResetName(event, `${outputTitle}_reset`)
               }
             >
               <span className="material-symbols-outlined">restart_alt</span>
@@ -112,56 +123,63 @@ export default function Output({ func, data }) {
         <div className="output__config">
           <form
             className="output__form"
-            id={`${data.title}_reset`}
+            id={`${outputTitle}_reset`}
             onSubmit={(event) => func.handleResetName(event, '')}
             autoComplete="off"
           >
             <div className="output__form-item input-text input-text--full">
-              <label htmlFor={`${data.title}_item`}>
+              <label htmlFor={`${outputTitle}_item`}>
                 &lt;li&gt;<span className="sp-none">クラス名</span>
               </label>
               <input
                 type="text"
-                id={`${data.title}_item`}
-                placeholder={data.item}
-                value={data.item}
-                onChange={func.handleChangeName}
+                id={`${outputTitle}_item`}
+                placeholder={outputSetting.item}
+                value={outputSetting.item}
+                onChange={(e) => func.handleSettings(e)}
               />
             </div>
             <div className="output__form-item input-text input-text--full">
-              <label htmlFor={`${data.title}_link`}>
+              <label htmlFor={`${outputTitle}_link`}>
                 &lt;a&gt;<span className="sp-none">クラス名</span>
               </label>
               <input
                 type="text"
-                id={`${data.title}_link`}
-                placeholder={data.link}
-                value={data.link}
-                onChange={func.handleChangeName}
+                id={`${outputTitle}_link`}
+                placeholder={outputSetting.link}
+                value={outputSetting.link}
+                onChange={(e) => func.handleSettings(e)}
               />
             </div>
             <div className="output__form-item input-text input-text--full">
-              <label htmlFor={`${data.title}_acts`}>
+              <label htmlFor={`${outputTitle}_acts`}>
                 Active<span className="sp-none">クラス名</span>
               </label>
-              {removeList.indexOf(data.title) > -1 ? (
+              {/* {removeList.indexOf(outputTitle) > -1 ? (
                 <input
                   type="text"
-                  id={`${data.title}_acts`}
-                  placeholder={data.acts}
-                  value={data.acts}
-                  disabled={!data.remove}
-                  onChange={func.handleChangeName}
+                  id={`${outputTitle}_acts`}
+                  placeholder={outputSetting.acts}
+                  value={outputSetting.acts}
+                  disabled={userOptions.removeActive}
+                  onChange={(e) => func.handleSettings(e)}
                 />
               ) : (
                 <input
                   type="text"
-                  id={`${data.title}_acts`}
-                  placeholder={data.acts}
-                  value={data.acts}
-                  onChange={func.handleChangeName}
+                  id={`${outputTitle}_acts`}
+                  placeholder={outputSetting.acts}
+                  value={outputSetting.acts}
+                  onChange={(e) => func.handleSettings(e)}
                 />
-              )}
+              )} */}
+              <input
+                type="text"
+                id={`${outputTitle}_acts`}
+                placeholder={outputSetting.acts}
+                value={outputSetting.acts}
+                onChange={(e) => func.handleSettings(e)}
+              />
             </div>
             <div className="output__form-item sp-none">
               <button
@@ -174,9 +192,9 @@ export default function Output({ func, data }) {
             </div>
           </form>
         </div>
-        {/* <ul className="output__list">{outputItems(dataLength)}</ul> */}
+
         <div className="output__code">
-          {data.mainList.length > 1 ? (
+          {userList.length > 1 ? (
             <SyntaxHighlighter
               language="php-template"
               style={colorTheme}

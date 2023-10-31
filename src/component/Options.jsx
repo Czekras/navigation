@@ -8,29 +8,29 @@ export default function Options({ func, data }) {
         <div className="option__item">
           <input
             type="checkbox"
-            id="sougou_handle"
-            checked={data.sougouTogg}
-            onChange={func.handleSougouToggle}
+            id="removeSougou"
+            defaultChecked={data.userOptions.removeSougou}
+            onChange={(e) => func.handleOptions(e)}
           />
-          <label htmlFor="sougou_handle">総合トップ</label>
+          <label htmlFor="removeSougou">総合トップ</label>
         </div>
+        {/* <div className="option__item">
+          <input
+            type="checkbox"
+            id="removeActive"
+            defaultChecked={data.userOptions.removeActive}
+            onChange={(e) => func.handleOptions(e)}
+          />
+          <label htmlFor="removeActive">サイトマップActive</label>
+        </div> */}
         <div className="option__item">
           <input
             type="checkbox"
-            id="remove_handle"
-            checked={data.removeActs}
-            onChange={func.handleRemoveActs}
+            id="removeColors"
+            defaultChecked={data.userOptions.removeColors}
+            onChange={(e) => func.handleOptions(e)}
           />
-          <label htmlFor="remove_handle">サイトマップActive</label>
-        </div>
-        <div className="option__item">
-          <input
-            type="checkbox"
-            id="remove_color"
-            checked={data.removeColr}
-            onChange={func.handleRemoveColor}
-          />
-          <label htmlFor="remove_handle">カラー</label>
+          <label htmlFor="removeColors">コードカラー</label>
         </div>
       </div>
     </section>

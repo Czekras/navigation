@@ -1,139 +1,56 @@
 import { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-import dataSetting from '../data/settings.json';
+import settings from '../data/settings.json';
 import Output from './Output';
-import Setting from './Setting';
 import Options from './Options';
 
 export default function Main() {
   const [slug, setSlug] = useState('');
   const [name, setName] = useState('');
 
-  const [nameTimer, setNameTimer] = useState(null);
-  const [toggTimer, setToggTimer] = useState(null);
-
-  const [sougouTogg, setSougouTogg] = useState(Boolean);
-  const [removeActs, setRemoveActs] = useState(Boolean);
-  const [removeColr, setRemoveColr] = useState(Boolean);
+  const [userList, setUserList] = useState([]);
+  const [userSetting, setUserSetting] = useState([]);
+  const [userOptions, setUserOptions] = useState([]);
 
   const [nameChange, setNameChange] = useState(false);
-
   const [itemsCount, setItemsCount] = useState(Number);
 
-  const [headerItem, setHeaderItem] = useState('');
-  const [headerLink, setHeaderLink] = useState('');
-  const [headerActs, setHeaderActs] = useState('');
-  const [headerTogg, setHeaderTogg] = useState(Boolean);
-
-  const [drawerItem, setDrawerItem] = useState('');
-  const [drawerLink, setDrawerLink] = useState('');
-  const [drawerActs, setDrawerActs] = useState('');
-  const [drawerTogg, setDrawerTogg] = useState(Boolean);
-
-  const [footerItem, setFooterItem] = useState('');
-  const [footerLink, setFooterLink] = useState('');
-  const [footerActs, setFooterActs] = useState('');
-  const [footerTogg, setFooterTogg] = useState(Boolean);
-
-  const [sitemapItem, setSitemapItem] = useState('');
-  const [sitemapLink, setSitemapLink] = useState('');
-  const [sitemapActs, setSitemapActs] = useState('');
-  const [sitemapTogg, setSitemapTogg] = useState(Boolean);
-
-  const [mainList, setMainList] = useState([]);
-
-  /* -------------------------------------------------------------------------- */
-  /*                                    Main                                    */
-  /* -------------------------------------------------------------------------- */
   useEffect(() => {
-    const mainList = localStorage.getItem('mainList');
-    loadSetting(mainList, dataSetting);
-    // eslint-disable-next-line
+    const localList = localStorage.getItem('navigationArrays');
+    loadSetting(localList, settings);
   }, []);
 
-  /* ----------------------------- Initial Loding ----------------------------- */
-  const loadSetting = (mainList, setting) => {
-    if (!mainList) {
-      console.log('Initialize: Settings');
-      // eslint-disable-next-line
-      Object.entries(setting.initialData).map((section) => {
-        Object.entries(section[1]).map((name) => {
-          // setting.initialData.forEach((section) => {
-          //   section[1].forEach((name) => {
-          const keyName = `${section[0]}_${name[0]}`;
-          return localStorage.setItem(keyName, [name[1]]);
-        });
-      });
-
-      console.log('Initialize: List');
-      const list = Object.entries(setting.initialList).map((key) => {
+  const loadSetting = (list, setting) => {
+    if (!list) {
+      const updatedList = setting.initialList.map((item) => {
         return {
           id: crypto.randomUUID(),
-          slug: key[1].slug,
-          name: key[1].name,
+          slug: item.slug,
+          name: item.name,
           initial: true,
         };
       });
-      localStorage.setItem('mainList', JSON.stringify(list));
 
-      console.log('Initialize: Toggle');
-      // eslint-disable-next-line
-      Object.entries(setting.initialToggle).map((section) => {
-        // setting.initialToggle.forEach((section) => {
-        const keyName = `${section[0]}_toggle`;
-        localStorage.setItem(keyName, section[1]);
-      });
+      localStorage.setItem('navigationArrays', JSON.stringify(updatedList));
+      localStorage.setItem(
+        'navigationSettings',
+        JSON.stringify(setting.initialSetting)
+      );
 
-      console.log('Initialize: Option');
-      const initSougou = setting.sougouToggle;
-      const initRemove = setting.removeActs;
-      const initColors = setting.removeColor;
-
-      localStorage.setItem('sougou_option', initSougou);
-      localStorage.setItem('remove_option', initRemove);
-      localStorage.setItem('colors_option', initColors);
+      localStorage.setItem(
+        'navigationOptions',
+        JSON.stringify(setting.initialOption)
+      );
     }
 
-    console.log('Load: Setting');
-    setHeaderItem(localStorage.getItem('header_item'));
-    setHeaderLink(localStorage.getItem('header_link'));
-    setHeaderActs(localStorage.getItem('header_acts'));
+    const localList = JSON.parse(localStorage.getItem('navigationArrays'));
+    const localSetting = JSON.parse(localStorage.getItem('navigationSettings'));
+    const localOptions = JSON.parse(localStorage.getItem('navigationOptions'));
 
-    setDrawerItem(localStorage.getItem('drawer_item'));
-    setDrawerLink(localStorage.getItem('drawer_link'));
-    setDrawerActs(localStorage.getItem('drawer_acts'));
-
-    setFooterItem(localStorage.getItem('footer_item'));
-    setFooterLink(localStorage.getItem('footer_link'));
-    setFooterActs(localStorage.getItem('footer_acts'));
-
-    setSitemapItem(localStorage.getItem('sitemap_item'));
-    setSitemapLink(localStorage.getItem('sitemap_link'));
-    setSitemapActs(localStorage.getItem('sitemap_acts'));
-
-    console.log('Load: Toggle');
-    setHeaderTogg(JSON.parse(localStorage.getItem('header_toggle')));
-    setDrawerTogg(JSON.parse(localStorage.getItem('drawer_toggle')));
-    setFooterTogg(JSON.parse(localStorage.getItem('footer_toggle')));
-    setSitemapTogg(JSON.parse(localStorage.getItem('sitemap_toggle')));
-
-    console.log('Load: Option');
-    setSougouTogg(JSON.parse(localStorage.getItem('sougou_option')));
-    setRemoveActs(JSON.parse(localStorage.getItem('remove_option')));
-    setRemoveColr(JSON.parse(localStorage.getItem('colors_option')));
-
-    pullList();
-    // const itemCount = pullList();
-    // setItemsCount(Math.abs(itemCount - setting.initialList.length));
-  };
-
-  /* ------------------------------ Local Storage ----------------------------- */
-  const pullList = () => {
-    console.log('Load: List');
-    const list = JSON.parse(localStorage.getItem('mainList'));
-    setMainList(list);
-    // return list.length;
+    setUserList(localList);
+    setUserSetting(localSetting);
+    setUserOptions(localOptions);
   };
 
   /* ---------------------------- Submit Classname ---------------------------- */
@@ -147,169 +64,99 @@ export default function Main() {
       initial: false,
     };
 
-    console.log('Update: List');
     const newList = [
-      ...mainList.slice(0, itemsCount + 2),
+      ...userList.slice(0, itemsCount + 2),
       newItem,
-      ...mainList.slice(itemsCount + 2),
+      ...userList.slice(itemsCount + 2),
     ];
 
-    localStorage.setItem('mainList', JSON.stringify(newList));
+    localStorage.setItem('navigationArrays', JSON.stringify(newList));
 
-    // setMainList((currentItems) => {
-    //   return [
-    //     ...currentItems.slice(0, itemsCount + 2),
-    //     newItem,
-    //     ...currentItems.slice(itemsCount + 2),
-    //   ];
-    // });
-
-    setMainList(newList);
+    setUserList(newList);
     setSlug('');
     setName('');
     setItemsCount(itemsCount + 1);
   };
 
-  /* ---------------------------- Change Classname ---------------------------- */
-  const handleChangeName = (e) => {
-    const [section, name] = e.target.id.split('_');
-    const value = e.target.value;
-
-    if (section === 'header') {
-      if (name === 'item') setHeaderItem(value);
-      if (name === 'link') setHeaderLink(value);
-      if (name === 'acts') setHeaderActs(value);
-    }
-
-    if (section === 'drawer') {
-      if (name === 'item') setDrawerItem(value);
-      if (name === 'link') setDrawerLink(value);
-      if (name === 'acts') setDrawerActs(value);
-    }
-
-    if (section === 'footer') {
-      if (name === 'item') setFooterItem(value);
-      if (name === 'link') setFooterLink(value);
-      if (name === 'acts') setFooterActs(value);
-    }
-
-    if (section === 'sitemap') {
-      if (name === 'item') setSitemapItem(value);
-      if (name === 'link') setSitemapLink(value);
-      if (name === 'acts') setSitemapActs(value);
-    }
-
-    clearTimeout(nameTimer);
-    const inputDelay = () =>
-      setTimeout(() => {
-        setNameChange(true);
-        localStorage.setItem(e.target.id, e.target.value);
-        console.log(`Update: ${e.target.id}`);
-      }, 500);
-    setNameTimer(inputDelay);
-  };
-
-  /* ----------------------------- Reset Classname ---------------------------- */
+  /* ------------------------------- Reset Name ------------------------------- */
   const handleResetName = (e, id) => {
     e.preventDefault();
-    setNameChange(false);
 
-    let db = '';
-    const sectionName =
-      id === '' ? e.target.id.split('_')[0] : id.split('_')[0];
+    const section = id === '' ? e.target.id.split('_')[0] : id.split('_')[0];
+    // const section = e.target.id.split('_')[0];
 
-    console.log(`Reset: ${sectionName}`);
+    const newList = {
+      ...userSetting,
+      [section]: {
+        ...settings.initialSetting[section],
+        toggle: userSetting[section].toggle,
+      },
+    };
 
-    if (sectionName === 'header') db = dataSetting.initialData.header;
-    if (sectionName === 'drawer') db = dataSetting.initialData.drawer;
-    if (sectionName === 'footer') db = dataSetting.initialData.footer;
-    if (sectionName === 'sitemap') db = dataSetting.initialData.sitemap;
-
-    // eslint-disable-next-line
-    Object.entries(db).map((section) => {
-      // db.forEach((section) => {
-      const storageName = `${sectionName}_${section[0]}`;
-      localStorage.setItem(storageName, section[1]);
-
-      if (section[0] === 'item') {
-        if (sectionName === 'header') setHeaderItem(section[1]);
-        if (sectionName === 'drawer') setDrawerItem(section[1]);
-        if (sectionName === 'footer') setFooterItem(section[1]);
-        if (sectionName === 'sitemap') setSitemapItem(section[1]);
-      }
-
-      if (section[0] === 'link') {
-        if (sectionName === 'header') setHeaderLink(section[1]);
-        if (sectionName === 'drawer') setDrawerLink(section[1]);
-        if (sectionName === 'footer') setFooterLink(section[1]);
-        if (sectionName === 'sitemap') setSitemapLink(section[1]);
-      }
-
-      if (section[0] === 'acts') {
-        if (sectionName === 'header') setHeaderActs(section[1]);
-        if (sectionName === 'drawer') setDrawerActs(section[1]);
-        if (sectionName === 'footer') setFooterActs(section[1]);
-        if (sectionName === 'sitemap') setSitemapActs(section[1]);
-      }
-    });
+    localStorage.setItem('navigationSettings', JSON.stringify(newList));
+    setUserSetting(newList);
   };
 
-  /* ----------------------------- Toggle Setting ----------------------------- */
-  const handleCollapseToggle = (e) => {
-    const section = e.target.id.split('_')[0];
-    if (section === 'header') setHeaderTogg(!headerTogg);
-    if (section === 'drawer') setDrawerTogg(!drawerTogg);
-    if (section === 'footer') setFooterTogg(!footerTogg);
-    if (section === 'sitemap') setSitemapTogg(!sitemapTogg);
+  /* --------------------------------- Options -------------------------------- */
+  const handleOptions = (e) => {
+    const { id, checked } = e.target;
 
-    clearTimeout(toggTimer);
-    const inputDelay = () =>
-      setTimeout(() => {
-        const keyName = `${section}_toggle`;
-        if (section === 'header') localStorage.setItem(keyName, !headerTogg);
-        if (section === 'drawer') localStorage.setItem(keyName, !drawerTogg);
-        if (section === 'footer') localStorage.setItem(keyName, !footerTogg);
-        if (section === 'sitemap') localStorage.setItem(keyName, !sitemapTogg);
-        console.log(`Update: ${keyName}`);
-      }, 500);
-    setToggTimer(inputDelay);
+    const array = {
+      ...userOptions,
+      [id]: checked,
+    };
+
+    localStorage.setItem('navigationOptions', JSON.stringify(array));
+    setUserOptions(array);
   };
 
-  /* ----------------------------- Toggle (Sougou) ---------------------------- */
-  const handleSougouToggle = () => {
-    setSougouTogg(!sougouTogg);
-    localStorage.setItem('sougou_option', !sougouTogg);
-    console.log('Update: souguo_option');
+  /* -------------------------------- Settings -------------------------------- */
+  const handleSettings = (e) => {
+    let [section, operation] = e.target.id.split('_');
+    let newList = {};
+
+    if (operation === 'handle') {
+      newList = {
+        ...userSetting,
+        [section]: {
+          ...userSetting[section],
+          toggle: e.target.checked,
+        },
+      };
+    } else {
+      newList = {
+        ...userSetting,
+        [section]: {
+          ...userSetting[section],
+          [operation]: e.target.value,
+        },
+      };
+    }
+
+    localStorage.setItem('navigationSettings', JSON.stringify(newList));
+    setUserSetting(newList);
   };
 
-  /* -------------------------- Toggle (Remove Acts) -------------------------- */
-  const handleRemoveActs = (e) => {
-    setRemoveActs(!removeActs);
-    localStorage.setItem('remove_option', !removeActs);
-    console.log('Update: remove_option');
-  };
-
-  /* -------------------------- Toggle (Remove Color) ------------------------- */
-  const handleRemoveColor = (e) => {
-    setRemoveColr(!removeColr);
-    localStorage.setItem('colors_option', !removeColr);
-    console.log('Update: colors_option');
-  };
-
-  /* -------------------------- Generate Initial List ------------------------- */
+  /* ----------------------------- Generate Button ---------------------------- */
   const generateInitList = () => {
-    console.log('Initialize: List');
-    const list = Object.entries(dataSetting.initialList).map((key) => {
+    const updatedList = settings.initialList.map((item) => {
       return {
         id: crypto.randomUUID(),
-        slug: key[1].slug,
-        name: key[1].name,
+        slug: item.slug,
+        name: item.name,
         initial: true,
       };
     });
-    localStorage.setItem('mainList', JSON.stringify(list));
-    setMainList(list);
+
+    localStorage.setItem('navigationArrays', JSON.stringify(updatedList));
+    setUserList(updatedList);
   };
+
+  const generateButton = (
+    <button className="generate-button" onClick={() => generateInitList()}>
+      初期リストを作成する
+    </button>
+  );
 
   /* -------------------------------------------------------------------------- */
   /*                             Draggable Functions                            */
@@ -328,8 +175,7 @@ export default function Main() {
   });
 
   const pushList = (result) => {
-    console.log('Update: List');
-    localStorage.setItem('mainList', JSON.stringify(result));
+    localStorage.setItem('navigationArrays', JSON.stringify(result));
   };
 
   const handleOnDragEnd = (result) => {
@@ -338,45 +184,23 @@ export default function Main() {
     }
 
     const items = reorder(
-      mainList,
+      userList,
       result.source.index,
       result.destination.index
     );
 
-    setMainList(items);
+    setUserList(items);
     pushList(items);
   };
 
   const handleDeleteItem = (itemInitial, index) => {
-    const oldList = [...mainList];
+    const oldList = [...userList];
     const newList = [...oldList.slice(0, index), ...oldList.slice(index + 1)];
 
     if (!itemInitial) setItemsCount(itemsCount - 1);
 
-    setMainList(newList);
+    setUserList(newList);
     pushList(newList);
-  };
-
-  /* ------------------------------- Components ------------------------------- */
-
-  const generateButton = (
-    <button className="generate-button" onClick={() => generateInitList()}>
-      {/* <span class="button_icon button-icon--small material-symbols-outlined">
-        edit
-      </span> */}
-      初期リストを作成する
-    </button>
-  );
-
-  /* -------------------------------------------------------------------------- */
-  /*                        Functions to pass to children                       */
-  /* -------------------------------------------------------------------------- */
-  const mainFunction = {
-    handleCollapseToggle: handleCollapseToggle,
-    handleResetName: handleResetName,
-    handleChangeName: handleChangeName,
-    generateInitList: generateInitList,
-    generateButton: generateButton,
   };
 
   /* -------------------------------------------------------------------------- */
@@ -388,7 +212,7 @@ export default function Main() {
           <div className="input__wrapper">
             <form
               className="input__form"
-              onSubmit={handleSubmit}
+              onSubmit={(e) => handleSubmit(e)}
               autoComplete="off"
             >
               <div className="input-text">
@@ -421,14 +245,10 @@ export default function Main() {
 
         <Options
           func={{
-            handleSougouToggle: handleSougouToggle,
-            handleRemoveActs: handleRemoveActs,
-            handleRemoveColor: handleRemoveColor,
+            handleOptions: handleOptions,
           }}
           data={{
-            sougouTogg: sougouTogg,
-            removeActs: removeActs,
-            removeColr: removeColr,
+            userOptions: userOptions,
           }}
         />
 
@@ -446,8 +266,8 @@ export default function Main() {
                     ref={provided.innerRef}
                   >
                     {' '}
-                    {mainList.length > 1
-                      ? mainList.map((item, index) => {
+                    {userList.length > 1
+                      ? userList.map((item, index) => {
                           const isEntrance =
                             item.slug === 'entrance'
                               ? 'display__item-none'
@@ -500,72 +320,62 @@ export default function Main() {
             </DragDropContext>
           </div>
         </section>
-
-        <Setting />
       </aside>
 
       <section className="main__main-r">
         <Output
-          func={mainFunction}
+          func={{
+            handleSettings: handleSettings,
+            handleResetName: handleResetName,
+            generateButton: generateButton,
+          }}
           data={{
             title: 'header',
-            item: headerItem,
-            link: headerLink,
-            acts: headerActs,
-            toggle: headerTogg,
-            sougou: sougouTogg,
-            remove: removeActs,
-            colors: removeColr,
-            mainList: mainList,
-            nameChange: nameChange,
+            userList: userList,
+            userSetting: userSetting,
+            userOptions: userOptions,
           }}
         />
 
         <Output
-          func={mainFunction}
+          func={{
+            handleSettings: handleSettings,
+            handleResetName: handleResetName,
+            generateButton: generateButton,
+          }}
           data={{
             title: 'drawer',
-            item: drawerItem,
-            link: drawerLink,
-            acts: drawerActs,
-            toggle: drawerTogg,
-            sougou: sougouTogg,
-            remove: removeActs,
-            colors: removeColr,
-            mainList: mainList,
-            nameChange: nameChange,
+            userList: userList,
+            userSetting: userSetting,
+            userOptions: userOptions,
           }}
         />
 
         <Output
-          func={mainFunction}
+          func={{
+            handleSettings: handleSettings,
+            handleResetName: handleResetName,
+            generateButton: generateButton,
+          }}
           data={{
             title: 'footer',
-            item: footerItem,
-            link: footerLink,
-            acts: footerActs,
-            toggle: footerTogg,
-            sougou: sougouTogg,
-            remove: removeActs,
-            colors: removeColr,
-            mainList: mainList,
-            nameChange: nameChange,
+            userList: userList,
+            userSetting: userSetting,
+            userOptions: userOptions,
           }}
         />
 
         <Output
-          func={mainFunction}
+          func={{
+            handleSettings: handleSettings,
+            handleResetName: handleResetName,
+            generateButton: generateButton,
+          }}
           data={{
             title: 'sitemap',
-            item: sitemapItem,
-            link: sitemapLink,
-            acts: sitemapActs,
-            toggle: sitemapTogg,
-            sougou: sougouTogg,
-            remove: removeActs,
-            colors: removeColr,
-            mainList: mainList,
-            nameChange: nameChange,
+            userList: userList,
+            userSetting: userSetting,
+            userOptions: userOptions,
           }}
         />
       </section>

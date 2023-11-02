@@ -28,31 +28,39 @@
   "initialList": [
     {
       "slug": "entrance",
-      "name": "総合トップ"
+      "name": "総合トップ",
+      "skip": true
     },
     {
       "slug": "top",
-      "name": "トップページ"
+      "name": "トップページ",
+      "skip": false
     },
     {
       "slug": "news",
-      "name": "お知らせ"
+      "name": "お知らせ",
+      "skip": false
     },
     {
       "slug": "contact",
-      "name": "お問い合わせ"
+      "name": "お問い合わせ",
+      "skip": false
     },
     {
       "slug": "privacy",
-      "name": "プライバシーポリシー"
+      "name": "プライバシーポリシー",
+      "skip": false
     },
     {
       "slug": "site",
-      "name": "サイトマップ"
+      "name": "サイトマップ",
+      "skip": false
     }
   ],
   "initialOption": {
     "removeSougou": false,
-    "removeColors": false
+    "removeColors": false,
+    "sougouName": "総合トップ",
+    "sougouSlug": "entrance"
   }
 }

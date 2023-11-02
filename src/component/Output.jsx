@@ -7,7 +7,6 @@ import {
 import { Tooltip } from 'react-tooltip';
 
 export default function Output({ func, data }) {
-  // const removeList = ['sitemap'];
   const [copy, setCopy] = useState(false);
   const copyItem = [];
   const mainItem = [];
@@ -30,6 +29,12 @@ export default function Output({ func, data }) {
 
   if (userList.length > 1) {
     userList.map((item, index) => {
+      console.log(item, index);
+      if (index === 0) {
+        item.name = userOptions.sougouName;
+        item.slug = userOptions.sougouSlug;
+      }
+
       let itemHref = item.slug ? `/${item.slug}/` : '';
       const itemItem = userSetting.item ? ` class="${userSetting.item}"` : '';
       const itemLink = userSetting.link ? `${userSetting.link}` : '';
@@ -49,14 +54,6 @@ export default function Output({ func, data }) {
         if (index === 0) return;
         if (item.slug === 'top') itemHref = '/';
       }
-
-      // if (removeList.indexOf(outputTitle) > -1 && !userOptions.removeActive) {
-      //   if (userSetting.link.length > 0) {
-      //     itemSet = ` class="${itemLink}"`;
-      //   } else {
-      //     itemSet = '';
-      //   }
-      // }
 
       const itemString = `<li${itemItem}><a${itemSet} href="${itemHref}">${item.name}</a></li>`;
 

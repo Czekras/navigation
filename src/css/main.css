@@ -49,6 +49,7 @@ a {
   border: 1px solid #d1d1d1;
   background-color: #ffffff;
   padding-inline: 5px;
+  width: 100%;
 }
 .input-text input::placeholder {
   color: #adadad;
@@ -58,6 +59,9 @@ a {
 }
 .input-text--full input {
   width: 100%;
+}
+.input-text--option {
+  margin-top: 5px;
 }
 
 .button-icon {
@@ -83,6 +87,12 @@ a {
   padding-bottom: 5px;
   margin-bottom: 10px;
   border-bottom: 1px solid #d1d1d1;
+}
+.side-note--btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row nowrap;
 }
 
 .cmn-button {
@@ -225,6 +235,17 @@ a {
 }
 .option__item input[type=checkbox]:hover, .option__item input[type=checkbox]:focus {
   cursor: pointer;
+}
+.option__reset-btn {
+  all: unset;
+}
+.option__reset-btn small {
+  transition: all 0.3s;
+  text-transform: uppercase;
+}
+.option__reset-btn small:hover {
+  cursor: pointer;
+  color: #e06c75;
 }
 
 /* -------------------------------------------------------------------------- */

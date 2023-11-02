@@ -72,6 +72,7 @@ a {
     border: 1px solid $bdc;
     background-color: $bgc-main;
     padding-inline: 5px;
+    width: 100%;
 
     &::placeholder {
       color: $clr-sub;
@@ -83,6 +84,10 @@ a {
     input {
       width: 100%;
     }
+  }
+
+  &--option {
+    margin-top: 5px;
   }
 }
 
@@ -116,6 +121,13 @@ a {
   padding-bottom: 5px;
   margin-bottom: 10px;
   border-bottom: 1px solid $bdc;
+
+  &--btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row nowrap;
+  }
 }
 
 .cmn-button {
@@ -285,6 +297,20 @@ a {
       &:hover,
       &:focus {
         cursor: pointer;
+      }
+    }
+  }
+
+  &__reset-btn {
+    all: unset;
+
+    small {
+      transition: $transition;
+      text-transform: uppercase;
+
+      &:hover {
+        cursor: pointer;
+        color: $clr-red;
       }
     }
   }

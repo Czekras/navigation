@@ -13,7 +13,6 @@ export default function Main() {
   const [userSetting, setUserSetting] = useState([]);
   const [userOptions, setUserOptions] = useState([]);
 
-  const [nameChange, setNameChange] = useState(false);
   const [itemsCount, setItemsCount] = useState(Number);
 
   useEffect(() => {
@@ -25,9 +24,8 @@ export default function Main() {
     if (!list) {
       const updatedList = setting.initialList.map((item) => {
         return {
+          ...item,
           id: crypto.randomUUID(),
-          slug: item.slug,
-          name: item.name,
           initial: true,
         };
       });
@@ -62,6 +60,7 @@ export default function Main() {
       slug: slug,
       name: name,
       initial: false,
+      skip: false,
     };
 
     const newList = [
@@ -78,7 +77,7 @@ export default function Main() {
     setItemsCount(itemsCount + 1);
   };
 
-  /* ------------------------------- Reset Name ------------------------------- */
+  /* ---------------------------------- Reset --------------------------------- */
   const handleResetName = (e, id) => {
     e.preventDefault();
 
@@ -108,6 +107,25 @@ export default function Main() {
 
     localStorage.setItem('navigationOptions', JSON.stringify(array));
     setUserOptions(array);
+  };
+
+  const handleInputOptions = (e) => {
+    const { id, value } = e.target;
+
+    const array = {
+      ...userOptions,
+      [id]: value,
+    };
+
+    localStorage.setItem('navigationOptions', JSON.stringify(array));
+    setUserOptions(array);
+  };
+
+  const handleResetOptions = (e) => {
+    const initialOptions = settings.initialOption;
+
+    localStorage.setItem('navigationOptions', JSON.stringify(initialOptions));
+    setUserOptions(initialOptions);
   };
 
   /* -------------------------------- Settings -------------------------------- */
@@ -246,9 +264,12 @@ export default function Main() {
         <Options
           func={{
             handleOptions: handleOptions,
+            handleInputOptions: handleInputOptions,
+            handleResetOptions: handleResetOptions,
           }}
           data={{
             userOptions: userOptions,
+            defaultOptions: settings.initialOption,
           }}
         />
 
@@ -268,10 +289,9 @@ export default function Main() {
                     {' '}
                     {userList.length > 1
                       ? userList.map((item, index) => {
-                          const isEntrance =
-                            item.slug === 'entrance'
-                              ? 'display__item-none'
-                              : '';
+                          const isEntrance = item.skip
+                            ? 'display__item-none'
+                            : '';
 
                           return (
                             <Draggable

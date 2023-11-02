@@ -29,7 +29,6 @@ export default function Output({ func, data }) {
 
   if (userList.length > 1) {
     userList.map((item, index) => {
-      console.log(item, index);
       if (index === 0) {
         item.name = userOptions.sougouName;
         item.slug = userOptions.sougouSlug;

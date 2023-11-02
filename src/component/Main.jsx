@@ -15,11 +15,18 @@ export default function Main() {
 
   const [itemsCount, setItemsCount] = useState(Number);
 
+  // TODO: Update version
+  // const appVersion = 'v1.0.2';
+
   useEffect(() => {
     const localList = localStorage.getItem('navigationArrays');
+    // const version = localStorage.getItem('navigationVersion');
+    // loadSetting(localList, settings, version);
     loadSetting(localList, settings);
   }, []);
 
+  // const loadSetting = (list, setting, version = ) => {
+  //   if (!list || version !== appVersion) {
   const loadSetting = (list, setting) => {
     if (!list) {
       const updatedList = setting.initialList.map((item) => {
@@ -40,6 +47,8 @@ export default function Main() {
         'navigationOptions',
         JSON.stringify(setting.initialOption)
       );
+
+      // localStorage.setItem('navigationVersion', appVersion);
     }
 
     const localList = JSON.parse(localStorage.getItem('navigationArrays'));
@@ -159,9 +168,8 @@ export default function Main() {
   const generateInitList = () => {
     const updatedList = settings.initialList.map((item) => {
       return {
+        ...item,
         id: crypto.randomUUID(),
-        slug: item.slug,
-        name: item.name,
         initial: true,
       };
     });

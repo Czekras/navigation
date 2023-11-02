@@ -123,7 +123,7 @@ a {
   flex-flow: row nowrap;
 }
 .main > * {
-  padding-block: 73px 30px;
+  padding-block: 73px 45px;
   overflow: auto;
 }
 .main__main-l {

@@ -106,10 +106,10 @@ export default function Output({ func, data }) {
               disabled={copyDisable}
               onClick={() => copytToClipboard(copyItem)}
               data-tooltip-id="copy-tooltip"
-              data-tooltip-content={'コピー'}
+              data-tooltip-content={'Copy'}
               data-tooltip-place="left"
             >
-              <span className="material-symbols-outlined">
+              <span className="output__icon material-symbols-outlined">
                 {copyDisable
                   ? 'content_paste_off'
                   : !copyDisable && copy

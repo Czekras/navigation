@@ -9,8 +9,8 @@ export default function Options({ func, data }) {
           <input
             type="checkbox"
             id="removeSougou"
-            defaultChecked={data.userOptions.removeSougou}
-            onChange={(e) => func.handleOptions(e)}
+            checked={data.userOptions.removeSougou || false}
+            onChange={func.handleOptions}
           />
           <label htmlFor="removeSougou">総合トップ</label>
         </div>
@@ -27,10 +27,11 @@ export default function Options({ func, data }) {
           <input
             type="checkbox"
             id="removeColors"
-            defaultChecked={data.userOptions.removeColors}
-            onChange={(e) => func.handleOptions(e)}
+            checked={data.userOptions.removeColors || false}
+            // onChange={(e) => func.handleOptions(e)}
+            onChange={func.handleOptions}
           />
-          <label htmlFor="removeColors">コードカラー</label>
+          <label htmlFor="removeColors">シンタックスHL</label>
         </div>
       </div>
     </section>

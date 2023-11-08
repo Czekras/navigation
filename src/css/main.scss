@@ -223,6 +223,10 @@ a {
   &__title {
     letter-spacing: 2px;
     text-transform: uppercase;
+    // small {
+    //   color: $clr-sub;
+    //   font-size: clamp(8px, 2.5vw, 12px);
+    // }
   }
 }
 
@@ -286,6 +290,7 @@ a {
 /* -------------------------------------------------------------------------- */
 .option {
   &__item {
+    $this: &;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -297,6 +302,19 @@ a {
       &:hover,
       &:focus {
         cursor: pointer;
+      }
+    }
+
+    &-info {
+      #{$this}-icon {
+        margin-left: auto;
+        font-size: 15px;
+        color: $clr-sub;
+
+        &:hover {
+          cursor: default;
+          color: $clr-main;
+        }
       }
     }
   }
@@ -445,6 +463,7 @@ a {
   &__icon {
     transition: $transition;
     color: $clr-sub;
+    margin-top: 2px;
   }
 }
 

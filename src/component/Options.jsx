@@ -1,13 +1,37 @@
+import { Tooltip } from 'react-tooltip';
+
 export default function Options({ func, data }) {
   return (
     <section className="option">
       <div className="option__wrapper">
         <p className="side-note side-note--btn">
           <small>オプション</small>
-          <button className="option__reset-btn" onClick={func.handleResetOptions}>
+          <button
+            className="option__reset-btn"
+            onClick={func.handleResetOptions}
+          >
             <small>reset</small>
           </button>
         </p>
+        <div className="option__item option__item-info">
+          <input
+            type="checkbox"
+            id="activeInItem"
+            checked={data.userOptions.activeInItem || false}
+            onChange={func.handleOptions}
+          />
+          <label htmlFor="activeInItem">Active in &lt;li&gt;</label>
+          {/* <span
+            className="material-symbols-outlined option__item-icon"
+            data-tooltip-id="info-tooltip"
+            // data-tooltip-html=""
+            data-tooltip-content="Activeクラス名を<li>に入れる"
+            data-tooltip-place="right"
+          >
+            info
+          </span> */}
+          {/* <Tooltip id="info-tooltip" /> */}
+        </div>
         <div className="option__item">
           <input
             type="checkbox"
@@ -15,7 +39,7 @@ export default function Options({ func, data }) {
             checked={data.userOptions.removeColors || false}
             onChange={func.handleOptions}
           />
-          <label htmlFor="removeColors">シンタックスHL</label>
+          <label htmlFor="removeColors">Syntax Highlight</label>
         </div>
         <div className="option__item">
           <input

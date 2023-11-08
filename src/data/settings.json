@@ -58,6 +58,7 @@
     }
   ],
   "initialOption": {
+    "activeInItem": false,
     "removeSougou": false,
     "removeColors": false,
     "sougouName": "総合トップ",

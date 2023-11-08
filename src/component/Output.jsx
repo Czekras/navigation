@@ -34,27 +34,62 @@ export default function Output({ func, data }) {
         item.slug = userOptions.sougouSlug;
       }
 
+      let itemItemSet = '';
+      let itemLinkSet = '';
+
       let itemHref = item.slug ? `/${item.slug}/` : '';
-      const itemItem = userSetting.item ? ` class="${userSetting.item}"` : '';
-      const itemLink = userSetting.link ? `${userSetting.link}` : '';
+      // let itemItem = userSetting.item ? `${userSetting.item}` : '';
+      // let itemLink = userSetting.link ? `${userSetting.link}` : '';
+      let itemItem = userSetting.item;
+      let itemLink = userSetting.link;
       const itemActs = userSetting.acts
         ? `<?php if (get_meta('slug') == '${item.slug}') echo '${userSetting.acts}'?>`
         : '';
-      let itemSet =
-        itemLink || itemActs
-          ? ` class="${[itemLink, itemActs].filter((x) => x).join(' ')}"`
-          : '';
 
       if (userOptions.removeSougou) {
         if (index === 0) itemHref = '/';
         if (item.slug === 'top') itemHref = `/${item.slug}/`;
       } else {
-        // eslint-disable-next-line
-        if (index === 0) return;
+        if (index === 0) return
         if (item.slug === 'top') itemHref = '/';
       }
 
-      const itemString = `<li${itemItem}><a${itemSet} href="${itemHref}">${item.name}</a></li>`;
+      if (userOptions.activeInItem) {
+        itemLinkSet = itemLink ? ` class="${itemLink}"` : '';
+        itemItemSet =
+          itemItem || itemActs
+            ? ` class="${[itemItem, itemActs].filter((x) => x).join(' ')}"`
+            : '';
+      } else {
+        itemItemSet = itemItem ? ` class="${itemItem}"` : '';
+        itemLinkSet =
+          itemLink || itemActs
+            ? ` class="${[itemLink, itemActs].filter((x) => x).join(' ')}"`
+            : '';
+      }
+
+      // const itemActs = userSetting.acts
+      //   ? `<?php if (get_meta('slug') == '${item.slug}') echo '${userSetting.acts}'?>`
+      //   : '';
+
+      // let itemSet;
+      // let itemItem;
+
+      // if (!userOptions.activeInItem) {
+      //   itemItem = userSetting.item ? ` class="${userSetting.item}"` : '';
+      //   itemSet =
+      //     itemLink || itemActs
+      //       ? ` class="${[itemLink, itemActs].filter((x) => x).join(' ')}"`
+      //       : '';
+      // } else {
+      //   itemSet = itemLink;
+      //   itemItem =
+      //     itemLink || itemActs
+      //       ? ` class="${[itemLink, itemActs].filter((x) => x).join(' ')}"`
+      //       : '';
+      // }
+
+      const itemString = `<li${itemItemSet}><a${itemLinkSet} href="${itemHref}">${item.name}</a></li>`;
 
       copyItem.push(itemString);
       mainItem.push(itemString);
@@ -101,19 +136,23 @@ export default function Output({ func, data }) {
               className="button-icon"
               disabled={copyDisable}
               onClick={() => copytToClipboard(copyItem)}
-              data-tooltip-id="copy-tooltip"
-              data-tooltip-content={'Copy'}
-              data-tooltip-place="left"
+              // data-tooltip-id="copy-tooltip"
+              // data-tooltip-content="Copied!"
+              // data-tooltip-place="left"
             >
               <span className="output__icon material-symbols-outlined">
                 {copyDisable
-                  ? 'content_paste_off'
+                  // ? 'content_paste_off'
+                  // : !copyDisable && copy
+                  // ? 'inventory'
+                  // : 'integration_instructions'}
+                  ? ''
                   : !copyDisable && copy
-                  ? 'inventory'
-                  : 'integration_instructions'}
+                  ? 'done'
+                  : 'content_copy'}
               </span>
             </button>
-            <Tooltip id="copy-tooltip" />
+            {/* <Tooltip id="copy-tooltip" /> */}
           </div>
         </header>
         <div className="output__config">

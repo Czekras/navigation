@@ -236,6 +236,15 @@ a {
 .option__item input[type=checkbox]:hover, .option__item input[type=checkbox]:focus {
   cursor: pointer;
 }
+.option__item-info .option__item-icon {
+  margin-left: auto;
+  font-size: 15px;
+  color: #adadad;
+}
+.option__item-info .option__item-icon:hover {
+  cursor: default;
+  color: #464646;
+}
 .option__reset-btn {
   all: unset;
 }
@@ -350,6 +359,7 @@ a {
 .output__icon {
   transition: all 0.3s;
   color: #adadad;
+  margin-top: 2px;
 }
 
 /* -------------------------------------------------------------------------- */

@@ -1,5 +1,3 @@
-import { Tooltip } from 'react-tooltip';
-
 export default function Options({ func, data }) {
   return (
     <section className="option">

@@ -59,9 +59,14 @@
   ],
   "initialOption": {
     "activeInItem": false,
+    "formatCoding": false,
     "removeSougou": false,
     "removeColors": false,
+    "spanAddition": false,
+    "spanName": "",
+    "spanToggle": false,
     "sougouName": "総合トップ",
-    "sougouSlug": "entrance"
+    "sougouSlug": "entrance",
+    "sougouToggle": false
   }
 }

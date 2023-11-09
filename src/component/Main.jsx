@@ -16,7 +16,7 @@ export default function Main() {
   const [itemsCount, setItemsCount] = useState(Number);
 
   // TODO: Update version
-  // const appVersion = 'v1.0.2';
+  // const appVersion = 'v1.0.4';
 
   useEffect(() => {
     const localList = localStorage.getItem('navigationArrays');
@@ -112,6 +112,16 @@ export default function Main() {
     const array = {
       ...userOptions,
       [id]: checked,
+    };
+
+    localStorage.setItem('navigationOptions', JSON.stringify(array));
+    setUserOptions(array);
+  };
+
+  const handleOptionButton = (e, optionName) => {
+    const array = {
+      ...userOptions,
+      [optionName]: !userOptions[optionName],
     };
 
     localStorage.setItem('navigationOptions', JSON.stringify(array));
@@ -272,6 +282,7 @@ export default function Main() {
         <Options
           func={{
             handleOptions: handleOptions,
+            handleOptionButton: handleOptionButton,
             handleInputOptions: handleInputOptions,
             handleResetOptions: handleResetOptions,
           }}

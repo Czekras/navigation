@@ -50,7 +50,7 @@ export default function Output({ func, data }) {
         if (index === 0) itemHref = '/';
         if (item.slug === 'top') itemHref = `/${item.slug}/`;
       } else {
-        if (index === 0) return
+        if (index === 0) return;
         if (item.slug === 'top') itemHref = '/';
       }
 
@@ -68,28 +68,19 @@ export default function Output({ func, data }) {
             : '';
       }
 
-      // const itemActs = userSetting.acts
-      //   ? `<?php if (get_meta('slug') == '${item.slug}') echo '${userSetting.acts}'?>`
-      //   : '';
+      const itemSpan = userOptions.spanName
+        ? ` class="${userOptions.spanName}"`
+        : '';
 
-      // let itemSet;
-      // let itemItem;
+      const itemName = userOptions.spanAddition
+        ? `<span${itemSpan}>${item.name}</span>`
+        : item.name;
 
-      // if (!userOptions.activeInItem) {
-      //   itemItem = userSetting.item ? ` class="${userSetting.item}"` : '';
-      //   itemSet =
-      //     itemLink || itemActs
-      //       ? ` class="${[itemLink, itemActs].filter((x) => x).join(' ')}"`
-      //       : '';
-      // } else {
-      //   itemSet = itemLink;
-      //   itemItem =
-      //     itemLink || itemActs
-      //       ? ` class="${[itemLink, itemActs].filter((x) => x).join(' ')}"`
-      //       : '';
-      // }
+      let itemString = `<li${itemItemSet}><a${itemLinkSet} href="${itemHref}">${itemName}</a></li>`;
 
-      const itemString = `<li${itemItemSet}><a${itemLinkSet} href="${itemHref}">${item.name}</a></li>`;
+      if (userOptions.formatCoding) {
+        itemString = `<li${itemItemSet}>\n  <a${itemLinkSet} href="${itemHref}">\n    ${itemName}\n  </a>\n</li>`;
+      }
 
       copyItem.push(itemString);
       mainItem.push(itemString);
@@ -136,23 +127,15 @@ export default function Output({ func, data }) {
               className="button-icon"
               disabled={copyDisable}
               onClick={() => copytToClipboard(copyItem)}
-              // data-tooltip-id="copy-tooltip"
-              // data-tooltip-content="Copied!"
-              // data-tooltip-place="left"
             >
               <span className="output__icon material-symbols-outlined">
                 {copyDisable
-                  // ? 'content_paste_off'
-                  // : !copyDisable && copy
-                  // ? 'inventory'
-                  // : 'integration_instructions'}
                   ? ''
                   : !copyDisable && copy
                   ? 'done'
                   : 'content_copy'}
               </span>
             </button>
-            {/* <Tooltip id="copy-tooltip" /> */}
           </div>
         </header>
         <div className="output__config">
@@ -190,24 +173,6 @@ export default function Output({ func, data }) {
               <label htmlFor={`${outputTitle}_acts`}>
                 Active<span className="sp-none">クラス名</span>
               </label>
-              {/* {removeList.indexOf(outputTitle) > -1 ? (
-                <input
-                  type="text"
-                  id={`${outputTitle}_acts`}
-                  placeholder={outputSetting.acts}
-                  value={outputSetting.acts}
-                  disabled={userOptions.removeActive}
-                  onChange={(e) => func.handleSettings(e)}
-                />
-              ) : (
-                <input
-                  type="text"
-                  id={`${outputTitle}_acts`}
-                  placeholder={outputSetting.acts}
-                  value={outputSetting.acts}
-                  onChange={(e) => func.handleSettings(e)}
-                />
-              )} */}
               <input
                 type="text"
                 id={`${outputTitle}_acts`}
@@ -217,11 +182,7 @@ export default function Output({ func, data }) {
               />
             </div>
             <div className="output__form-item sp-none">
-              <button
-                className="output__icon button-icon"
-                disabled={false}
-                // type="button"
-              >
+              <button className="output__icon button-icon" disabled={false}>
                 <span className="material-symbols-outlined">restart_alt</span>
               </button>
             </div>

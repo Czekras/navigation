@@ -52,6 +52,10 @@ body {
   margin-bottom: 10px;
 }
 
+.mb-4 {
+  margin-bottom: 4px;
+}
+
 a {
   color: inherit;
   transition: $transition;
@@ -223,10 +227,6 @@ a {
   &__title {
     letter-spacing: 2px;
     text-transform: uppercase;
-    // small {
-    //   color: $clr-sub;
-    //   font-size: clamp(8px, 2.5vw, 12px);
-    // }
   }
 }
 
@@ -296,7 +296,7 @@ a {
     align-items: center;
     flex-flow: row nowrap;
 
-    input[type='checkbox'] {
+    &-cb {
       margin-right: 10px;
 
       &:hover,
@@ -316,6 +316,22 @@ a {
           color: $clr-main;
         }
       }
+    }
+  }
+
+  &__expand {
+    all: unset;
+    color: $clr-sub;
+    margin-left: auto;
+    height: 21px;
+
+    span {
+      font-size: 21px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $clr-main;
     }
   }
 
@@ -444,6 +460,7 @@ a {
 
     pre {
       margin: 0;
+      max-height: 230px;
     }
 
     code {

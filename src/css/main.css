@@ -32,6 +32,10 @@ body {
   margin-bottom: 10px;
 }
 
+.mb-4 {
+  margin-bottom: 4px;
+}
+
 a {
   color: inherit;
   transition: all 0.3s;
@@ -230,10 +234,10 @@ a {
   align-items: center;
   flex-flow: row nowrap;
 }
-.option__item input[type=checkbox] {
+.option__item-cb {
   margin-right: 10px;
 }
-.option__item input[type=checkbox]:hover, .option__item input[type=checkbox]:focus {
+.option__item-cb:hover, .option__item-cb:focus {
   cursor: pointer;
 }
 .option__item-info .option__item-icon {
@@ -243,6 +247,19 @@ a {
 }
 .option__item-info .option__item-icon:hover {
   cursor: default;
+  color: #464646;
+}
+.option__expand {
+  all: unset;
+  color: #adadad;
+  margin-left: auto;
+  height: 21px;
+}
+.option__expand span {
+  font-size: 21px;
+}
+.option__expand:hover {
+  cursor: pointer;
   color: #464646;
 }
 .option__reset-btn {
@@ -345,6 +362,7 @@ a {
 }
 .output__code pre {
   margin: 0;
+  max-height: 230px;
 }
 .output__code code {
   font-family: "Source Code Pro", "M PLUS 1 Code", monospace;

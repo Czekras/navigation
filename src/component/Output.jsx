@@ -4,7 +4,6 @@ import {
   githubGist,
   ascetic,
 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { Tooltip } from 'react-tooltip';
 
 export default function Output({ func, data }) {
   const [copy, setCopy] = useState(false);

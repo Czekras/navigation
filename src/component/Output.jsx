@@ -170,7 +170,7 @@ export default function Output({ func, data }) {
             </div>
             <div className="output__form-item input-text input-text--full">
               <label htmlFor={`${outputTitle}_acts`}>
-                Active<span className="sp-none">クラス名</span>
+                current<span className="sp-none">クラス名</span>
               </label>
               <input
                 type="text"

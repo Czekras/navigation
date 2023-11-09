@@ -267,7 +267,6 @@ a {
 }
 .option__reset-btn small {
   transition: all 0.3s;
-  text-transform: uppercase;
 }
 .option__reset-btn small:hover {
   cursor: pointer;

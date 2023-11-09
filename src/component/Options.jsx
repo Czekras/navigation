@@ -65,7 +65,7 @@ export default function Options({ func, data }) {
             checked={data.userOptions.activeInItem || false}
             onChange={func.handleOptions}
           />
-          <label htmlFor="activeInItem">Active in &lt;li&gt;</label>
+          <label htmlFor="activeInItem">current in &lt;li&gt;</label>
         </div>
 
         <div className="option__item">
@@ -76,7 +76,7 @@ export default function Options({ func, data }) {
             checked={data.userOptions.spanAddition || false}
             onChange={func.handleOptions}
           />
-          <label htmlFor="spanAddition">Insert &lt;span&gt;</label>
+          <label htmlFor="spanAddition">insert &lt;span&gt;</label>
           <button
             className="option__expand"
             onClick={(e) => func.handleOptionButton(e, 'spanToggle')}
@@ -111,7 +111,7 @@ export default function Options({ func, data }) {
             checked={data.userOptions.removeColors || false}
             onChange={func.handleOptions}
           />
-          <label htmlFor="removeColors">Syntax Highlight</label>
+          <label htmlFor="removeColors">syntax highlight</label>
         </div>
 
         <div className="option__item option__item-info">
@@ -122,7 +122,7 @@ export default function Options({ func, data }) {
             checked={data.userOptions.formatCoding || false}
             onChange={func.handleOptions}
           />
-          <label htmlFor="formatCoding">Code Format</label>
+          <label htmlFor="formatCoding">code format</label>
         </div>
       </div>
     </section>

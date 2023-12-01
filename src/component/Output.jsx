@@ -78,7 +78,11 @@ export default function Output({ func, data }) {
       let itemString = `<li${itemItemSet}><a${itemLinkSet} href="${itemHref}">${itemName}</a></li>`;
 
       if (userOptions.formatCoding) {
-        itemString = `<li${itemItemSet}>\n  <a${itemLinkSet} href="${itemHref}">\n    ${itemName}\n  </a>\n</li>`;
+        if (!userOptions.spanAddition) {
+          itemString = `<li${itemItemSet}>\n  <a${itemLinkSet} href="${itemHref}">${itemName}</a>\n</li>`;
+        } else {
+          itemString = `<li${itemItemSet}>\n  <a${itemLinkSet} href="${itemHref}">\n    ${itemName}\n  </a>\n</li>`;
+        }
       }
 
       copyItem.push(itemString);

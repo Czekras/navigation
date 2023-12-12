@@ -13,7 +13,7 @@ $clr-accent: #f1f1f1;
 $clr-accent: #f9f9f9;
 $clr-code-bg: #ffffff;
 $clr-config-bg: #ffffff;
-$bdc: #d1d1d1;
+$bdc: #e0e0e0;
 
 $ff-sans: 'Noto Sans JP', sans-serif;
 $ff-mono: 'Source Code Pro', 'M PLUS 1 Code', monospace;
@@ -295,6 +295,7 @@ a {
     justify-content: flex-start;
     align-items: center;
     flex-flow: row nowrap;
+    margin-top: 5px;
 
     &-cb {
       margin-right: 10px;
@@ -358,7 +359,7 @@ a {
     display: flex;
     justify-content: center;
     flex-flow: column nowrap;
-    gap: 10px;
+    gap: 5px;
 
     button {
       width: 100%;

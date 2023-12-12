@@ -50,7 +50,7 @@ a {
 .input-text input {
   border: none;
   outline: none;
-  border: 1px solid #d1d1d1;
+  border: 1px solid #e0e0e0;
   background-color: #ffffff;
   padding-inline: 5px;
   width: 100%;
@@ -90,7 +90,7 @@ a {
   color: #adadad;
   padding-bottom: 5px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid #e0e0e0;
 }
 .side-note--btn {
   display: flex;
@@ -144,7 +144,7 @@ a {
   height: 100dvh;
   position: sticky;
   inset: 0 auto 0 0;
-  border-right: 1px solid #d1d1d1;
+  border-right: 1px solid #e0e0e0;
   padding-inline: 3px clamp(15px, 2.5vw, 30px);
   display: flex;
   flex-flow: column nowrap;
@@ -164,7 +164,7 @@ a {
   position: fixed;
   inset: 0 0 auto 0;
   padding-block: 15px;
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid #e0e0e0;
   z-index: 100;
   font-size: 14px;
   z-index: 100;
@@ -233,6 +233,7 @@ a {
   justify-content: flex-start;
   align-items: center;
   flex-flow: row nowrap;
+  margin-top: 5px;
 }
 .option__item-cb {
   margin-right: 10px;
@@ -280,7 +281,7 @@ a {
   display: flex;
   justify-content: center;
   flex-flow: column nowrap;
-  gap: 10px;
+  gap: 5px;
 }
 .input__form button {
   width: 100%;
@@ -318,7 +319,7 @@ a {
 }
 .output__form {
   padding: 10px;
-  border: 1px solid #d1d1d1;
+  border: 1px solid #e0e0e0;
   border-bottom: none;
   display: flex;
   justify-content: center;
@@ -337,7 +338,7 @@ a {
   display: flex;
   justify-content: flex-start;
   flex-flow: row nowrap;
-  border: 1px solid #d1d1d1;
+  border: 1px solid #e0e0e0;
   border-bottom: none;
 }
 .output__header > * {
@@ -357,7 +358,7 @@ a {
   flex-flow: row nowrap;
 }
 .output__code {
-  border: 1px solid #d1d1d1;
+  border: 1px solid #e0e0e0;
 }
 .output__code pre {
   margin: 0;
@@ -402,7 +403,7 @@ a {
   inset: auto 0 0 0;
   padding-block: 4px;
   text-align: center;
-  border-top: 1px solid #d1d1d1;
+  border-top: 1px solid #e0e0e0;
   z-index: 100;
 }
 .footer small {

@@ -19,8 +19,8 @@
       "toggle": false
     },
     "sitemap": {
-      "item": "sitemap__item",
-      "link": "sitemap__link",
+      "item": "site__item",
+      "link": "site__link",
       "acts": "",
       "toggle": false
     }

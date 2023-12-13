@@ -45,7 +45,7 @@ body {
 
   &--output {
     // padding-block: 20px clamp(0px, 1vw, 10px);
-    padding-block: 8px clamp(0px, 1vw, 10px);
+    // padding-block: 8px clamp(0px, 1vw, 10px);
   }
 }
 
@@ -469,6 +469,12 @@ a {
     pre {
       margin: 0;
       max-height: 230px;
+      // overflow-x: hidden !important;
+      // scrollbar-gutter: stable !important;
+    
+      &:hover {
+        // overflow-x: auto !important;
+      }
     }
 
     code {

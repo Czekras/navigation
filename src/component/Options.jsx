@@ -92,7 +92,7 @@ export default function Options({ func, data }) {
               className="mb-5"
               type="text"
               id="spanName"
-              placeholder="span classname"
+              placeholder="クラス名"
               // placeholder={data.defaultOptions.spanName}
               disabled={!data.userOptions.spanAddition}
               value={data.userOptions.spanName || ''}

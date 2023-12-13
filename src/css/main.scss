@@ -44,7 +44,8 @@ body {
   padding-block: 20px;
 
   &--output {
-    padding-block: 20px clamp(0px, 1vw, 10px);
+    // padding-block: 20px clamp(0px, 1vw, 10px);
+    padding-block: 8px clamp(0px, 1vw, 10px);
   }
 }
 
@@ -187,7 +188,8 @@ a {
     position: sticky;
     inset: 0 auto 0 0;
     border-right: 1px solid $bdc;
-    padding-inline: 3px clamp(15px, 2.5vw, 30px);
+    // padding-inline: 3px clamp(15px, 2.5vw, 30px);
+    padding-inline: 3px clamp(8px, 2.5vw, 16px);
     display: flex;
     flex-flow: column nowrap;
     transition: $transition;
@@ -197,7 +199,10 @@ a {
   &__main-r {
     // width: min(100%, 755px);
     width: min(100%, 810px);
-    padding-left: clamp(15px, 2.5vw, 30px);
+    // padding-left: clamp(15px, 2.5vw, 30px);
+    // padding-inline: 20px;
+    
+    border-right: 1px solid $bdc;
   }
 }
 
@@ -410,8 +415,9 @@ a {
 
   &__form {
     padding: 10px;
-    border: 1px solid $bdc;
-    border-bottom: none;
+    // border: 1px solid $bdc;
+    // border-bottom: none;
+    border-bottom: 1px dashed $bdc;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -431,8 +437,9 @@ a {
     display: flex;
     justify-content: flex-start;
     flex-flow: row nowrap;
-    border: 1px solid $bdc;
-    border-bottom: none;
+    // border: 1px solid $bdc;
+    // border-bottom: none;
+    border-bottom: 1px dashed $bdc;
 
     & > * {
       transition: $transition;
@@ -457,7 +464,7 @@ a {
   }
 
   &__code {
-    border: 1px solid $bdc;
+    border-bottom: 1px solid $bdc;
 
     pre {
       margin: 0;

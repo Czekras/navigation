@@ -16,7 +16,8 @@ $clr-config-bg: #ffffff;
 $bdc: #e0e0e0;
 
 $ff-sans: 'Noto Sans JP', sans-serif;
-$ff-mono: 'Source Code Pro', 'M PLUS 1 Code', monospace;
+$ff-mono: '游ゴシック', 'YuGothic', 'Hiragino Kaku Gothic ProN',
+        'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
 $transition: all 0.3s;
 
 /* -------------------------------------------------------------------------- */
@@ -42,11 +43,6 @@ body {
 
 .cmn-py {
   padding-block: 20px;
-
-  &--output {
-    // padding-block: 20px clamp(0px, 1vw, 10px);
-    // padding-block: 8px clamp(0px, 1vw, 10px);
-  }
 }
 
 .cmn-mb {
@@ -201,7 +197,7 @@ a {
     width: min(100%, 810px);
     // padding-left: clamp(15px, 2.5vw, 30px);
     // padding-inline: 20px;
-    
+
     border-right: 1px solid $bdc;
   }
 }
@@ -469,12 +465,7 @@ a {
     pre {
       margin: 0;
       max-height: 230px;
-      // overflow-x: hidden !important;
-      // scrollbar-gutter: stable !important;
-    
-      &:hover {
-        // overflow-x: auto !important;
-      }
+      scrollbar-width: thin !important;
     }
 
     code {

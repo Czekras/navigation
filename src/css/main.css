@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* -------------------------------------------------------------------------- */
 /*                                  Variables                                 */
 /* -------------------------------------------------------------------------- */
@@ -24,6 +25,7 @@ body {
 .cmn-py {
   padding-block: 20px;
 }
+
 .cmn-mb {
   margin-bottom: 10px;
 }
@@ -357,9 +359,10 @@ a {
 .output__code pre {
   margin: 0;
   max-height: 230px;
+  scrollbar-width: thin !important;
 }
 .output__code code {
-  font-family: "Source Code Pro", "M PLUS 1 Code", monospace;
+  font-family: "游ゴシック", "YuGothic", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
 }
 .output__code code * {
   font-weight: 400 !important;
@@ -415,7 +418,7 @@ a {
   padding: 5px 0;
   color: #adadad;
   transition: all 0.3s;
-  font-family: "Source Code Pro", "M PLUS 1 Code", monospace;
+  font-family: "游ゴシック", "YuGothic", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;

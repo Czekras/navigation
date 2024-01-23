@@ -360,6 +360,21 @@ a {
   margin: 0;
   max-height: 230px;
   scrollbar-width: thin !important;
+  padding-block: 10px 8px !important;
+}
+.output__code pre::-webkit-scrollbar {
+  background-color: transparent;
+  width: 8px;
+  height: 8px;
+}
+.output__code pre:hover::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+}
+.output__code pre:hover::-webkit-scrollbar-thumb:hover {
+  background-color: #adadad;
+}
+.output__code pre:hover::-webkit-scrollbar {
+  background-color: #f1f1f1;
 }
 .output__code code {
   font-family: "游ゴシック", "YuGothic", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;

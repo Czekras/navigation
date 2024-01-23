@@ -466,6 +466,28 @@ a {
       margin: 0;
       max-height: 230px;
       scrollbar-width: thin !important;
+      padding-block: 10px 8px !important;
+      // transition: $transition;
+
+      &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 8px;
+        height: 8px;
+      }
+
+      &:hover {
+        &::-webkit-scrollbar-thumb {
+          background-color: $bgc-sub;
+
+          &:hover {
+            background-color: $clr-sub;
+          }
+        }
+
+        &::-webkit-scrollbar {
+          background-color: $bgc-accent;
+        }
+      }
     }
 
     code {

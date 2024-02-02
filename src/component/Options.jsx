@@ -113,8 +113,8 @@ export default function Options({ func, data }) {
             checked={data.userOptions.removeColors || false}
             onChange={func.handleOptions}
           />
-          {/* <label htmlFor="removeColors">Syntax Highlight</label> */}
-          <label htmlFor="removeColors">ハイライト</label>
+          <label htmlFor="removeColors">Syntax Highlight</label>
+          {/* <label htmlFor="removeColors">ハイライト</label> */}
         </div>
 
         <div className="option__item option__item-info">
@@ -125,8 +125,8 @@ export default function Options({ func, data }) {
             checked={data.userOptions.formatCoding || false}
             onChange={func.handleOptions}
           />
-          {/* <label htmlFor="formatCoding">Code Format</label> */}
-          <label htmlFor="formatCoding">フォーマット</label>
+          <label htmlFor="formatCoding">Code Format</label>
+          {/* <label htmlFor="formatCoding">フォーマット</label> */}
         </div>
       </div>
     </section>

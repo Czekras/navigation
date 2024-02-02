@@ -65,7 +65,8 @@ export default function Options({ func, data }) {
             checked={data.userOptions.activeInItem || false}
             onChange={func.handleOptions}
           />
-          <label htmlFor="activeInItem">Current in &lt;li&gt;</label>
+          {/* <label htmlFor="activeInItem">Current in &lt;li&gt;</label> */}
+          <label htmlFor="activeInItem">Current クラス</label>
         </div>
 
         <div className="option__item">
@@ -76,7 +77,8 @@ export default function Options({ func, data }) {
             checked={data.userOptions.spanAddition || false}
             onChange={func.handleOptions}
           />
-          <label htmlFor="spanAddition">Insert &lt;span&gt;</label>
+          {/* <label htmlFor="spanAddition">Insert &lt;span&gt;</label> */}
+          <label htmlFor="spanAddition">&lt;span&gt; タグ</label>
           <button
             className="option__expand"
             onClick={(e) => func.handleOptionButton(e, 'spanToggle')}
@@ -111,7 +113,8 @@ export default function Options({ func, data }) {
             checked={data.userOptions.removeColors || false}
             onChange={func.handleOptions}
           />
-          <label htmlFor="removeColors">Syntax Highlight</label>
+          {/* <label htmlFor="removeColors">Syntax Highlight</label> */}
+          <label htmlFor="removeColors">ハイライト</label>
         </div>
 
         <div className="option__item option__item-info">
@@ -122,7 +125,8 @@ export default function Options({ func, data }) {
             checked={data.userOptions.formatCoding || false}
             onChange={func.handleOptions}
           />
-          <label htmlFor="formatCoding">Code Format</label>
+          {/* <label htmlFor="formatCoding">Code Format</label> */}
+          <label htmlFor="formatCoding">フォーマット</label>
         </div>
       </div>
     </section>

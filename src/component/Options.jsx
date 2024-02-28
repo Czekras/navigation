@@ -1,6 +1,6 @@
 export default function Options({ func, data }) {
   return (
-    <section className="option">
+    <div className="option">
       <div className="option__wrapper">
         <p className="side-note side-note--btn">
           <small>オプション</small>
@@ -129,6 +129,6 @@ export default function Options({ func, data }) {
           {/* <label htmlFor="formatCoding">フォーマット</label> */}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

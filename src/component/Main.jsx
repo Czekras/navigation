@@ -243,8 +243,8 @@ export default function Main() {
 
   return (
     <main className="main cmn-px">
-      <aside className="main__main-l">
-        <section className="input cmn-py">
+      <div className="main__main-l">
+        <div className="input cmn-py">
           <div className="input__wrapper">
             <form
               className="input__form"
@@ -277,7 +277,7 @@ export default function Main() {
               </button>
             </form>
           </div>
-        </section>
+        </div>
 
         <Options
           func={{
@@ -292,7 +292,7 @@ export default function Main() {
           }}
         />
 
-        <section className="display cmn-py">
+        <div className="display cmn-py">
           <div className="display__wrapper">
             <p className="side-note">
               <small>並び替える・削除する</small>
@@ -358,10 +358,10 @@ export default function Main() {
               </Droppable>
             </DragDropContext>
           </div>
-        </section>
-      </aside>
+        </div>
+      </div>
 
-      <section className="main__main-r">
+      <div className="main__main-r">
         <Output
           func={{
             handleSettings: handleSettings,
@@ -417,7 +417,7 @@ export default function Main() {
             userOptions: userOptions,
           }}
         />
-      </section>
+      </div>
     </main>
   );
 }

@@ -1,12 +1,12 @@
-export default function Header() {
-  const currentPage = window.location.href;
+import pkg from '../../package.json';
 
+export default function Header() {
   return (
     <header className="header">
       <div className="header__wrapper">
-        <a className="header__logo" href={currentPage}>
-          {/* <h1 className="header__title">Navigation <small>v1.0.3</small></h1> */}
+        <a className="header__logo" href={import.meta.env.BASE_URL}>
           <h1 className="header__title">navigation</h1>
+          <span className="header__version">v{pkg.version}</span>
         </a>
       </div>
     </header>

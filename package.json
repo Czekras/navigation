@@ -1,49 +1,36 @@
 {
   "name": "navigation",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "private": true,
   "homepage": "https://czekras.github.io/navigation",
   "dependencies": {
-    "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "^14.2.1",
-    "@testing-library/user-event": "^14.5.2",
-    "react": "^18.2.0",
-    "react-beautiful-dnd": "^13.1.1",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "react-syntax-highlighter": "^15.5.0",
-    "react-tooltip": "^5.26.3",
-    "web-vitals": "^3.5.2"
+    "@hello-pangea/dnd": "^18.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-syntax-highlighter": "^15.6.1"
   },
   "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "gh-pages": "^6.1.1"
+    "@eslint/js": "^9.39.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "gh-pages": "^6.3.0",
+    "sass": "^1.89.2",
+    "vite": "^6.3.5"
   },
-  "license": "MIT"
+  "type": "module",
+  "license": "MIT",
+  "allowScripts": {
+    "@parcel/watcher@2.5.6": true,
+    "esbuild@0.25.12": true
+  }
 }

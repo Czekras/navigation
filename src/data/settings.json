@@ -3,19 +3,19 @@
     "header": {
       "item": "header__item",
       "link": "header__link",
-      "acts": "header__link--current",
+      "acts": "header__link--active",
       "toggle": true
     },
     "drawer": {
       "item": "drawer__item",
       "link": "drawer__link",
-      "acts": "drawer__link--current",
+      "acts": "drawer__link--active",
       "toggle": false
     },
     "footer": {
       "item": "footer__item",
       "link": "footer__link",
-      "acts": "footer__link--current",
+      "acts": "footer__link--active",
       "toggle": false
     },
     "sitemap": {

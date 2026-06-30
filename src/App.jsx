@@ -4,8 +4,8 @@ import Hidden from './component/Hidden';
 import Footer from './component/Footer';
 
 import './css/reset.css';
-import './css/main.css';
-import './css/main_sp.css';
+import './css/main.scss';
+import './css/main_sp.scss';
 
 function App() {
   return (

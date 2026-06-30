@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Noto Sans JP';
-  src: url('/src/font/NotoSansJP-VariableFont_wght.ttf');
+  src: url('../font/NotoSansJP-VariableFont_wght.ttf');
   font-weight: 400 700;
 }
 
@@ -14,15 +14,14 @@ $bgc-sub: #dfdfdf;
 $bgc-accent: #f1f1f1;
 
 $clr-main: #464646;
-$clr-sub: #adadad;
-$clr-accent: #f1f1f1;
+$clr-sub: #888888;
 $clr-accent: #f9f9f9;
 $clr-code-bg: #ffffff;
 $clr-config-bg: #ffffff;
 $bdc: #e0e0e0;
 
 $ff-sans: 'Noto Sans JP', sans-serif;
-$ff-mono: '游ゴシック', 'YuGothic', 'Hiragino Kaku Gothic ProN',
+$ff-mono: 'Noto Sans JP', '游ゴシック', 'YuGothic', 'Hiragino Kaku Gothic ProN',
   'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
 $transition: all 0.3s;
 
@@ -73,16 +72,19 @@ a {
   }
 
   input {
-    border: none;
-    // outline: 1px solid $clr-sub;
-    outline: none;
     border: 1px solid $bdc;
+    outline: none;
     background-color: $bgc-main;
-    padding-inline: 5px;
+    padding: 4px 6px;
     width: 100%;
+    transition: border-color 0.2s;
 
     &::placeholder {
       color: $clr-sub;
+    }
+
+    &:focus {
+      border-color: $clr-sub;
     }
   }
 
@@ -112,9 +114,6 @@ a {
     color: $clr-red;
   }
 
-  &--small {
-    font-size: 16px;
-  }
 
   &:disabled {
     &:hover {
@@ -158,6 +157,7 @@ a {
 
   &:disabled {
     background-color: #f0f0f0;
+    color: $clr-sub;
 
     &:hover {
       cursor: auto;
@@ -219,7 +219,6 @@ a {
   border-bottom: 1px solid $bdc;
   z-index: 100;
   font-size: 14px;
-  z-index: 100;
 
   &__wrapper {
     padding-inline: calc(50% - 540px);
@@ -228,12 +227,20 @@ a {
 
   &__logo {
     width: fit-content;
-    display: block;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
   }
 
   &__title {
     letter-spacing: 2px;
     text-transform: uppercase;
+  }
+
+  &__version {
+    font-size: 11px;
+    color: $clr-sub;
+    letter-spacing: 0.5px;
   }
 }
 
@@ -253,7 +260,7 @@ a {
     padding: 2px 0 2px 5px;
     position: relative;
     background-color: $bgc-accent;
-    transition: $transition;
+    transition: background-color 0.3s;
 
     &:not(:last-child) {
       margin-bottom: 5px;
@@ -333,9 +340,6 @@ a {
     margin-left: auto;
     height: 21px;
 
-    span {
-      font-size: 21px;
-    }
 
     &:hover {
       cursor: pointer;
@@ -348,7 +352,7 @@ a {
 
     small {
       transition: $transition;
-      // text-transform: uppercase;
+      color: $clr-sub;
 
       &:hover {
         cursor: pointer;
@@ -560,7 +564,7 @@ a {
   padding: 5px 0;
   color: $clr-sub;
   transition: $transition;
-  font-family: $ff-mono;
+  font-family: $ff-sans;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -588,7 +592,3 @@ a {
   }
 }
 
-/* ---------------------------------- Icons --------------------------------- */
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-}

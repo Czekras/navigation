@@ -1,13 +1,12 @@
-export default function Options({ func, data }) {
+import Icon from './Icon';
+
+export default function Options({ userOptions, defaultOptions, handleOptions, handleOptionButton, handleInputOptions, handleResetOptions }) {
   return (
     <div className="option">
       <div className="option__wrapper">
         <p className="side-note side-note--btn">
           <small>オプション</small>
-          <button
-            className="option__reset-btn"
-            onClick={func.handleResetOptions}
-          >
+          <button className="option__reset-btn" onClick={handleResetOptions}>
             <small>RESET</small>
           </button>
         </p>
@@ -17,44 +16,40 @@ export default function Options({ func, data }) {
             className="option__item-cb"
             type="checkbox"
             id="removeSougou"
-            checked={data.userOptions.removeSougou || false}
-            onChange={func.handleOptions}
+            checked={userOptions.removeSougou}
+            onChange={handleOptions}
           />
           <label htmlFor="removeSougou">総合トップ</label>
           <button
             className="option__expand"
-            onClick={(e) => func.handleOptionButton(e, 'sougouToggle')}
+            onClick={() => handleOptionButton('sougouToggle')}
           >
-            <span className="material-symbols-outlined">
-              {data.userOptions.sougouToggle ? 'expand_less' : 'expand_more'}
-            </span>
+            <Icon name={userOptions.sougouToggle ? 'expand_less' : 'expand_more'} size={21} />
           </button>
         </div>
-        {data.userOptions.sougouToggle ? (
+        {userOptions.sougouToggle && (
           <>
             <div className="input-text input-text--option">
               <input
                 type="text"
                 id="sougouName"
-                placeholder={data.defaultOptions.sougouName}
-                disabled={!data.userOptions.removeSougou}
-                value={data.userOptions.sougouName || ''}
-                onChange={func.handleInputOptions}
+                placeholder={defaultOptions.sougouName}
+                disabled={!userOptions.removeSougou}
+                value={userOptions.sougouName}
+                onChange={handleInputOptions}
               />
             </div>
             <div className="input-text input-text--option mb-4">
               <input
                 type="text"
                 id="sougouSlug"
-                placeholder={data.defaultOptions.sougouSlug}
-                disabled={!data.userOptions.removeSougou}
-                value={data.userOptions.sougouSlug || ''}
-                onChange={func.handleInputOptions}
+                placeholder={defaultOptions.sougouSlug}
+                disabled={!userOptions.removeSougou}
+                value={userOptions.sougouSlug}
+                onChange={handleInputOptions}
               />
             </div>
           </>
-        ) : (
-          ''
         )}
 
         <div className="option__item option__item-info">
@@ -62,11 +57,10 @@ export default function Options({ func, data }) {
             className="option__item-cb"
             type="checkbox"
             id="activeInItem"
-            checked={data.userOptions.activeInItem || false}
-            onChange={func.handleOptions}
+            checked={userOptions.activeInItem}
+            onChange={handleOptions}
           />
-          {/* <label htmlFor="activeInItem">Current in &lt;li&gt;</label> */}
-          <label htmlFor="activeInItem">Current クラス</label>
+          <label htmlFor="activeInItem">Active クラス</label>
         </div>
 
         <div className="option__item">
@@ -74,35 +68,28 @@ export default function Options({ func, data }) {
             className="option__item-cb"
             type="checkbox"
             id="spanAddition"
-            checked={data.userOptions.spanAddition || false}
-            onChange={func.handleOptions}
+            checked={userOptions.spanAddition}
+            onChange={handleOptions}
           />
-          {/* <label htmlFor="spanAddition">Insert &lt;span&gt;</label> */}
           <label htmlFor="spanAddition">&lt;span&gt; タグ</label>
           <button
             className="option__expand"
-            onClick={(e) => func.handleOptionButton(e, 'spanToggle')}
+            onClick={() => handleOptionButton('spanToggle')}
           >
-            <span className="material-symbols-outlined">
-              {data.userOptions.spanToggle ? 'expand_less' : 'expand_more'}
-            </span>
+            <Icon name={userOptions.spanToggle ? 'expand_less' : 'expand_more'} size={21} />
           </button>
         </div>
-        {data.userOptions.spanToggle ? (
+        {userOptions.spanToggle && (
           <div className="input-text input-text--option mb-4">
             <input
-              className="mb-5"
               type="text"
               id="spanName"
               placeholder="クラス名"
-              // placeholder={data.defaultOptions.spanName}
-              disabled={!data.userOptions.spanAddition}
-              value={data.userOptions.spanName || ''}
-              onChange={func.handleInputOptions}
+              disabled={!userOptions.spanAddition}
+              value={userOptions.spanName}
+              onChange={handleInputOptions}
             />
           </div>
-        ) : (
-          ''
         )}
 
         <div className="option__item">
@@ -110,11 +97,10 @@ export default function Options({ func, data }) {
             className="option__item-cb"
             type="checkbox"
             id="removeColors"
-            checked={data.userOptions.removeColors || false}
-            onChange={func.handleOptions}
+            checked={userOptions.removeColors}
+            onChange={handleOptions}
           />
           <label htmlFor="removeColors">Syntax Highlight</label>
-          {/* <label htmlFor="removeColors">ハイライト</label> */}
         </div>
 
         <div className="option__item option__item-info">
@@ -122,11 +108,10 @@ export default function Options({ func, data }) {
             className="option__item-cb"
             type="checkbox"
             id="formatCoding"
-            checked={data.userOptions.formatCoding || false}
-            onChange={func.handleOptions}
+            checked={userOptions.formatCoding}
+            onChange={handleOptions}
           />
           <label htmlFor="formatCoding">Code Format</label>
-          {/* <label htmlFor="formatCoding">フォーマット</label> */}
         </div>
       </div>
     </div>

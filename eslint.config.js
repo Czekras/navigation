@@ -3,6 +3,7 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 
 export default [
+  { ignores: ['dist/**'] },
   js.configs.recommended,
   {
     files: ['src/**/*.{js,jsx}'],
@@ -24,6 +25,8 @@ export default [
         localStorage: 'readonly',
         console: 'readonly',
         setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        __APP_VERSION__: 'readonly',
       },
     },
     settings: {
@@ -34,7 +37,13 @@ export default [
       ...reactHooks.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' }],
+    },
+  },
+  {
+    files: ['*.config.js'],
+    languageOptions: {
+      globals: { URL: 'readonly' },
     },
   },
 ];

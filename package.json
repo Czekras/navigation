@@ -1,21 +1,19 @@
 {
   "name": "navigation",
-  "version": "1.1.0",
   "private": true,
-  "homepage": "https://czekras.github.io/navigation",
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-syntax-highlighter": "^15.6.1"
-  },
-  "scripts": {
-    "dev": "vite",
-    "start": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
@@ -23,14 +21,7 @@
     "eslint": "^9.39.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "gh-pages": "^6.3.0",
-    "sass": "^1.89.2",
-    "vite": "^6.3.5"
-  },
-  "type": "module",
-  "license": "MIT",
-  "allowScripts": {
-    "@parcel/watcher@2.5.6": true,
-    "esbuild@0.25.12": true
+    "gh-pages": "^6.2.0",
+    "vite": "^6.4.3"
   }
 }

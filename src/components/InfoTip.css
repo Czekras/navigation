@@ -1,0 +1,68 @@
+.info-tip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  outline: none;
+}
+
+.info-tip__badge {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  font-style: normal;
+  font-family: var(--font-ui);
+  line-height: 1;
+  cursor: help;
+  background: var(--info-bg);
+  color: var(--muted);
+  transition: background 0.14s ease, color 0.14s ease;
+}
+
+.info-tip:hover .info-tip__badge,
+.info-tip:focus .info-tip__badge {
+  background: var(--info-bg-hover);
+  color: var(--muted-2);
+}
+
+.info-tip__bubble {
+  position: absolute;
+  bottom: calc(100% + 9px);
+  left: -2px;
+  width: 272px;
+  max-width: min(272px, 74vw);
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--tip-bg);
+  color: var(--tip-text);
+  font-size: 11px;
+  line-height: 1.55;
+  font-weight: 400;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.14s ease, transform 0.14s ease, visibility 0.14s;
+  pointer-events: none;
+  z-index: 40;
+}
+
+.info-tip__bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 8px;
+  border: 5px solid transparent;
+  border-top-color: var(--tip-bg);
+}
+
+.info-tip:hover .info-tip__bubble,
+.info-tip:focus .info-tip__bubble {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}

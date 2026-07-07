@@ -29,7 +29,6 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: var(--panel);
   min-width: 0;
   border-right: var(--hairline);
 }

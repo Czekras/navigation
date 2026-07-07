@@ -1,5 +1,6 @@
 import "./OptionsPanel.css";
 import { cx } from "../lib/cx";
+import InfoTip from "./InfoTip";
 
 export default function OptionsPanel({
   wrapSpan,
@@ -52,12 +53,7 @@ export default function OptionsPanel({
           </span>
           <span className="options__text">{'Active時に aria-current="page" を追加'}</span>
         </label>
-        <span
-          className="options__info"
-          title="スクリーンリーダーに「現在のページ」であることを伝える属性です"
-        >
-          ⓘ
-        </span>
+        <InfoTip text="スクリーンリーダーに「現在のページ」であることを伝える属性です" />
       </div>
     </div>
   );

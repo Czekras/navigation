@@ -61,16 +61,6 @@
   color: var(--text);
 }
 
-.options__info {
-  flex: none;
-  width: 20px;
-  height: 20px;
-  font-size: 13px;
-  color: var(--faint-2);
-  cursor: help;
-  text-align: center;
-}
-
 .options__field {
   padding: 0 0 9px 28px;
 }

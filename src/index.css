@@ -57,6 +57,7 @@
   --accent-disabled: #b9cfe3;
   --text: #1a1a1a;
   --muted: #8c8c8c;
+  --muted-2: #6b6b6b;
   --faint: #c4c4c0;
   --faint-2: #b5b5b2;
   --border-color: #e6e6e4;
@@ -67,6 +68,10 @@
   --success: #3f8a4f;
   --danger: #b4433a;
   --hover-bg: #e7e7e4;
+  --info-bg: #ececea;
+  --info-bg-hover: #dededa;
+  --tip-bg: #262624;
+  --tip-text: #ffffff;
 
   /* Syntax-highlight tokens */
   --tok-string: #3f8a4f;

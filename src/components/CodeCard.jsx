@@ -39,6 +39,24 @@ function CheckIcon() {
   );
 }
 
+function ChevronIcon({ className }) {
+  return (
+    <svg
+      className={className}
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M4 8l8 8 8-8" />
+    </svg>
+  );
+}
+
 function ClassField({ label, value, onChange, placeholder }) {
   return (
     <div className="code-card__field">
@@ -73,7 +91,7 @@ export default function CodeCard({
   return (
     <div className="code-card">
       <div className="code-card__header" onClick={onToggle}>
-        <span className={cx("code-card__chevron", open && "code-card__chevron--open")}>▶</span>
+        <ChevronIcon className={cx("code-card__chevron", open && "code-card__chevron--open")} />
         <span className="code-card__title">{title}</span>
         <button
           className={cx("code-card__copy", copied && "code-card__copy--copied")}

@@ -19,13 +19,29 @@ export default function OptionsPanel({
           <input
             type="checkbox"
             className="options__checkbox-input"
+            checked={ariaCurrent}
+            onChange={onToggleAriaCurrent}
+          />
+          <span className="options__text">{'Active時にaria-current="page"を追加'}</span>
+          <InfoTip text="スクリーンリーダー等に「現在表示中のページ」であることを伝えるアクセシビリティ属性です。" />
+          <span className={cx("options__switch", ariaCurrent && "options__switch--on")} aria-hidden="true">
+            <span className="options__knob" />
+          </span>
+        </label>
+      </div>
+
+      <div className="options__row">
+        <label className="options__checkbox">
+          <input
+            type="checkbox"
+            className="options__checkbox-input"
             checked={wrapSpan}
             onChange={onToggleWrap}
           />
-          <span className={cx("options__box", wrapSpan && "options__box--checked")} aria-hidden="true">
-            {wrapSpan ? "✓" : ""}
+          <span className="options__text">{"リンクテキストを<span>で囲む"}</span>
+          <span className={cx("options__switch", wrapSpan && "options__switch--on")} aria-hidden="true">
+            <span className="options__knob" />
           </span>
-          <span className="options__text">{"テキストを <span> で囲む"}</span>
         </label>
       </div>
 
@@ -39,22 +55,6 @@ export default function OptionsPanel({
           />
         </div>
       )}
-
-      <div className="options__row">
-        <label className="options__checkbox">
-          <input
-            type="checkbox"
-            className="options__checkbox-input"
-            checked={ariaCurrent}
-            onChange={onToggleAriaCurrent}
-          />
-          <span className={cx("options__box", ariaCurrent && "options__box--checked")} aria-hidden="true">
-            {ariaCurrent ? "✓" : ""}
-          </span>
-          <span className="options__text">{'Active時に aria-current="page" を追加'}</span>
-        </label>
-        <InfoTip text="スクリーンリーダーに「現在のページ」であることを伝える属性です" />
-      </div>
     </div>
   );
 }

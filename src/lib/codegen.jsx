@@ -13,8 +13,10 @@ export function makeCodeText(pages, cls, spanClass, wrapSpan, ariaCurrentEnabled
     .join("\n");
 }
 
-// Token colors are defined in CodeCard.css, keyed by these class names.
-// Keyword list covers the PHP keywords this app actually emits (see makeCodeText above).
+/**
+ * Token colors are defined in CodeCard.css, keyed by these class names.
+ * Keyword list covers the PHP keywords this app actually emits (see makeCodeText above).
+ */
 function tokenize(text) {
   const out = [];
   const re = /("[^"]*")|\b(if|echo)\b/g;

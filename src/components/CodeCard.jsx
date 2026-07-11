@@ -127,7 +127,7 @@ export default function CodeCard({
               onChange={(e) => onClassChange("link", e.target.value)}
             />
             <ClassField
-              label="Activeクラス名"
+              label="Active時のクラス名"
               value={cls.active}
               onChange={(e) => onClassChange("active", e.target.value)}
               placeholder="classname__link--active"

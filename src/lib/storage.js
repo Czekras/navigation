@@ -1,12 +1,28 @@
 import { SECTIONS, defaultClasses } from "./defaults";
 
-// Versioned key: a version bump starts users fresh instead of merging in a stale shape.
 const KEY_PREFIX = "project_navigation:";
-const KEY = `${KEY_PREFIX}${__APP_VERSION__}`;
+
+/**
+ * Bumped only when the stored data's *shape* changes in a breaking way (a field renamed
+ * or removed, not just added) — deliberately NOT tied to package.json's version, so an
+ * ordinary release doesn't wipe every user's saved pages. Add the previous key to
+ * LEGACY_KEYS below whenever this changes, so existing data gets migrated forward instead
+ * of silently discarded.
+ */
+const SCHEMA_VERSION = 1;
+const KEY = `${KEY_PREFIX}schema-${SCHEMA_VERSION}`;
+
+/**
+ * Keys the app has stored data under before the storage key was decoupled from
+ * package.json's version — "project_navigation:2.1.0" was the key in production up to
+ * this point. Checked once, in order, if the current schema-versioned key has no data yet,
+ * so upgrading doesn't erase anyone's saved pages.
+ */
+const LEGACY_KEYS = [KEY_PREFIX + "2.1.0"];
 
 // Keys from earlier versions of this app, no longer read but left behind in localStorage.
-const LEGACY_KEYS = ["navigationArrays", "navigationOptions", "navigationSettings", "navigationVersion"];
-const LEGACY_PREFIXES = ["navdc:"];
+const OBSOLETE_KEYS = ["navigationArrays", "navigationOptions", "navigationSettings", "navigationVersion"];
+const OBSOLETE_PREFIXES = ["navdc:"];
 
 function removeStaleKeys() {
   try {
@@ -14,8 +30,8 @@ function removeStaleKeys() {
       const key = localStorage.key(i);
       if (!key || key === KEY) continue;
       const isStale =
-        LEGACY_KEYS.includes(key) ||
-        LEGACY_PREFIXES.some((prefix) => key.startsWith(prefix)) ||
+        OBSOLETE_KEYS.includes(key) ||
+        OBSOLETE_PREFIXES.some((prefix) => key.startsWith(prefix)) ||
         key.startsWith(KEY_PREFIX);
       if (isStale) localStorage.removeItem(key);
     }
@@ -25,11 +41,23 @@ function removeStaleKeys() {
 }
 
 export function loadStore() {
-  removeStaleKeys();
   try {
-    return JSON.parse(localStorage.getItem(KEY)) || {};
+    const current = localStorage.getItem(KEY);
+    if (current) return JSON.parse(current) || {};
+
+    for (const legacyKey of LEGACY_KEYS) {
+      const legacy = localStorage.getItem(legacyKey);
+      if (legacy) {
+        const data = JSON.parse(legacy) || {};
+        saveStore(data);
+        return data;
+      }
+    }
+    return {};
   } catch (_) {
     return {};
+  } finally {
+    removeStaleKeys();
   }
 }
 
@@ -41,8 +69,8 @@ export function saveStore(data) {
   }
 }
 
-export function loadClasses() {
-  const saved = loadStore().classes || {};
+export function loadClasses(savedClasses) {
+  const saved = savedClasses || {};
   const out = {};
   for (const title of SECTIONS) {
     out[title] = { ...defaultClasses(title), ...(saved[title] || {}) };

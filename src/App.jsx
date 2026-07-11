@@ -19,7 +19,7 @@ export default function App() {
   const [wrapSpan, setWrapSpan] = useState(persisted.wrapSpan || false);
   const [spanClass, setSpanClass] = useState(persisted.spanClass || "");
   const [ariaCurrent, setAriaCurrent] = useState(persisted.ariaCurrent ?? true);
-  const [pages, setPages] = useState(persisted.pages || DEFAULT_PAGES);
+  const [pages, setPages] = useState(Array.isArray(persisted.pages) ? persisted.pages : DEFAULT_PAGES);
   const [open, setOpen] = useState({
     Header: true,
     Drawer: true,
@@ -27,7 +27,7 @@ export default function App() {
     Sitemap: false,
     ...persisted.open,
   });
-  const [classes, setClasses] = useState(loadClasses);
+  const [classes, setClasses] = useState(() => loadClasses(persisted.classes));
   const [copied, setCopied] = useState(null);
   const copyTimer = useRef(null);
 
@@ -38,7 +38,7 @@ export default function App() {
 
   useEffect(() => () => clearTimeout(copyTimer.current), []);
 
-  const normalizedSlug = slugField.trim().replace(/^\/+|\/+$/g, "");
+  const normalizedSlug = slugField.trim().replace(/^[-/]+|[-/]+$/g, "");
   const normalizedHref = normalizedSlug === "top" || normalizedSlug === "home" ? "/" : `/${normalizedSlug}/`;
   const isDuplicateSlug =
     normalizedSlug !== "" && pages.some((p) => p.slug === normalizedSlug || p.href === normalizedHref);

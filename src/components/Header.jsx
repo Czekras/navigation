@@ -1,7 +1,9 @@
 import "./Header.css";
 
-// Border spans full width; inner content is centered at the shared max-width.
-// __APP_VERSION__ is injected from package.json at build time (vite.config.js).
+/**
+ * Border spans full width; inner content is centered at the shared max-width.
+ * __APP_VERSION__ is injected from package.json at build time (vite.config.js).
+ */
 export default function Header() {
   return (
     <header className="app-header">

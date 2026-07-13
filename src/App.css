@@ -2,6 +2,7 @@
 
 .app {
   min-height: 100vh;
+  overflow-x: hidden;
   background: var(--surface);
   display: flex;
   flex-direction: column;
@@ -13,7 +14,7 @@
   max-width: var(--content-max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 448px 1fr;
 }
 
 .app__controls {

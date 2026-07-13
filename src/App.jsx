@@ -18,7 +18,7 @@ export default function App() {
   const [slugHadSpace, setSlugHadSpace] = useState(false);
   const [wrapSpan, setWrapSpan] = useState(persisted.wrapSpan || false);
   const [spanClass, setSpanClass] = useState(persisted.spanClass || "");
-  const [ariaCurrent, setAriaCurrent] = useState(persisted.ariaCurrent ?? true);
+  const [ariaCurrent, setAriaCurrent] = useState(persisted.ariaCurrent ?? false);
   const [pages, setPages] = useState(Array.isArray(persisted.pages) ? persisted.pages : DEFAULT_PAGES);
   const [open, setOpen] = useState({
     Header: true,

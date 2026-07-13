@@ -32,7 +32,7 @@
 .info-tip__bubble {
   position: absolute;
   bottom: calc(100% + 9px);
-  left: -2px;
+  right: -2px;
   width: 272px;
   max-width: min(272px, 74vw);
   padding: 10px 12px;
@@ -55,7 +55,7 @@
   content: "";
   position: absolute;
   top: 100%;
-  left: 8px;
+  right: 8px;
   border: 5px solid transparent;
   border-top-color: var(--tip-bg);
 }

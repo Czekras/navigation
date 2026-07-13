@@ -8,25 +8,11 @@
 .info-tip__badge {
   width: 14px;
   height: 14px;
-  border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  font-weight: 700;
-  font-style: normal;
-  font-family: var(--font-ui);
-  line-height: 1;
   cursor: help;
-  background: var(--info-bg);
   color: var(--muted);
-  transition: background 0.14s ease, color 0.14s ease;
-}
-
-.info-tip:hover .info-tip__badge,
-.info-tip:focus .info-tip__badge {
-  background: var(--info-bg-hover);
-  color: var(--muted-2);
 }
 
 .info-tip__bubble {

@@ -77,11 +77,7 @@
 }
 
 .page-list__handle {
-  flex-shrink: 0;
-  color: var(--faint);
   cursor: grab;
-  letter-spacing: 2px;
-  font-size: 12px;
 }
 
 .page-list__name {
@@ -120,10 +116,6 @@
   background: var(--surface);
   color: var(--faint);
   cursor: pointer;
-}
-
-.page-list__remove svg {
-  flex: none;
 }
 
 .page-list__remove:focus-visible {

@@ -1,11 +1,12 @@
 ## Navigation
 
-Generate HTML + PHP &lt;li&gt; navigation links for websites.
+Generate HTML + PHP `<li>` navigation links for websites.
 
 ### Dependencies
 
 - [React](https://react.dev) — UI library.
 - [@hello-pangea/dnd](https://github.com/hello-pangea/dnd) — Drag and drop for the page list.
+- [lucide-react](https://lucide.dev) — Icon set used throughout the app.
 
 ### Dev Dependencies
 

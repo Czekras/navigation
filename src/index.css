@@ -57,7 +57,6 @@
   --accent-disabled: #b9cfe3;
   --text: #1a1a1a;
   --muted: #8c8c8c;
-  --muted-2: #6b6b6b;
   --faint: #c4c4c0;
   --faint-2: #b5b5b2;
   --border-color: #e6e6e4;
@@ -68,9 +67,9 @@
   --success: #3f8a4f;
   --danger: #b4433a;
   --danger-bg: #fbeceb;
+  --warning: #b8960b;
+  --warning-bg: #faf1de;
   --hover-bg: #e7e7e4;
-  --info-bg: #ececea;
-  --info-bg-hover: #dededa;
   --tip-bg: #262624;
   --tip-text: #ffffff;
 
@@ -104,6 +103,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+@media (max-width: 1000px) {
+  body {
+    min-width: 370px;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -123,4 +128,8 @@ body {
 }
 * {
   scrollbar-color: #d8d8d4 transparent;
+}
+
+.icon {
+  flex: none;
 }

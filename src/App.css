@@ -2,7 +2,6 @@
 
 .app {
   min-height: 100vh;
-  overflow-x: hidden;
   background: var(--surface);
   display: flex;
   flex-direction: column;
@@ -22,6 +21,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
   border-right: var(--hairline);
 }
 
@@ -34,15 +34,34 @@
   border-right: var(--hairline);
 }
 
+.app__mobile-warning {
+  display: none;
+}
+
 @media (max-width: 1000px) {
   .app__main {
     grid-template-columns: 1fr;
   }
   .app__controls {
+    padding-left: 16px;
+    padding-right: 16px;
     border-right: none;
     border-bottom: var(--hairline);
   }
   .app__preview {
+    padding-left: 16px;
+    padding-right: 16px;
     border-right: none;
+  }
+  .app__mobile-warning {
+    display: block;
+    padding: 10px 16px;
+    background: var(--warning-bg);
+    color: var(--warning);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+    border-bottom: var(--hairline);
   }
 }

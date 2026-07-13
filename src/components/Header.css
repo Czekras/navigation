@@ -35,3 +35,9 @@
   letter-spacing: 0.04em;
   color: var(--faint-2);
 }
+
+@media (max-width: 1000px) {
+  .app-header__inner {
+    padding: 18px 16px;
+  }
+}

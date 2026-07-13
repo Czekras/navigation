@@ -100,6 +100,10 @@ export default function App() {
     <div className="app">
       <Header />
 
+      <div className="app__mobile-warning">
+        本ツールはPC専用（SP非対応）です。<br />PC環境でのご利用を推奨します。
+      </div>
+
       <main className="app__main">
         <div className="app__controls">
           <AddPageForm

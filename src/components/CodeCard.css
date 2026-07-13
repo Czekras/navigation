@@ -14,14 +14,12 @@
 }
 
 .code-card__chevron {
-  flex-shrink: 0;
-  color: var(--muted);
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
   transition: transform 0.15s;
 }
 
 .code-card__chevron--open {
-  transform: rotate(0deg);
+  transform: rotate(90deg);
 }
 
 .code-card__title {
@@ -61,8 +59,15 @@
   font-weight: 600;
 }
 
-.code-card__copy-icon {
-  flex: none;
+@media (max-width: 1000px) {
+  .code-card__copy {
+    width: 34px;
+    padding: 0;
+  }
+
+  .code-card__copy-text {
+    display: none;
+  }
 }
 
 .code-card__body {
@@ -87,6 +92,7 @@
   font-size: 11px;
   color: var(--muted);
   margin-bottom: 5px;
+  word-break: keep-all;
 }
 
 .code-card__input {
@@ -118,7 +124,6 @@
   border: var(--hairline);
   background: var(--surface);
   color: var(--muted);
-  font-size: 16px;
   cursor: pointer;
 }
 

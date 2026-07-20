@@ -1,0 +1,6 @@
+import{c as t}from"./index-DEHJpBpL.js";/**
+ * @license lucide-react v1.24.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const e=[["path",{d:"M15 12H3",key:"6jk70r"}],["path",{d:"M3 5h18",key:"1u36vt"}],["path",{d:"M9 19H3",key:"s61nz1"}]],s=t("list-sort-descending",e);export{e as __iconNode,s as default};

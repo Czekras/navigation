@@ -20,7 +20,7 @@ const KEY = `${KEY_PREFIX}schema-${SCHEMA_VERSION}`;
  */
 const LEGACY_KEYS = [KEY_PREFIX + "2.1.0"];
 
-// Keys from earlier versions of this app, no longer read but left behind in localStorage.
+/** Keys from earlier versions of this app, no longer read but left behind in localStorage. */
 const OBSOLETE_KEYS = ["navigationArrays", "navigationOptions", "navigationSettings", "navigationVersion"];
 const OBSOLETE_PREFIXES = ["navdc:"];
 
@@ -40,6 +40,13 @@ function removeStaleKeys() {
   }
 }
 
+/**
+ * Reads the current schema-versioned key; falls back to migrating the most
+ * recent legacy key forward (and saving it under the new key) if the current
+ * one has no data yet.
+ *
+ * @returns {Object}
+ */
 export function loadStore() {
   try {
     const current = localStorage.getItem(KEY);
@@ -69,6 +76,13 @@ export function saveStore(data) {
   }
 }
 
+/**
+ * Merges saved per-section class names over the defaults, so a partially
+ * saved/older shape still gets every field filled in.
+ *
+ * @param {Object} [savedClasses]
+ * @returns {Object}
+ */
 export function loadClasses(savedClasses) {
   const saved = savedClasses || {};
   const out = {};

@@ -1,0 +1,6 @@
+/* Sizing/color come from each call site's className (see AppSearchPopover.css) —
+   this just keeps the icon from stretching or shrinking inside flex rows. */
+.icon {
+  display: inline-block;
+  flex: none;
+}

@@ -8,6 +8,12 @@ export const DEFAULT_PAGES = [
   { name: "サイトマップ", slug: "site", href: "/site/" },
 ];
 
+/**
+ * Standard `item`/`link`/`active` class-name trio for one section.
+ *
+ * @param {string} title - One of `SECTIONS` ("Header", "Drawer", "Footer", "Sitemap").
+ * @returns {{item: string, link: string, active: string}}
+ */
 export function defaultClasses(title) {
   const base = { Header: "header", Drawer: "drawer", Footer: "footer", Sitemap: "sitemap" }[title];
   return {

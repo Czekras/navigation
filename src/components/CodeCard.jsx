@@ -12,6 +12,11 @@ function ClassField({ label, value, onChange, placeholder }) {
   );
 }
 
+/**
+ * One collapsible section (Header/Drawer/Footer/Sitemap): editable class
+ * name fields on the left, the generated `<li><a>` markup with basic syntax
+ * highlighting and a copy button on the right.
+ */
 export default function CodeCard({
   title,
   open,

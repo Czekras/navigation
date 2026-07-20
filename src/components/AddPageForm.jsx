@@ -1,5 +1,11 @@
 import "./AddPageForm.css";
 
+/**
+ * Name + slug inputs for adding a new page. Shows inline hints for two
+ * validation states the parent computes: a duplicate slug, and a slug that
+ * had spaces/underscores auto-converted to hyphens (with a link explaining
+ * why hyphens are preferred for URLs).
+ */
 export default function AddPageForm({
   nameField,
   slugField,

@@ -31,7 +31,6 @@
   flex-direction: column;
   gap: 12px;
   min-width: 0;
-  border-right: var(--hairline);
 }
 
 .app__mobile-warning {

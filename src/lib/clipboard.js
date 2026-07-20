@@ -1,4 +1,9 @@
-// Falls back to a hidden textarea + execCommand where the Clipboard API is unavailable or rejects.
+/**
+ * Falls back to a hidden textarea + execCommand where the Clipboard API is
+ * unavailable or rejects.
+ *
+ * @param {string} text
+ */
 export function copyText(text) {
   try {
     if (navigator.clipboard && navigator.clipboard.writeText) {

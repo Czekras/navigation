@@ -1,6 +1,6 @@
 import "./Footer.css";
 
-// Border spans full width; the credit line is centered at the shared max-width.
+/** Border spans full width; the credit line is centered at the shared max-width. */
 export default function Footer() {
   return (
     <footer className="app-footer">

@@ -1,3 +1,14 @@
+/**
+ * Builds the `<li><a>` markup for one section from the current pages and
+ * class-name settings.
+ *
+ * @param {Array<{name: string, slug: string, href: string}>} pages
+ * @param {{item: string, link: string, active: string}} cls - Class names for `<li>`, `<a>`, and the active-page `<a>` variant.
+ * @param {string} spanClass - Optional class for the `<span>` wrapper, when `wrapSpan` is on.
+ * @param {boolean} wrapSpan - Whether to wrap each link's text in a `<span>`.
+ * @param {boolean} ariaCurrentEnabled - Whether to emit `aria-current="page"` on the active link.
+ * @returns {string}
+ */
 export function makeCodeText(pages, cls, spanClass, wrapSpan, ariaCurrentEnabled) {
   const active = (cls.active || "").trim();
   const sc = (spanClass || "").trim();
@@ -16,6 +27,9 @@ export function makeCodeText(pages, cls, spanClass, wrapSpan, ariaCurrentEnabled
 /**
  * Token colors are defined in CodeCard.css, keyed by these class names.
  * Keyword list covers the PHP keywords this app actually emits (see makeCodeText above).
+ *
+ * @param {string} text - One line of generated code.
+ * @returns {Array<string|JSX.Element>} Mixed plain-text and highlighted-span pieces, in order.
  */
 function tokenize(text) {
   const out = [];
@@ -39,6 +53,7 @@ function tokenize(text) {
   return out;
 }
 
+/** Renders `code` as one `<div>` per line, with basic PHP token highlighting from `tokenize`. */
 export function CodeHighlight({ code }) {
   const lines = code.split("\n").map((line, i) => <div key={i}>{tokenize(line)}</div>);
   return <div>{lines}</div>;

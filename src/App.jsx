@@ -10,6 +10,12 @@ import OptionsPanel from "./components/OptionsPanel.jsx";
 import PageList from "./components/PageList.jsx";
 import CodeCard from "./components/CodeCard.jsx";
 
+/**
+ * Top-level app state: page list, per-section class names, and output
+ * options (span wrap, aria-current). Everything is persisted to
+ * localStorage on change and fed into a `CodeCard` per section to preview
+ * and copy the generated markup.
+ */
 export default function App() {
   const persisted = loadStore();
 

@@ -3,7 +3,9 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 
 export default [
-  { ignores: ['dist/**'] },
+  // design_handoff_*/ folders are Hikari's reference bundles (prototype + starter
+  // scaffold), not shipped app code — each one's own README says as much.
+  { ignores: ['dist/**', 'design_handoff_*/**'] },
   js.configs.recommended,
   {
     files: ['src/**/*.{js,jsx}'],
@@ -23,9 +25,12 @@ export default [
         navigator: 'readonly',
         crypto: 'readonly',
         localStorage: 'readonly',
+        fetch: 'readonly',
         console: 'readonly',
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
+        requestAnimationFrame: 'readonly',
+        cancelAnimationFrame: 'readonly',
         __APP_VERSION__: 'readonly',
       },
     },

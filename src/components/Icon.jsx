@@ -1,22 +1,42 @@
-import { LayoutGrid } from "lucide-react";
-import { DynamicIcon } from "lucide-react/dynamic";
+import {
+  LayoutGrid,
+  Search,
+  SearchX,
+  UserRoundKey,
+  ClipboardList,
+  SquareKanban,
+  Route,
+  ImageDown,
+} from "lucide-react";
 import "./Icon.css";
 
 /**
- * Fully data-driven: resolves any lucide name at runtime (async import per
- * name), so an icon change in apps.json needs no code change here. While a
- * name is loading, or if it doesn't exist in lucide, `DynamicIcon` renders
- * nothing on its own — the `fallback` keeps a bad/loading icon from ever
- * showing as a blank slot. `DynamicIcon` calls `fallback` with no props, so
- * it needs its own component per call to pick up the caller's sizing
- * className.
- *
+ * Static name → component map, not `lucide-react/dynamic`'s `DynamicIcon`:
+ * `DynamicIcon` resolves any of lucide's ~1,500 icons via a per-name dynamic
+ * import, so Vite bundles a chunk for every one of them regardless of which
+ * names this app actually uses (~1,700 unused chunks, ~21MB dist). Add an
+ * entry here — and only here — whenever apps.json (or this component)
+ * introduces a new icon name, including apps still `off`/`soon` (see
+ * `image-down` below), so flipping an app's status later doesn't silently
+ * fall back to the default icon.
+ */
+const ICONS = {
+  "layout-grid": LayoutGrid,
+  search: Search,
+  "search-x": SearchX,
+  "user-round-key": UserRoundKey,
+  "clipboard-list": ClipboardList,
+  "square-kanban": SquareKanban,
+  route: Route,
+  "image-down": ImageDown, // Image Compressor — status "off" today, not yet visible in the switcher
+};
+
+/**
  * @param {Object} props
- * @param {string} props.name - Any lucide-react icon name (kebab-case).
+ * @param {string} props.name - A key in `ICONS` (kebab-case, matching lucide's naming).
  * @param {string} [props.className] - Extra class(es) merged onto the icon.
  */
 export default function Icon({ name, className = "" }) {
-  const full = `icon ${className}`;
-  const Fallback = () => <LayoutGrid className={full} aria-hidden="true" />;
-  return <DynamicIcon name={name} className={full} aria-hidden="true" fallback={Fallback} />;
+  const Cmp = ICONS[name] ?? LayoutGrid;
+  return <Cmp className={`icon ${className}`} aria-hidden="true" />;
 }

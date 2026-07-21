@@ -1,13 +1,17 @@
+import { useId, useMemo } from "react";
 import { CopyIcon, CheckIcon, ChevronRightIcon, ResetIcon } from "../lib/icons.jsx";
 import "./CodeCard.css";
 import { makeCodeText, CodeHighlight } from "../lib/codegen.jsx";
 import { cx } from "../lib/cx";
 
 function ClassField({ label, value, onChange, placeholder }) {
+  const id = useId();
   return (
     <div className="code-card__field">
-      <label className="code-card__field-label">{label}</label>
-      <input className="code-card__input" value={value} onChange={onChange} placeholder={placeholder} />
+      <label className="code-card__field-label" htmlFor={id}>
+        {label}
+      </label>
+      <input id={id} className="code-card__input" value={value} onChange={onChange} placeholder={placeholder} />
     </div>
   );
 }
@@ -31,8 +35,11 @@ export default function CodeCard({
   onClassChange,
   onReset,
 }) {
-  const codeText = makeCodeText(pages, cls, spanClass, wrapSpan, ariaCurrent);
-  const lineCount = (codeText.match(/\n/g) || []).length + 1;
+  const codeText = useMemo(
+    () => makeCodeText(pages, cls, spanClass, wrapSpan, ariaCurrent),
+    [pages, cls, spanClass, wrapSpan, ariaCurrent]
+  );
+  const lineCount = useMemo(() => (codeText.match(/\n/g) || []).length + 1, [codeText]);
 
   const stopAnd = (fn) => (e) => {
     e.stopPropagation();
@@ -41,17 +48,19 @@ export default function CodeCard({
 
   return (
     <div className="code-card">
-      <div className="code-card__header" onClick={onToggle}>
-        <ChevronRightIcon
-          color="var(--muted)"
-          className={cx("code-card__chevron", open && "code-card__chevron--open")}
-        />
-        <span className="code-card__title">{title}</span>
+      <div className="code-card__header">
+        <button type="button" className="code-card__toggle" aria-expanded={open} onClick={onToggle}>
+          <ChevronRightIcon
+            color="var(--muted)"
+            className={cx("code-card__chevron", open && "code-card__chevron--open")}
+          />
+          <span className="code-card__title">{title}</span>
+        </button>
         <button
           className={cx("code-card__copy", copied && "code-card__copy--copied")}
           type="button"
           title="このコードをコピー"
-          onClick={stopAnd(() => onCopy(codeText))}
+          onClick={() => onCopy(codeText)}
         >
           {copied ? (
             <>

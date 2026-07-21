@@ -52,6 +52,7 @@ export default function OptionsPanel({
             value={spanClass}
             onChange={onSpanClass}
             placeholder="spanのクラス名（任意）"
+            aria-label="spanのクラス名（任意）"
           />
         </div>
       )}

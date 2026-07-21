@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import "./App.css";
 import { SECTIONS, DEFAULT_PAGES, defaultClasses } from "./lib/defaults";
 import { loadStore, saveStore, loadClasses } from "./lib/storage";
@@ -17,7 +17,7 @@ import CodeCard from "./components/CodeCard.jsx";
  * and copy the generated markup.
  */
 export default function App() {
-  const persisted = loadStore();
+  const [persisted] = useState(loadStore);
 
   const [nameField, setNameField] = useState("");
   const [slugField, setSlugField] = useState("");

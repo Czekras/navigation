@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { loadCachedApps, fetchApps, visibleApps, currentAppName, navigateToApp } from "../lib/apps.js";
 import Icon from "./Icon.jsx";
 import "./AppSearchPopover.css";
@@ -31,7 +31,24 @@ function isDimmed(app) {
   return app.status === "soon" || app.status === "maintenance" || !app.url;
 }
 
+/**
+ * Row's status label. Order matters: being the current app wins over any status tag.
+ *
+ * @param {{status?: string, url?: string}} app
+ * @param {boolean} isCurrent
+ * @returns {string}
+ */
+function statusMeta(app, isCurrent) {
+  if (isCurrent) return "Current";
+  if (app.status === "soon") return "Coming Soon";
+  if (app.status === "maintenance") return "Maintenance";
+  if (!app.url) return "Unavailable";
+  return ""; // normal apps: no meta (no per-app version in the shared list)
+}
+
 export default function AppSearchPopover() {
+  const baseId = useId();
+  const listboxId = `${baseId}-listbox`;
   const [apps, setApps] = useState(() => loadCachedApps());
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -219,6 +236,8 @@ export default function AppSearchPopover() {
             onKeyDown={onKeyDown}
             placeholder="Jump to app…"
             aria-label="Search apps"
+            aria-controls={listboxId}
+            aria-activedescendant={results.length ? `${baseId}-option-${active}` : undefined}
             autoComplete="off"
             spellCheck="false"
           />
@@ -226,9 +245,9 @@ export default function AppSearchPopover() {
         </div>
       )}
 
-      <div className={`${B}__popover`} role="listbox" aria-label="Support Tools" hidden={!open}>
+      <div className={`${B}__popover`} id={listboxId} role="listbox" aria-label="Support Tools" hidden={!open}>
         <div className={`${B}__list`} ref={listRef}>
-          <div className={`${B}__heading`}>
+          <div className={`${B}__heading`} role="presentation">
             <span className={`${B}__heading-label`}>Support Tools</span>
             <span className={`${B}__count`}>
               {results.length} {results.length === 1 ? "app" : "apps"}
@@ -246,18 +265,11 @@ export default function AppSearchPopover() {
             ]
               .filter(Boolean)
               .join(" ");
-            const meta = isCurrent
-              ? "Current"
-              : app.status === "soon"
-                ? "Coming Soon"
-                : app.status === "maintenance"
-                  ? "Maintenance"
-                  : !app.url
-                    ? "Unavailable"
-                    : ""; // normal apps: no meta (no per-app version in the shared list)
+            const meta = statusMeta(app, isCurrent);
             return (
               <div
                 key={app.name}
+                id={`${baseId}-option-${i}`}
                 className={cls}
                 role="option"
                 aria-selected={isActive}

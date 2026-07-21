@@ -10,6 +10,20 @@
   align-items: center;
   gap: 10px;
   padding: 14px 16px;
+}
+
+.code-card__toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: inherit;
   cursor: pointer;
 }
 

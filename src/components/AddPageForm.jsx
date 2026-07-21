@@ -30,12 +30,14 @@ export default function AddPageForm({
           value={nameField}
           onChange={onName}
           placeholder="ページ名"
+          aria-label="ページ名"
         />
         <input
           className="add-page-form__input add-page-form__input--mono"
           value={slugField}
           onChange={onSlug}
           placeholder="スラッグ（例: company）"
+          aria-label="スラッグ（例: company）"
         />
         {slugHadSpace && (
           <span className="add-page-form__hint">

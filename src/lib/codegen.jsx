@@ -16,7 +16,7 @@ export function makeCodeText(pages, cls, spanClass, wrapSpan, ariaCurrentEnabled
     .map((p) => {
       const activeCheck = `<?php if (get_meta('slug') == '${p.slug}') echo `;
       const link = active ? `${cls.link} ${activeCheck}'${active}'?>` : cls.link;
-      const ariaCurrent = active && ariaCurrentEnabled ? ` ${activeCheck}'aria-current="page"'?>` : "";
+      const ariaCurrent = ariaCurrentEnabled ? ` ${activeCheck}'aria-current="page"'?>` : "";
       const spanOpen = sc ? `<span class="${sc}">` : "<span>";
       const inner = wrapSpan ? `${spanOpen}${p.name}</span>` : p.name;
       return `<li class="${cls.item}"><a class="${link}" href="${p.href}"${ariaCurrent}>${inner}</a></li>`;

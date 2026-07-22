@@ -1,6 +1,7 @@
 import js from '@eslint/js'
 import reactPlugin from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
+import eslintConfigPrettier from 'eslint-config-prettier'
 
 export default [
   // design_handoff_*/ folders are Hikari's reference bundles (prototype + starter
@@ -54,4 +55,7 @@ export default [
       globals: { URL: 'readonly' },
     },
   },
+  // Must stay last: turns off ESLint formatting rules that'd otherwise
+  // fight Prettier's output.
+  eslintConfigPrettier,
 ]

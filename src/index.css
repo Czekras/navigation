@@ -50,32 +50,61 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("./assets/fonts/RobotoMono-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  /* Color */
+  /* Accent */
   --accent: #2f6fb0;
-  --accent-hover: #255c96;
+  --accent-hover: #2a6299;
   --accent-disabled: #b9cfe3;
+  --accent-soft: #e4eef9;
+
+  /* Text */
   --text: #1a1a1a;
   --muted: #8c8c8c;
+  --muted-2: #6b6b68;
   --faint: #c4c4c0;
   --faint-2: #b5b5b2;
-  --border-color: #e6e6e4;
+
+  /* Surfaces & lines */
   --surface: #ffffff;
   --panel: #fafafa;
+  --hover-bg: #e7e7e4;
   --code-bg: #fafaf8;
   --gutter-bg: #f4f4f1;
+  --border-color: #e6e6e4;
+
+  /* Status */
   --success: #3f8a4f;
-  --danger: #b4433a;
-  --danger-bg: #fbeceb;
+  --success-bg: #eaf5ec;
   --warning: #b8960b;
   --warning-bg: #faf1de;
-  --hover-bg: #e7e7e4;
-  --tip-bg: #262624;
-  --tip-text: #ffffff;
+  --danger: #b4433a;
+  --danger-bg: #fbeceb;
+
+  /* Notify surface (toast + tooltip) — Hikari "Calm Light", 2026-07-21.
+     Both Toast + InfoTip read only --notify-bg / --notify-text; flip the pair → both restyle. */
+  --notify-bg: #ffffff;
+  --notify-text: #1a1a1a;
+  --info-bg: #ecece8;
+  --info-bg-hover: #e0e0dc;
+  --note-bg: #f3f7fb;
+
+  /* LEGACY dark tooltip tokens — superseded by --notify-*; remove once the
+     toast/tooltip migration has landed in every app. */
+  --tip-bg: #1a1a1a;
+  --tip-text: #ededeb;
 
   /* Syntax-highlight tokens */
   --tok-string: #3f8a4f;
   --tok-keyword: #2563a8;
+  --tok-comment: #9aa0a6;
 
   /* Type */
   --font-ui: "Noto Sans JP", sans-serif;
@@ -91,6 +120,13 @@
   box-sizing: border-box;
 }
 
+button {
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease;
+}
+
 html {
   scrollbar-gutter: stable;
 }
@@ -103,10 +139,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-@media (max-width: 1000px) {
-  body {
-    min-width: 370px;
-  }
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent-hover);
 }
 
 ::-webkit-scrollbar {
@@ -132,4 +170,11 @@ body {
 
 .icon {
   flex: none;
+}
+
+/* App-specific tail — keeps mobile from clipping below 370px. */
+@media (max-width: 1000px) {
+  body {
+    min-width: 370px;
+  }
 }

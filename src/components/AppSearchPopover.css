@@ -33,7 +33,7 @@
 
 /* Open on SP: no field to morph into, so the trigger itself shows "on". */
 .app-search__trigger--active {
-  background: #e4eef9;
+  background: var(--accent-soft);
 }
 .app-search__trigger--active .app-search__trigger-icon {
   color: var(--accent);
@@ -176,7 +176,7 @@
 }
 /* Current app: accent icon chip + label + "Current" tag. */
 .app-search__item--current .app-search__icon-wrap {
-  background: #e4eef9;
+  background: var(--accent-soft);
   border-color: #cfe0f0;
 }
 .app-search__item--current .app-search__icon {

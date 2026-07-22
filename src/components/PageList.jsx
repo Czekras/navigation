@@ -3,6 +3,11 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import "./PageList.css";
 import { cx } from "../lib/cx";
 
+/**
+ * Draggable list of configured pages. Reordering goes through
+ * `@hello-pangea/dnd`; an empty state offers a one-click restore of the
+ * default page set.
+ */
 export default function PageList({ pages, onReorder, onRemove, onRestoreDefaults }) {
   const onDragEnd = (result) => {
     if (!result.destination) return;

@@ -104,7 +104,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Header title="Navigation" />
 
       <div className="app__mobile-warning">
         本ツールはPC専用（SP非対応）です。<br />PC環境でのご利用を推奨します。

@@ -4,6 +4,13 @@ import "./CodeCard.css";
 import { makeCodeText, CodeHighlight } from "../lib/codegen.jsx";
 import { cx } from "../lib/cx";
 
+/**
+ * @param {Object} props
+ * @param {string} props.label - Field label, associated with the input via `useId`.
+ * @param {string} props.value - Current class-name value.
+ * @param {(e: Event) => void} props.onChange - Updates the value from the input's `onChange`.
+ * @param {string} [props.placeholder] - Optional input placeholder.
+ */
 function ClassField({ label, value, onChange, placeholder }) {
   const id = useId();
   return (

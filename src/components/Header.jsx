@@ -5,15 +5,20 @@ import "./Header.css";
  * Border spans full width; inner content is centered at the shared max-width.
  * `__APP_VERSION__` is injected from package.json at build time (vite.config.js).
  * `AppSearchPopover` is self-contained (owns its own open state + Cmd+K
- * listener) — no props to wire up here.
+ * listener) — no extra props to wire up for it.
+ *
+ * @param {Object} props
+ * @param {string} props.title - App name shown in the header (e.g. "Navigation").
  */
-export default function Header() {
+export default function Header({ title }) {
   return (
     <header className="app-header">
       <div className="app-header__inner">
         <div className="app-header__brand">
-          <span className="app-header__title">Navigation</span>
-          <span className="app-header__version">v{__APP_VERSION__}</span>
+          <h1 className="app-header__title">
+            {title}
+            <span className="app-header__version">v{__APP_VERSION__}</span>
+          </h1>
         </div>
         <AppSearchPopover />
       </div>

@@ -2,6 +2,11 @@ import "./OptionsPanel.css";
 import { cx } from "../lib/cx";
 import InfoTip from "./InfoTip";
 
+/**
+ * Output-options panel: toggles for wrapping link text in a `<span>` and
+ * emitting `aria-current="page"` on the active link, plus the optional
+ * span class-name field (shown only while wrapping is on).
+ */
 export default function OptionsPanel({
   wrapSpan,
   onToggleWrap,

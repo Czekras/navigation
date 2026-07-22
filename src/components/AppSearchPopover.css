@@ -5,21 +5,21 @@
   position: relative;
 }
 
-/* ---- Trigger (closed): icon + visible "Ctrl + K" hint ---- */
+/* ---- Trigger (closed): icon, + a "Ctrl + K" hint revealed on hover/focus ---- */
 .app-search__trigger {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   height: 36px;
   padding: 0 10px;
   border: none;
   border-radius: 8px;
-  background: #f7f7f5;
+  background: var(--quiet-bg);
   color: var(--muted);
   cursor: pointer;
+  transition: background 0.12s ease;
 }
 .app-search__trigger:hover {
-  background: #f0f0ee;
+  background: var(--hover-bg);
 }
 .app-search__trigger:focus-visible {
   outline: none;
@@ -29,6 +29,29 @@
   width: 16px;
   height: 16px;
   color: #5a5a57;
+}
+/* Spacing to the kbd hint lives on its own margin (not the trigger's flex
+   gap) so it can animate to true zero width instead of leaving a gap. */
+.app-search__trigger .app-search__kbd {
+  display: inline-block;
+  max-width: 0;
+  margin-left: 0;
+  padding: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    max-width 0.18s ease,
+    margin-left 0.18s ease,
+    padding 0.18s ease,
+    opacity 0.12s ease;
+}
+.app-search__trigger:hover .app-search__kbd,
+.app-search__trigger:focus-visible .app-search__kbd {
+  max-width: 70px;
+  margin-left: 8px;
+  padding: 2px 6px;
+  opacity: 1;
 }
 
 /* Open on SP: no field to morph into, so the trigger itself shows "on". */
@@ -133,7 +156,7 @@
   transition: background 0.08s ease;
 }
 .app-search__item--active {
-  background: #f0f0ee;
+  background: var(--active-bg);
 }
 .app-search__item--soon {
   opacity: 0.7;
@@ -233,7 +256,9 @@
     padding: 0;
     justify-content: center;
   }
-  .app-search__trigger .app-search__kbd {
+  .app-search__trigger .app-search__kbd,
+  .app-search__trigger:hover .app-search__kbd,
+  .app-search__trigger:focus-visible .app-search__kbd {
     display: none;
   }
   .app-search__field {

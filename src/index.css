@@ -1,58 +1,68 @@
 /* Global tokens and reset; component styles live in their own co-located CSS files. */
 
 @font-face {
-  font-family: "Noto Sans JP";
+  font-family: 'Noto Sans JP';
   src:
-    url("./assets/fonts/noto-sans-jp-v56-japanese_latin-regular.woff2") format("woff2"),
-    url("./assets/fonts/NotoSansJP-VariableFont_wght.ttf") format("truetype-variations");
+    url('./assets/fonts/noto-sans-jp-v56-japanese_latin-regular.woff2')
+      format('woff2'),
+    url('./assets/fonts/NotoSansJP-VariableFont_wght.ttf')
+      format('truetype-variations');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Noto Sans JP";
+  font-family: 'Noto Sans JP';
   src:
-    url("./assets/fonts/noto-sans-jp-v56-japanese_latin-500.woff2") format("woff2"),
-    url("./assets/fonts/NotoSansJP-VariableFont_wght.ttf") format("truetype-variations");
+    url('./assets/fonts/noto-sans-jp-v56-japanese_latin-500.woff2')
+      format('woff2'),
+    url('./assets/fonts/NotoSansJP-VariableFont_wght.ttf')
+      format('truetype-variations');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Noto Sans JP";
+  font-family: 'Noto Sans JP';
   src:
-    url("./assets/fonts/noto-sans-jp-v56-japanese_latin-600.woff2") format("woff2"),
-    url("./assets/fonts/NotoSansJP-VariableFont_wght.ttf") format("truetype-variations");
+    url('./assets/fonts/noto-sans-jp-v56-japanese_latin-600.woff2')
+      format('woff2'),
+    url('./assets/fonts/NotoSansJP-VariableFont_wght.ttf')
+      format('truetype-variations');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Noto Sans JP";
+  font-family: 'Noto Sans JP';
   src:
-    url("./assets/fonts/noto-sans-jp-v56-japanese_latin-700.woff2") format("woff2"),
-    url("./assets/fonts/NotoSansJP-VariableFont_wght.ttf") format("truetype-variations");
+    url('./assets/fonts/noto-sans-jp-v56-japanese_latin-700.woff2')
+      format('woff2'),
+    url('./assets/fonts/NotoSansJP-VariableFont_wght.ttf')
+      format('truetype-variations');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Roboto Mono";
+  font-family: 'Roboto Mono';
   src:
-    url("./assets/fonts/roboto-mono-v31-latin-regular.woff2") format("woff2"),
-    url("./assets/fonts/RobotoMono-VariableFont_wght.ttf") format("truetype-variations");
+    url('./assets/fonts/roboto-mono-v31-latin-regular.woff2') format('woff2'),
+    url('./assets/fonts/RobotoMono-VariableFont_wght.ttf')
+      format('truetype-variations');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Roboto Mono";
-  src: url("./assets/fonts/RobotoMono-VariableFont_wght.ttf") format("truetype-variations");
+  font-family: 'Roboto Mono';
+  src: url('./assets/fonts/RobotoMono-VariableFont_wght.ttf')
+    format('truetype-variations');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -75,7 +85,9 @@
   /* Surfaces & lines */
   --surface: #ffffff;
   --panel: #fafafa;
+  --quiet-bg: #f7f7f5; /* borderless icon/quiet buttons (CodeCard copy/reset, App Switcher trigger) */
   --hover-bg: #e7e7e4;
+  --active-bg: #f0f0ee; /* solid/highlighted state (PageList restore button, App Switcher active row) */
   --code-bg: #fafaf8;
   --gutter-bg: #f4f4f1;
   --border-color: #e6e6e4;
@@ -107,8 +119,8 @@
   --tok-comment: #9aa0a6;
 
   /* Type */
-  --font-ui: "Noto Sans JP", sans-serif;
-  --font-mono: "Roboto Mono", monospace;
+  --font-ui: 'Noto Sans JP', sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
 
   /* Effects */
   --hairline: 0.5px solid var(--border-color);

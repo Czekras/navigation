@@ -15,10 +15,8 @@ export default function Header({ title }) {
     <header className="app-header">
       <div className="app-header__inner">
         <div className="app-header__brand">
-          <h1 className="app-header__title">
-            {title}
-            <span className="app-header__version">v{__APP_VERSION__}</span>
-          </h1>
+          <h1 className="app-header__title">{title}</h1>
+          <span className="app-header__version">v{__APP_VERSION__}</span>
         </div>
         <AppSearchPopover />
       </div>

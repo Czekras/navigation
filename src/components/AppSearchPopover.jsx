@@ -22,7 +22,7 @@ import './AppSearchPopover.css'
  * Cmd+K listener. Usage: `<AppSearchPopover />` — no props, no host state.
  */
 const B = 'app-search'
-const EMPTY_QUERY_MAX = 40 // cap the echoed query in "No apps match" so a long paste can't stretch the popover
+const EMPTY_QUERY_MAX = 15 // cap the echoed query in "No apps match" so a long paste can't stretch the popover
 const SP_QUERY = '(max-width: 640px)' // matches the CSS mobile breakpoint
 
 /**

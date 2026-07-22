@@ -1,6 +1,6 @@
-import "./OptionsPanel.css";
-import { cx } from "../lib/cx";
-import InfoTip from "./InfoTip";
+import './OptionsPanel.css'
+import { cx } from '../lib/cx'
+import InfoTip from './InfoTip'
 
 /**
  * Output-options panel: toggles for wrapping link text in a `<span>` and
@@ -27,9 +27,17 @@ export default function OptionsPanel({
             checked={ariaCurrent}
             onChange={onToggleAriaCurrent}
           />
-          <span className="options__text">{'Active時にaria-current="page"を追加'}</span>
+          <span className="options__text">
+            {'Active時にaria-current="page"を追加'}
+          </span>
           <InfoTip text="スクリーンリーダー等に「現在表示中のページ」であることを伝えるアクセシビリティ属性です。" />
-          <span className={cx("options__switch", ariaCurrent && "options__switch--on")} aria-hidden="true">
+          <span
+            className={cx(
+              'options__switch',
+              ariaCurrent && 'options__switch--on',
+            )}
+            aria-hidden="true"
+          >
             <span className="options__knob" />
           </span>
         </label>
@@ -43,8 +51,13 @@ export default function OptionsPanel({
             checked={wrapSpan}
             onChange={onToggleWrap}
           />
-          <span className="options__text">{"リンクテキストを<span>で囲む"}</span>
-          <span className={cx("options__switch", wrapSpan && "options__switch--on")} aria-hidden="true">
+          <span className="options__text">
+            {'リンクテキストを<span>で囲む'}
+          </span>
+          <span
+            className={cx('options__switch', wrapSpan && 'options__switch--on')}
+            aria-hidden="true"
+          >
             <span className="options__knob" />
           </span>
         </label>
@@ -62,5 +75,5 @@ export default function OptionsPanel({
         </div>
       )}
     </div>
-  );
+  )
 }

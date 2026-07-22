@@ -1,4 +1,4 @@
-import "./InfoTip.css";
+import './InfoTip.css'
 
 /**
  * A small "?" badge that reveals a tooltip bubble on hover or keyboard focus.
@@ -22,5 +22,5 @@ export default function InfoTip({ text }) {
         {text}
       </span>
     </span>
-  );
+  )
 }

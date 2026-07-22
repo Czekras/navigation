@@ -1,8 +1,13 @@
-import { useId, useMemo } from "react";
-import { CopyIcon, CheckIcon, ChevronRightIcon, ResetIcon } from "../lib/icons.jsx";
-import "./CodeCard.css";
-import { makeCodeText, CodeHighlight } from "../lib/codegen.jsx";
-import { cx } from "../lib/cx";
+import { useId, useMemo } from 'react'
+import {
+  CopyIcon,
+  CheckIcon,
+  ChevronRightIcon,
+  ResetIcon,
+} from '../lib/icons.jsx'
+import './CodeCard.css'
+import { makeCodeText, CodeHighlight } from '../lib/codegen.jsx'
+import { cx } from '../lib/cx'
 
 /**
  * @param {Object} props
@@ -12,15 +17,21 @@ import { cx } from "../lib/cx";
  * @param {string} [props.placeholder] - Optional input placeholder.
  */
 function ClassField({ label, value, onChange, placeholder }) {
-  const id = useId();
+  const id = useId()
   return (
     <div className="code-card__field">
       <label className="code-card__field-label" htmlFor={id}>
         {label}
       </label>
-      <input id={id} className="code-card__input" value={value} onChange={onChange} placeholder={placeholder} />
+      <input
+        id={id}
+        className="code-card__input"
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
     </div>
-  );
+  )
 }
 
 /**
@@ -44,27 +55,38 @@ export default function CodeCard({
 }) {
   const codeText = useMemo(
     () => makeCodeText(pages, cls, spanClass, wrapSpan, ariaCurrent),
-    [pages, cls, spanClass, wrapSpan, ariaCurrent]
-  );
-  const lineCount = useMemo(() => (codeText.match(/\n/g) || []).length + 1, [codeText]);
+    [pages, cls, spanClass, wrapSpan, ariaCurrent],
+  )
+  const lineCount = useMemo(
+    () => (codeText.match(/\n/g) || []).length + 1,
+    [codeText],
+  )
 
   const stopAnd = (fn) => (e) => {
-    e.stopPropagation();
-    fn();
-  };
+    e.stopPropagation()
+    fn()
+  }
 
   return (
     <div className="code-card">
       <div className="code-card__header">
-        <button type="button" className="code-card__toggle" aria-expanded={open} onClick={onToggle}>
+        <button
+          type="button"
+          className="code-card__toggle"
+          aria-expanded={open}
+          onClick={onToggle}
+        >
           <ChevronRightIcon
             color="var(--muted)"
-            className={cx("code-card__chevron", open && "code-card__chevron--open")}
+            className={cx(
+              'code-card__chevron',
+              open && 'code-card__chevron--open',
+            )}
           />
           <span className="code-card__title">{title}</span>
         </button>
         <button
-          className={cx("code-card__copy", copied && "code-card__copy--copied")}
+          className={cx('code-card__copy', copied && 'code-card__copy--copied')}
           type="button"
           title="このコードをコピー"
           onClick={() => onCopy(codeText)}
@@ -87,22 +109,27 @@ export default function CodeCard({
         <div className="code-card__body">
           <div className="code-card__classes">
             <ClassField
-              label={"<li>クラス名"}
+              label={'<li>クラス名'}
               value={cls.item}
-              onChange={(e) => onClassChange("item", e.target.value)}
+              onChange={(e) => onClassChange('item', e.target.value)}
             />
             <ClassField
-              label={"<a>クラス名"}
+              label={'<a>クラス名'}
               value={cls.link}
-              onChange={(e) => onClassChange("link", e.target.value)}
+              onChange={(e) => onClassChange('link', e.target.value)}
             />
             <ClassField
               label="Active時のクラス名"
               value={cls.active}
-              onChange={(e) => onClassChange("active", e.target.value)}
+              onChange={(e) => onClassChange('active', e.target.value)}
               placeholder="classname__link--active"
             />
-            <button className="code-card__reset" type="button" title="デフォルトに戻す" onClick={stopAnd(onReset)}>
+            <button
+              className="code-card__reset"
+              type="button"
+              title="デフォルトに戻す"
+              onClick={stopAnd(onReset)}
+            >
               <ResetIcon />
             </button>
           </div>
@@ -120,5 +147,5 @@ export default function CodeCard({
         </div>
       )}
     </div>
-  );
+  )
 }

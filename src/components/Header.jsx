@@ -1,5 +1,5 @@
-import AppSearchPopover from "./AppSearchPopover.jsx";
-import "./Header.css";
+import AppSearchPopover from './AppSearchPopover.jsx'
+import './Header.css'
 
 /**
  * Border spans full width; inner content is centered at the shared max-width.
@@ -23,5 +23,5 @@ export default function Header({ title }) {
         <AppSearchPopover />
       </div>
     </header>
-  );
+  )
 }

@@ -7,8 +7,8 @@ import {
   SquareKanban,
   Route,
   ImageDown,
-} from "lucide-react";
-import "./Icon.css";
+} from 'lucide-react'
+import './Icon.css'
 
 /**
  * Static name → component map, not `lucide-react/dynamic`'s `DynamicIcon`:
@@ -21,22 +21,22 @@ import "./Icon.css";
  * fall back to the default icon.
  */
 const ICONS = {
-  "layout-grid": LayoutGrid,
+  'layout-grid': LayoutGrid,
   search: Search,
-  "search-x": SearchX,
-  "user-round-key": UserRoundKey,
-  "clipboard-list": ClipboardList,
-  "square-kanban": SquareKanban,
+  'search-x': SearchX,
+  'user-round-key': UserRoundKey,
+  'clipboard-list': ClipboardList,
+  'square-kanban': SquareKanban,
   route: Route,
-  "image-down": ImageDown, // Image Compressor — status "off" today, not yet visible in the switcher
-};
+  'image-down': ImageDown, // Image Compressor — status "off" today, not yet visible in the switcher
+}
 
 /**
  * @param {Object} props
  * @param {string} props.name - A key in `ICONS` (kebab-case, matching lucide's naming).
  * @param {string} [props.className] - Extra class(es) merged onto the icon.
  */
-export default function Icon({ name, className = "" }) {
-  const Cmp = ICONS[name] ?? LayoutGrid;
-  return <Cmp className={`icon ${className}`} aria-hidden="true" />;
+export default function Icon({ name, className = '' }) {
+  const Cmp = ICONS[name] ?? LayoutGrid
+  return <Cmp className={`icon ${className}`} aria-hidden="true" />
 }

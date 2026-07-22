@@ -23,7 +23,9 @@
   cursor: help;
   background: var(--info-bg);
   color: var(--muted);
-  transition: background 0.14s ease, color 0.14s ease;
+  transition:
+    background 0.14s ease,
+    color 0.14s ease;
 }
 
 .info-tip:hover .info-tip__badge,
@@ -51,14 +53,17 @@
   visibility: hidden;
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease,
+    visibility 0.16s;
   pointer-events: none;
   z-index: 40;
 }
 
 /* Caret — matches the light surface, borrowing two borders to sit on the hairline. */
 .info-tip__bubble::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 100%;
   left: 16px;

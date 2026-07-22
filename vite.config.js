@@ -1,10 +1,12 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { readFileSync } from "node:fs";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { readFileSync } from 'node:fs'
 
 // App version comes from package.json so the header tag updates on a version
 // bump with no code change. Referenced in the app as the global __APP_VERSION__.
-const pkg = JSON.parse(readFileSync(new URL("./package.json", import.meta.url), "utf-8"));
+const pkg = JSON.parse(
+  readFileSync(new URL('./package.json', import.meta.url), 'utf-8'),
+)
 
 // https://vitejs.dev/config/
 //
@@ -15,9 +17,9 @@ const pkg = JSON.parse(readFileSync(new URL("./package.json", import.meta.url), 
 //
 // Replace "navigation" below with your actual repository name.
 export default defineConfig({
-  base: "/navigation/",
+  base: '/navigation/',
   plugins: [react()],
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
   },
-});
+})

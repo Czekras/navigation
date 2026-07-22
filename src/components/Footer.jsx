@@ -1,4 +1,4 @@
-import "./Footer.css";
+import './Footer.css'
 
 /** Border spans full width; the credit line is centered at the shared max-width. */
 export default function Footer() {
@@ -8,5 +8,5 @@ export default function Footer() {
         <span className="app-footer__credit">Created by JC TINIO</span>
       </div>
     </footer>
-  );
+  )
 }

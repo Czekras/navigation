@@ -1,4 +1,4 @@
-import "./AddPageForm.css";
+import './AddPageForm.css'
 
 /**
  * Name + slug inputs for adding a new page. Shows inline hints for two
@@ -20,8 +20,8 @@ export default function AddPageForm({
     <form
       className="add-page-form"
       onSubmit={(e) => {
-        e.preventDefault();
-        if (canAdd) onAdd();
+        e.preventDefault()
+        if (canAdd) onAdd()
       }}
     >
       <div className="add-page-form__fields">
@@ -52,11 +52,19 @@ export default function AddPageForm({
             ）
           </span>
         )}
-        {duplicateSlug && <span className="add-page-form__warning">このURLは既に使用されています</span>}
+        {duplicateSlug && (
+          <span className="add-page-form__warning">
+            このURLは既に使用されています
+          </span>
+        )}
       </div>
-      <button className="add-page-form__submit" type="submit" disabled={!canAdd}>
+      <button
+        className="add-page-form__submit"
+        type="submit"
+        disabled={!canAdd}
+      >
         ページを追加
       </button>
     </form>
-  );
+  )
 }

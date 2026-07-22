@@ -6,7 +6,8 @@ import {
   ResetIcon,
 } from '../lib/icons.jsx'
 import './CodeCard.css'
-import { makeCodeText, CodeHighlight } from '../lib/codegen.jsx'
+import { makeCodeText } from '../lib/codegen.js'
+import { CodeHighlight } from '../lib/codegen.jsx'
 import { cx } from '../lib/cx'
 
 /**

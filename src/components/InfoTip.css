@@ -81,3 +81,17 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+@media (max-width: 640px) {
+  /* The badge sits near the row's right edge. Grow the bubble toward the
+     available space on mobile instead of extending past the viewport. */
+  .info-tip__bubble {
+    left: auto;
+    right: -8px;
+  }
+
+  .info-tip__bubble::after {
+    left: auto;
+    right: 10px;
+  }
+}

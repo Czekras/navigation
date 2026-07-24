@@ -32,26 +32,21 @@
   padding: 16px 0;
 }
 
-.page-list__empty-text {
-  font-size: 13px;
-  color: var(--muted);
-}
-
 .page-list__restore {
-  height: 34px;
-  padding: 0 16px;
-  border-radius: 8px;
   border: none;
-  background: var(--active-bg);
-  color: var(--text);
+  background: none;
+  padding: 0;
   font-family: var(--font-ui);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent);
   cursor: pointer;
 }
 
 .page-list__restore:hover {
-  background: var(--hover-bg);
+  color: var(--accent-link-hover);
+  text-decoration: underline;
 }
 
 .page-list__row {

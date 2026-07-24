@@ -53,8 +53,8 @@
   gap: 6px;
   justify-content: center;
   border-radius: 8px;
-  border: none;
-  background: var(--quiet-bg);
+  border: var(--hairline);
+  background: var(--surface);
   cursor: pointer;
   white-space: nowrap;
   font-family: var(--font-ui);
@@ -137,8 +137,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  border: none;
-  background: var(--quiet-bg);
+  border: var(--hairline);
+  background: var(--surface);
   color: var(--muted);
   cursor: pointer;
 }

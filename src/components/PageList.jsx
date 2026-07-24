@@ -30,7 +30,6 @@ export default function PageList({
 
       {pages.length === 0 ? (
         <div className="page-list__empty">
-          <span className="page-list__empty-text">ページがありません</span>
           <button
             className="page-list__restore"
             type="button"

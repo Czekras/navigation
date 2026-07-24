@@ -45,7 +45,7 @@ function isDimmed(app) {
  * @returns {string}
  */
 function statusMeta(app, isCurrent) {
-  if (isCurrent) return 'Current'
+  // if (isCurrent) return 'Current'
   if (app.status === 'soon') return 'Coming Soon'
   if (app.status === 'maintenance') return 'Maintenance'
   if (!app.url) return 'Unavailable'
@@ -230,7 +230,6 @@ export default function AppSearchPopover() {
           onClick={() => (open ? close() : openPopover())}
         >
           <Icon name="layout-grid" className={`${B}__trigger-icon`} />
-          <span className={`${B}__kbd`}>Ctrl + K</span>
         </button>
       ) : (
         <div className={`${B}__field`}>
@@ -245,7 +244,7 @@ export default function AppSearchPopover() {
               if (listRef.current) listRef.current.scrollTop = 0
             }}
             onKeyDown={onKeyDown}
-            placeholder="Jump to app…"
+            placeholder="Switch to..."
             aria-label="Search apps"
             aria-controls={listboxId}
             aria-activedescendant={
@@ -254,7 +253,6 @@ export default function AppSearchPopover() {
             autoComplete="off"
             spellCheck="false"
           />
-          <span className={`${B}__kbd`}>Esc</span>
         </div>
       )}
 
@@ -268,9 +266,6 @@ export default function AppSearchPopover() {
         <div className={`${B}__list`} ref={listRef}>
           <div className={`${B}__heading`} role="presentation">
             <span className={`${B}__heading-label`}>Support Tools</span>
-            <span className={`${B}__count`}>
-              {results.length} {results.length === 1 ? 'app' : 'apps'}
-            </span>
           </div>
           {results.map((app, i) => {
             const isCurrent = app.name === current

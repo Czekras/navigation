@@ -5,7 +5,7 @@
   position: relative;
 }
 
-/* ---- Trigger (closed): icon, + a "Ctrl + K" hint revealed on hover/focus ---- */
+/* ---- Trigger (closed): icon button ---- */
 .app-search__trigger {
   display: inline-flex;
   align-items: center;
@@ -29,29 +29,6 @@
   width: 16px;
   height: 16px;
   color: #5a5a57;
-}
-/* Spacing to the kbd hint lives on its own margin (not the trigger's flex
-   gap) so it can animate to true zero width instead of leaving a gap. */
-.app-search__trigger .app-search__kbd {
-  display: inline-block;
-  max-width: 0;
-  margin-left: 0;
-  padding: 0;
-  opacity: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  transition:
-    max-width 0.18s ease,
-    margin-left 0.18s ease,
-    padding 0.18s ease,
-    opacity 0.12s ease;
-}
-.app-search__trigger:hover .app-search__kbd,
-.app-search__trigger:focus-visible .app-search__kbd {
-  max-width: 70px;
-  margin-left: 8px;
-  padding: 2px 6px;
-  opacity: 1;
 }
 
 /* Open on SP: no field to morph into, so the trigger itself shows "on". */
@@ -91,13 +68,6 @@
 .app-search__input::placeholder {
   color: var(--faint-2);
 }
-.app-search__kbd {
-  flex: none;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  border-radius: 5px;
-  padding: 2px 6px;
-}
 
 /* ---- Popover, anchored to the trigger (right-aligned) ---- */
 .app-search__popover {
@@ -124,12 +94,8 @@
   padding: 6px;
 }
 
-/* Heading row carries the "Support Tools" label + the live app count. */
+/* Heading row carries the "Support Tools" label. */
 .app-search__heading {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
   padding: 8px 10px 6px;
 }
 .app-search__heading-label {
@@ -138,11 +104,6 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint-2);
-}
-.app-search__count {
-  font-size: 11px;
-  color: var(--faint);
-  text-transform: capitalize;
 }
 
 /* ---- Row ---- */
@@ -250,17 +211,6 @@
 
 /* ---- Mobile: narrower field, popover stays anchored (no full-width sheet) ---- */
 @media (max-width: 640px) {
-  /* No physical Ctrl key on touch — collapse back to a plain icon square. */
-  .app-search__trigger {
-    width: 36px;
-    padding: 0;
-    justify-content: center;
-  }
-  .app-search__trigger .app-search__kbd,
-  .app-search__trigger:hover .app-search__kbd,
-  .app-search__trigger:focus-visible .app-search__kbd {
-    display: none;
-  }
   .app-search__field {
     width: 200px;
   }

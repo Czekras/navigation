@@ -1,5 +1,10 @@
-/* Global tokens and reset; component styles live in their own co-located CSS files. */
+/*
+ * Global styles
+ *
+ * Component styles live in their own co-located CSS files.
+ */
 
+/* Fonts */
 @font-face {
   font-family: 'Noto Sans JP';
   src:
@@ -72,6 +77,7 @@
   /* Accent */
   --accent: #2f6fb0;
   --accent-hover: #2a6299;
+  --accent-link-hover: #245a91;
   --accent-disabled: #b9cfe3;
   --accent-soft: #e4eef9;
 
@@ -128,19 +134,14 @@
   --content-max: 1440px;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-button {
-  transition:
-    background-color 0.12s ease,
-    border-color 0.12s ease,
-    color 0.12s ease;
-}
-
+/* Reset and document defaults */
 html {
   scrollbar-gutter: stable;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-color: #d8d8d4 transparent;
 }
 
 body {
@@ -155,36 +156,46 @@ a {
   color: var(--accent);
   text-decoration: none;
 }
+
 a:hover {
   color: var(--accent-hover);
 }
 
+button {
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease;
+}
+
+/* Scrollbars */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #d8d8d4;
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #c4c4c0;
   background-clip: padding-box;
 }
-* {
-  scrollbar-color: #d8d8d4 transparent;
-}
 
+/* Shared utilities */
 .icon {
   flex: none;
 }
 
-/* App-specific tail — keeps mobile from clipping below 370px. */
+/* Responsive safeguards */
 @media (max-width: 1000px) {
   body {
     min-width: 370px;
